@@ -1,0 +1,58 @@
+robot
+4 parts
+	forward
+	dig
+	back
+	dump
+
+each part has 1 or more stages
+	turning etc
+each part has 1 or more cases
+	which location are we going to?
+
+control goals
+
+	turn to where we want to go
+			travel to goal
+	each step along the way there is a place we should be going to, not nessecarily the final position but somewhere along the way
+	the angle desired is tan^-1((ygoal-ycurrent)/(xgoal-xcurrent)
+	the current angle is given from localization and is negative of what we want the desired angle 
+	
+GOING TO MINE
+the error in the angle is angle desired-angle current
+
+
+		if the error is positive that means we are too shallow and need to turn  more
+		if the error is negative that means we are too high and need to turn back down
+		for each update or delta of 1 ft x we should update the new goal position
+			this is only important in the turning section of the path
+			we are pretty much limited to turning rates with a max ratio of .133 vs .05 for pwm
+			
+		so set a threshold of if the error is between +- 5 degrees or something we drive straight
+			otherwise max turn untill we get within that margin
+				would it be a good idea to no shit get the error to zero before we start operating w/in the band?
+				cause it can drive straight really well
+			
+
+start 	part 1
+	go forward
+		straight 	part 1 stage 1
+		turn		part 1 stage 2
+			location left =		case 1
+			location right=		case 2
+		straight 	part 1 stage 3
+			
+stop 	part 2
+	dig 			part 2 stage 1
+start 	part 3
+	go backward
+		straight 	part 3 stage 1
+		turn	 	part 3 stage 2
+			location left =		case 1
+			location right=		case 2
+		straight 	part 3 stage 3
+stop 	part 4
+	dump 			part 4 stage 1
+repeat
+
+you turn by setting the angle 

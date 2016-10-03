@@ -1,0 +1,18 @@
+[My Computer]
+My Computer = "127.0.0.1"
+
+[Navigation]
+Navigation = "172.22.11.2"
+
+[RT myRIO Target - Left Camera]
+RT myRIO Target - Left Camera = "192.168.1.33"
+
+[RT myRIO Target - Navigation]
+RT myRIO Target - Navigation = "192.168.1.44"
+
+[RT myRIO Target - Overlord]
+RT myRIO Target - Overlord = "192.168.1.11"
+
+[RT myRIO Target - Right Camera]
+RT myRIO Target - Right Camera = "192.168.1.22"
+

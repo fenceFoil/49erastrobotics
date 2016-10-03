@@ -1,0 +1,4 @@
+Encoder-Velocity_Conversion (SubVI).vi
+	C:\Users\UNCC_AST2_SP16\Desktop\UNCC_AST2_Master\Navigation_VIs\Encoder-Velocity_Conversion (SubVI).vi
+	C:\Users\UNCC_AST2_SP16\Desktop\UNCC_AST2_Master\Navigation_VIs\UNCC_AST2_Master\Navigation_VIs\Encoder-Velocity_Conversion (SubVI).vi
+	C:\Users\UNCC_AST2_SP16\Desktop\Navi\E\desktop\Encoder-Velocity_Conversion (SubVI).vi
