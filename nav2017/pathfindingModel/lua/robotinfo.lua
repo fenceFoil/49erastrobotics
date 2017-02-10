@@ -1,6 +1,6 @@
 --[[
 
-Contains info about the robot, such as dimensions.
+Contains relatively constant info about the robot, such as dimensions.
 
 Corners are numbered as follows: (following angles in radians)
 
