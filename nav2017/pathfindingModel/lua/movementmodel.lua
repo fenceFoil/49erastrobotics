@@ -16,6 +16,9 @@ local robotinfo = require "robotinfo"
 -- Source: https://love2d.org/wiki/General_math (Feb 9 2017)
 local function dist(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
 
+-- Ensure angle given is always within the range 0..2pi
+local function clampAngle(a) return math.fmod(((math.fmod(a, 2*math.pi)) + 2*math.pi), 2*math.pi) end
+
 -- returns 1 for front, 2 for back side of robot
 function movementmodel.getCloserEnd(botX, botY, botAngle, destX, destY)
   local corners = robotinfo.getcorners(botX, botY, botAngle)
@@ -66,8 +69,11 @@ Returns a movement table:
 - array of positions:
   - {x, y, angle}
 --]]
-function move(startX, startY, startAngle, destX, destY, turnRadius, tolerance, segLength)
-  local currX, currY, currAngle = startX, startY, startAngle
+function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius, tolerance, segLength)
+  local currX, currY = startX, startY
+  
+  -- TO DO Ensure that currAngle is within 0..2pi
+  local currAngle = clampAngle(startAngle)
   
   local positions = {}
 
@@ -91,19 +97,27 @@ function move(startX, startY, startAngle, destX, destY, turnRadius, tolerance, s
 
     -- Calculate next line segment towards destination
 
+
     -- Need to turn this segment?
     -- If not pointed at destination, move angle towards destination
     -- Find error in robot's angle
-    local angleToDest = math.atan((destY - startY), (destX - startX))
+    local angleToDest = math.atan2((destY - currY), (destX - currX))
     local angleError = angleToDest - currAngle
     -- If obtuse angle, make acute
-    if (angleError > math.pi) then angleError = angleError - math.pi end 
+    if (angleError > math.pi) then angleError = 2 * math.pi - angleError end 
+    if (angleError < -math.pi) then angleError = -(2 * math.pi - math.abs(angleError)) end
     -- Move current angle towards pointing at destination
-    if angleError > 0 then
-      currAngle = currAngle - math.min(angleError, maxAngleDelta)
+    if angleError >= 0 then
+      currAngle = currAngle + angleError --math.min(angleError, maxAngleDelta)
     else 
-      currAngle = currAngle + math.min(-angleError, maxAngleDelta)
+      currAngle = currAngle + angleError --math.min(-angleError, maxAngleDelta)
     end
+
+    --angleToDest = math.atan2(destY - startY, destX - startX)
+    --currAngle = angleToDest
+    
+    -- Ensure currAngle remains between 0 and 2pi
+    currAngle = clampAngle(currAngle)
     
     -- Move robot along line segment towards destination
     local moveDist = math.min(dist(currX, currY, destX, destY), segLength)
@@ -133,7 +147,7 @@ function move(startX, startY, startAngle, destX, destY, turnRadius, tolerance, s
     positions[#positions+1] = {destX, destY, currAngle}
   end
   
-  return {"didReach"=didReach, "didCollide"=didCollide, "positions"=positions}
+  return {didReach=didReach, didCollide=didCollide, positions=positions}
 end
 
 return movementmodel
