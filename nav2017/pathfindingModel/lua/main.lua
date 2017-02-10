@@ -21,11 +21,12 @@ function love.load()
 
 end
 
+-- TEMP STUFF
 robotAngle = 0
-
 function love.wheelmoved(x, y)
   robotAngle = robotAngle + y * (math.pi / 16)
 end
+-- END
 
 function love.draw()
   love.graphics.draw(arenaBG)
