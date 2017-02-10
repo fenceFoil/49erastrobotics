@@ -20,6 +20,8 @@ robotinfo = require "robotinfo"
 movement = require "movementmodel"
 
 function love.load()
+  --if arg[#arg] == "-debug" then require("mobdebug").start() end
+  
   arenaBG = love.graphics.newImage(arenaBGFilename)
 
 end
@@ -110,11 +112,32 @@ function love.draw()
 --  else 
 --    love.graphics.print("CLOSER", mx + mToPixels1(-robotinfo.length * 0.66) *math.cos(robotAngle), my + mToPixels1(-robotinfo.length * 0.66) * math.sin(robotAngle))
 --  end
+
+  -- Draw simulated robot movement towards destination
+  move = movement.move(mxm, mym, robotAngle, destX, destY, 1, 0.1, 0.1)
+  if (#move.positions > 1) then
+    -- Convert movement points to pixel points for rendering
+    local movePixelPoints = {}
+    for i,point in ipairs(move.positions) do
+      local pixX, pixY = mToPixels(point[1], point[2])
+      movePixelPoints[(i-1)*2+1] = pixX
+      movePixelPoints[(i-1)*2+1+1] = pixY
+    end
+    if move.didReach then
+      love.graphics.setColor(0, 255, 0)
+    else
+      love.graphics.setColor(255, 0, 0)
+    end
+    love.graphics.line(movePixelPoints)
+    love.graphics.setColor(255, 255, 255, 255)
+  end
 end
 
 function love.update(dt)
   arenaHeight = love.graphics.getHeight()
   arenaWidth = love.graphics.getWidth()
+  
+  --robotAngle = robotAngle + dt
 end
 
 -- Converts a position on the screen in pixels to a position in meters
