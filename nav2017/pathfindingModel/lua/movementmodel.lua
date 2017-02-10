@@ -17,7 +17,7 @@ local robotinfo = require "robotinfo"
 local function dist(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
 
 -- returns 1 for front, 2 for back side of robot
-local function getCloserEnd(botX, botY, botAngle, destX, destY)
+function movementmodel.getCloserEnd(botX, botY, botAngle, destX, destY)
   local corners = robotinfo.getcorners(botX, botY, botAngle)
   -- Get distances from corners to destination
   local cornerDists = {}
@@ -26,7 +26,7 @@ local function getCloserEnd(botX, botY, botAngle, destX, destY)
     cornerDists[#cornerDists+1] = dist(destX, destY, corners[i], corners[i+1])
   end
   -- Get distance from each corner to dest
-  if (cornerDists[1] + cornerDists[4]) >= (cornerDists[2] + cornerDists[3]) then
+  if (cornerDists[1] + cornerDists[4]) <= (cornerDists[2] + cornerDists[3]) then
     -- front end
     return 1
   else
