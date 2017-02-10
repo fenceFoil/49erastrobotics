@@ -11,18 +11,27 @@ All positions are in meters.
 
 local movementmodel = {}
 
-robotinfo = require "robotinfo"
+local robotinfo = require "robotinfo"
 
 -- Source: https://love2d.org/wiki/General_math (Feb 9 2017)
 local function dist(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
 
-local function getCloserSide(botX, botY, botAngle, destX, destY)
+-- returns 1 for front, 2 for back side of robot
+local function getCloserEnd(botX, botY, botAngle, destX, destY)
+  local corners = robotinfo.getcorners(botX, botY, botAngle)
   -- Get distances from corners to destination
-  
-  -- Get position of each corner
-  cornerPoints = {{}, {}, {}, {}}
-  
+  local cornerDists = {}
+  -- step through corner points
+  for i = 1, 8, 2 do
+    cornerDists[#cornerDists+1] = dist(destX, destY, corners[i], corners[i+1])
+  end
   -- Get distance from each corner to dest
+  if (cornerDists[1] + cornerDists[4]) >= (cornerDists[2] + cornerDists[3]) then
+    -- front end
+    return 1
+  else
+    return 2
+  end
 end
 
 --[[
@@ -41,8 +50,8 @@ Returns a movement table:
 - array of positions:
   - {x, y, angle}
 --]]
-function generateMovement(startX, startY, startAngle, destX, destY, radius, segLength)
-  
+function move(startX, startY, startAngle, destX, destY, radius, segLength)
+
 end
 
 return movementmodel
