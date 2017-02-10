@@ -4,10 +4,12 @@ Contains info about the robot, such as dimensions.
 
 Corners are numbered as follows: (following angles in radians)
 
-1 +--------+ 0
+2 +--------+ 1
   |        |
   |        |    ==> fwd (cameras in front, boxes in back)
-2 +--------+ 3
+3 +--------+ 4
+
+Front of robot, with the cameras, faces forward.
 
 --]]
 
@@ -22,11 +24,11 @@ robotinfo.length = 1.117
 function robotinfo.getcorners(botX, botY, botAngle)
   -- assume robot is not at an angle yet, find corner coords in polar
   -- get radian coordinates
-  local theta0 = math.atan((robotinfo.width/2)/(robotinfo.length/2))
+  local theta1 = math.atan((robotinfo.width/2)/(robotinfo.length/2))
   local r = ((robotinfo.width/2)*(robotinfo.width/2) + (robotinfo.length/2)*(robotinfo.length/2))^0.5
   -- use theat0 to calculate all corners
   -- simultaneously add botAngle to rotate robot
-  local thetas = {theta0 + botAngle, math.pi - theta0 + botAngle, math.pi + theta0 + botAngle, 2*math.pi - theta0 + botAngle}
+  local thetas = {theta1 + botAngle, math.pi - theta1 + botAngle, math.pi + theta1 + botAngle, 2*math.pi - theta1 + botAngle}
   
   -- convert corner points from polar to x,y, simultaneously adding botX and botY
   local xycoords = {}
