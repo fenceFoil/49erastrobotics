@@ -13,9 +13,10 @@ arenaBGFilename = "sand-texture1.png"
 -- Visualizations
 -- 1: A single movement path
 -- 2: A "sea of arrows", at arbitrary resolution
--- 3: A "sea of arrows", at each pathfinding position
+-- 3: Positions used in pathfinding
+-- 4: A "sea of arrows", at each pathfinding position
 currVisualization = 1
-numVisualizations = 3
+numVisualizations = 4
 
 -- Imports
 robotinfo = require "robotinfo"
@@ -23,6 +24,7 @@ movement = require "movementmodel"
 movement.turnRadius = 2
 movement.tolerance = 0.05
 movement.segLength = 0.1
+pathfinding = require "pathfinding"
 
 function love.load()
   if arg[#arg] == "-debug" then require("mobdebug").start() end
@@ -35,14 +37,16 @@ function love.load()
 
 end
 
--- TEMP STUFF
 robotAngle = 0
 lastScrollTime = love.timer.getTime()
 function love.wheelmoved(x, y)
   robotAngle = robotAngle + y * (math.pi / 16)
   lastScrollTime = love.timer.getTime()
 end
--- END
+function love.mousemoved(x, y, d, dy, istouch)
+  -- don't start spinning robot while mouse is moving
+  lastScrollTime = love.timer.getTime()
+end
 
 -- source: https://love2d.org/wiki/HSV_color
 function HSV(h, s, v)
@@ -160,8 +164,41 @@ function love.draw()
       end
     end
   elseif currVisualization == 3 then
+    -- pathfinding positions
+
+    -- Draw dead zone
+    ulx, uly = mToPixels(pathfinding.deadZone, pathfinding.deadZone)
+    lrx, lry = mToPixels(robotinfo.arenaWidth - pathfinding.deadZone, robotinfo.arenaHeight - pathfinding.deadZone)
+    love.graphics.rectangle("line", ulx, uly, lrx-ulx, lry-uly)
+
+    -- for now, just show positions considered in pathfinding
+    for i,pos in ipairs(pathfinding.getAllPositions()) do
+      px, py = mToPixels(pos[1], pos[2])
+      love.graphics.setColor(0, 0, 255, 80)
+      love.graphics.circle("fill", px, py, 10)
+      love.graphics.setColor(255, 255, 255, 255)
+      love.graphics.print(i, px, py)
+    end
+  elseif currVisualization == 4 then
     -- sea of arrows, at pathfinding position resolution
-    
+
+    -- for now, just show positions considered in pathfinding
+    for i,pos in ipairs(pathfinding.getAllPositions()) do
+      x, y = pos[1], pos[2]
+      px, py = mToPixels(x, y)
+
+
+      -- draw an arrow
+      local xMeters, yMeters = pixelsToM(x, y)
+      local move = movement.move(mxm, mym, robotAngle, x, y)
+      if move.didReach then
+        drawArrow(px, py, 20, move.positions[#move.positions][3])
+      else
+        love.graphics.setColor(255, 0, 0, 80)
+        love.graphics.circle("fill", px, py, 10)
+        love.graphics.setColor(255, 255, 255, 255)
+      end
+    end
   end
 end
 
@@ -170,7 +207,7 @@ function love.update(dt)
   arenaWidth = love.graphics.getWidth()
 
   if love.timer.getTime() - lastScrollTime > 5 then
-    robotAngle = robotAngle + dt*0.6
+    robotAngle = robotAngle + dt*0.4
   end
 end
 
