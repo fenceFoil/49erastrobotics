@@ -10,9 +10,7 @@ Visualizer code, making calls out to the movement and pathfinding models.
 -- Size of this dictates size of window. Modify conf.lua manually to match.
 arenaBGFilename = "sand-texture1.png"
 
--- Size of the arena. Will not change unless RMC rules change.
-arenaWidthM = 7.38 -- meters
-arenaHeightM = 3.78 -- meters
+
 
 
 -- Imports
@@ -147,17 +145,17 @@ end
 -- Converts a position on the screen in pixels to a position in meters
 -- returns metersX, metersY
 function pixelsToM(pixelX, pixelY)
-  return ((pixelX / arenaWidth) * arenaWidthM), ((pixelY / arenaHeight) * arenaHeightM)
+  return ((pixelX / arenaWidth) * robotinfo.arenaWidth), ((pixelY / arenaHeight) * robotinfo.arenaHeight)
 end
 
 -- Converts a position on the screen from meters to pixels
 -- returns metersX, metersY
 function mToPixels(meterX, meterY)
-  return ((meterX / arenaWidthM) * arenaWidth), ((meterY / arenaHeightM) * arenaHeight)
+  return ((meterX / robotinfo.arenaWidth) * arenaWidth), ((meterY / robotinfo.arenaHeight) * arenaHeight)
 end
 
 function mToPixels1(meters)
-  return ((meters / arenaWidthM) * arenaWidth)
+  return ((meters / robotinfo.arenaWidth) * arenaWidth)
 end
 
 

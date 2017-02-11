@@ -15,6 +15,10 @@ Front of robot, with the cameras, faces forward.
 
 local robotinfo = {}
 
+-- Size of the arena. Will not change unless RMC rules change.
+robotinfo.arenaWidth = 7.38 -- meters
+robotinfo.arenaHeight = 3.78 -- meters
+
 -- robot width and height in meters
 robotinfo.width = 0.71
 robotinfo.length = 1.117
