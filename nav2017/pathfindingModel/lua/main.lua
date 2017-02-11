@@ -10,12 +10,19 @@ Visualizer code, making calls out to the movement and pathfinding models.
 -- Size of this dictates size of window. Modify conf.lua manually to match.
 arenaBGFilename = "sand-texture1.png"
 
-
-
+-- Visualizations
+-- 1: A single movement path
+-- 2: A "sea of arrows", at arbitrary resolution
+-- 3: A "sea of arrows", at each pathfinding position
+currVisualization = 1
+numVisualizations = 3
 
 -- Imports
 robotinfo = require "robotinfo"
 movement = require "movementmodel"
+movement.turnRadius = 2
+movement.tolerance = 0.05
+movement.segLength = 0.1
 
 function love.load()
   if arg[#arg] == "-debug" then require("mobdebug").start() end
@@ -30,8 +37,10 @@ end
 
 -- TEMP STUFF
 robotAngle = 0
+lastScrollTime = love.timer.getTime()
 function love.wheelmoved(x, y)
   robotAngle = robotAngle + y * (math.pi / 16)
+  lastScrollTime = love.timer.getTime()
 end
 -- END
 
@@ -67,23 +76,23 @@ destX = 4
 destY = 2
 
 function love.mousereleased(x, y, button)
-  if button == 2 then
+  if button == 1 then
+    -- change visualization
+    currVisualization = currVisualization + 1
+    if currVisualization > numVisualizations then currVisualization = 1 end
+  elseif button == 2 then
     destX, destY = pixelsToM(x, y)
   end
 end
 
 function love.draw()
   love.graphics.draw(arenaBG)
+  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
   -- Print position in meters by the mouse
   mx, my = love.mouse.getPosition()
   mxm, mym = pixelsToM(mx, my)
   love.graphics.print(round2(mxm).."m, "..round2(mym).."m", mx+16, my+16)
-
-  -- Draw destination point
-  love.graphics.setColor(HSV(40, 255, 255))
-  love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
-  love.graphics.setColor(255, 255, 255)
 
   -- Draw the robot at the mouse cursor
   local cornerPoints = {}
@@ -95,47 +104,64 @@ function love.draw()
   love.graphics.line(cornerPoints)
   -- draw arrow
   drawArrow(mx, my, mToPixels1(robotinfo.length / 3), robotAngle)
---  if movement.getCloserEnd(mxm, mym, robotAngle, destX, destY) == 1 then
---    drawArrow(mx, my, mToPixels1(robotinfo.length / 3), robotAngle)
---  else 
---    drawArrow(mx, my, mToPixels1(robotinfo.length / 3), robotAngle+math.pi)
---  end
 
-  -- Draw lines from corners of robot to destination
-  for i = 1, 8, 2 do
-    local destXp, destYp = mToPixels(destX, destY)
-    love.graphics.setColor(255, 255, 255, 128)
-    love.graphics.line(destXp, destYp, cornerPoints[i], cornerPoints[i+1])
-    love.graphics.setColor(255, 255, 255, 255)
-  end
+  if currVisualization == 1 then
+    -- Show a single path from current position to destination point
 
-  -- Label closer side of robot
---  if movement.getCloserEnd(mxm, mym, robotAngle, destX, destY) == 1 then
---    love.graphics.print("CLOSER", mx + mToPixels1(robotinfo.length * 0.66) *math.cos(robotAngle), my + mToPixels1(robotinfo.length * 0.66) * math.sin(robotAngle))
---  else 
---    love.graphics.print("CLOSER", mx + mToPixels1(-robotinfo.length * 0.66) *math.cos(robotAngle), my + mToPixels1(-robotinfo.length * 0.66) * math.sin(robotAngle))
---  end
+    -- Draw destination point
+    love.graphics.setColor(HSV(40, 255, 255))
+    love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
+    love.graphics.setColor(255, 255, 255)
 
-  -- Draw simulated robot movement towards destination
-  move = movement.move(mxm, mym, robotAngle, destX, destY, 2, 0.05, 0.1)
-  if (#move.positions > 1) then
-    -- Convert movement points to pixel points for rendering
-    local movePixelPoints = {}
-    for i,point in ipairs(move.positions) do
-      local pixX, pixY = mToPixels(point[1], point[2])
-      movePixelPoints[(i-1)*2+1] = pixX
-      movePixelPoints[(i-1)*2+1+1] = pixY
+    -- Draw lines from corners of robot to destination
+    for i = 1, 8, 2 do
+      local destXp, destYp = mToPixels(destX, destY)
+      love.graphics.setColor(255, 255, 255, 128)
+      love.graphics.line(destXp, destYp, cornerPoints[i], cornerPoints[i+1])
+      love.graphics.setColor(255, 255, 255, 255)
     end
-    if move.didReach then
-      love.graphics.setColor(0, 255, 0)
-    else
-      love.graphics.setColor(255, 0, 0)
+
+    -- Draw simulated robot movement towards destination
+    move = movement.move(mxm, mym, robotAngle, destX, destY)
+    if (#move.positions > 1) then
+      -- Convert movement points to pixel points for rendering
+      local movePixelPoints = {}
+      for i,point in ipairs(move.positions) do
+        local pixX, pixY = mToPixels(point[1], point[2])
+        movePixelPoints[(i-1)*2+1] = pixX
+        movePixelPoints[(i-1)*2+1+1] = pixY
+      end
+      if move.didReach then
+        love.graphics.setColor(0, 255, 0)
+      else
+        love.graphics.setColor(255, 0, 0)
+      end
+      love.graphics.line(movePixelPoints)
+      love.graphics.setColor(255, 255, 255, 255)
+      if move.didCollide then
+        love.graphics.draw(boomImage, movePixelPoints[#movePixelPoints-1], movePixelPoints[#movePixelPoints], 0, 0.4, 0.4, boomImage:getWidth()/2, boomImage:getHeight()/2)
+      end
     end
-    love.graphics.line(movePixelPoints)
-    love.graphics.setColor(255, 255, 255, 255)
-    if move.didCollide then
-      love.graphics.draw(boomImage, movePixelPoints[#movePixelPoints-1], movePixelPoints[#movePixelPoints], 0, 0.4, 0.4, boomImage:getWidth()/2, boomImage:getHeight()/2)
+  elseif currVisualization == 2 then
+    -- sea of arrows
+    local step = 30
+    for x = 0, arenaWidth, step do
+      for y = 0, arenaHeight, step do
+        -- draw an arrow
+        local xMeters, yMeters = pixelsToM(x, y)
+        local move = movement.move(mxm, mym, robotAngle, xMeters, yMeters)
+        if move.didReach then
+          drawArrow(x, y, step*0.7, move.positions[#move.positions][3])
+        else
+          love.graphics.setColor(255, 0, 0, 80)
+          love.graphics.circle("fill", x, y, step/3)
+          love.graphics.setColor(255, 255, 255, 255)
+        end
+      end
     end
+  elseif currVisualization == 3 then
+    -- sea of arrows, at pathfinding position resolution
+    
   end
 end
 
@@ -143,7 +169,9 @@ function love.update(dt)
   arenaHeight = love.graphics.getHeight()
   arenaWidth = love.graphics.getWidth()
 
-  --robotAngle = robotAngle + dt
+  if love.timer.getTime() - lastScrollTime > 5 then
+    robotAngle = robotAngle + dt*0.6
+  end
 end
 
 -- Converts a position on the screen in pixels to a position in meters
