@@ -7,6 +7,10 @@ by a line segment. Uses iterative method to find points.
 
 All positions are in meters.
 
+tolerance, segLength, and turnRadius can be set either with the public
+variables provided below, or passed as arguments to a call of move(). 
+The public varaibles are the default.
+
 --]]
 
 local movementmodel = {}
@@ -37,6 +41,10 @@ function movementmodel.getCloserEnd(botX, botY, botAngle, destX, destY)
   end
 end
 
+movementmodel.turnRadius = 2
+movementmodel.tolerance = 0.05
+movementmodel.segLength = 0.1
+
 --[[
 Iteratively moves the robot along a circular/straight curve towards the 
 end point. This movement may or may not succeed, and the result is given
@@ -46,15 +54,16 @@ in meters/iteration of movement. The movement will also fail if the robot collid
 The robot may move forward or backward, depending on the closer of the 
 summed distances of the cameras on the front and back.
 
+tolerance, segLength, and turnRadius can be set either with the public
+variables provided in movementmodel, or passed as arguments to a call of move(). 
+The public varaibles are the default if no values provided for those 3 args.
+
 TO DO:
 - failure condition checking
-  - cant reach
   - collision
-    - walls
     - already-dug pits
 
 Returns a movement table:
-
 - didReach
 - didCollide
 - array of positions:
@@ -63,6 +72,16 @@ Returns a movement table:
 function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius, tolerance, segLength)
   local currX, currY = startX, startY
   local currAngle = startAngle
+  
+  if turnRadius == nil then
+    turnRadius = movementmodel.turnRadius
+  end
+  if tolerance == nil then
+    tolerance = movementmodel.tolerance
+  end
+  if segLength == nil then
+    segLength = movementmodel.segLength
+  end
 
   -- "Spin" robot 180 degrees "logically" here if the the robot moves backwards.
   -- Report the robot's angle as being 180 degrees again off it's "logical" angle here.
