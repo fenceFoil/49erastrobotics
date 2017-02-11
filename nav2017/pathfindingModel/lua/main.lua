@@ -19,9 +19,10 @@ movement = require "movementmodel"
 
 function love.load()
   if arg[#arg] == "-debug" then require("mobdebug").start() end
-  
+
   arenaBG = love.graphics.newImage(arenaBGFilename)
-  
+  boomImage = love.graphics.newImage("boom.png")
+
   -- debug movement
   --movement.move (3, 3, 0, 2, 2, 1, 0.1, 0.1)
 
@@ -132,13 +133,16 @@ function love.draw()
     end
     love.graphics.line(movePixelPoints)
     love.graphics.setColor(255, 255, 255, 255)
+    if move.didCollide then
+      love.graphics.draw(boomImage, movePixelPoints[#movePixelPoints-1], movePixelPoints[#movePixelPoints], 0, 0.4, 0.4, boomImage:getWidth()/2, boomImage:getHeight()/2)
+    end
   end
 end
 
 function love.update(dt)
   arenaHeight = love.graphics.getHeight()
   arenaWidth = love.graphics.getWidth()
-  
+
   --robotAngle = robotAngle + dt
 end
 
