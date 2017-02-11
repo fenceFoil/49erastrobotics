@@ -38,14 +38,6 @@ function movementmodel.getCloserEnd(botX, botY, botAngle, destX, destY)
 end
 
 --[[
--- in meters
-robotinfo.turningRadius = 1
-
--- tolerance for finishing a movement (meters)
-robotinfo.moveTolerance = 0.1
---]]
-
---[[
 Iteratively moves the robot along a circular/straight curve towards the 
 end point. This movement may or may not succeed, and the result is given
 in didReach. The "resolution" of the movement is determined by segLength,
@@ -60,7 +52,6 @@ TO DO:
   - collision
     - walls
     - already-dug pits
-- tolerance
 
 Returns a movement table:
 
@@ -71,10 +62,21 @@ Returns a movement table:
 --]]
 function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius, tolerance, segLength)
   local currX, currY = startX, startY
-  
-  -- TO DO Ensure that currAngle is within 0..2pi
-  local currAngle = clampAngle(startAngle)
-  
+  local currAngle = startAngle
+
+  -- "Spin" robot 180 degrees "logically" here if the the robot moves backwards.
+  -- Report the robot's angle as being 180 degrees again off it's "logical" angle here.
+  local movingBackward
+  if movementmodel.getCloserEnd(startX, startY, startAngle, destX, destY) == 1 then
+    movingBackward = false
+  else
+    movingBackward = true
+    currAngle = currAngle + math.pi
+  end
+
+  -- Ensure that currAngle is between 0..2pi
+  currAngle = clampAngle(currAngle)
+
   local positions = {}
 
   local didReach = true
@@ -93,7 +95,11 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
   local lastDist = dist(startX, startY, destX, destY)
   while (dist(currX, currY, destX, destY) > tolerance) do
     -- Log robot's current position
-    positions[#positions+1] = {currX, currY, currAngle}
+    if not movingBackward then
+      positions[#positions+1] = {currX, currY, currAngle}
+    else
+      positions[#positions+1] = {currX, currY, clampAngle(currAngle + math.pi)}
+    end
 
     -- Calculate next line segment towards destination
 
@@ -102,23 +108,21 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
     -- If not pointed at destination, move angle towards destination
     -- Find error in robot's angle
     local angleToDest = math.atan2((destY - currY), (destX - currX))
-    local angleError = angleToDest - currAngle
-    -- If obtuse angle, make acute
-    if (angleError > math.pi) then angleError = 2 * math.pi - angleError end 
-    if (angleError < -math.pi) then angleError = -(2 * math.pi - math.abs(angleError)) end
+    -- Find the smallest signed, acute angle between current 
+    -- angle and angle towards destination. Inputs must lie between 0 and 2pi
+    local angleError = math.atan2(math.sin(angleToDest-currAngle), math.cos(angleToDest-currAngle))
+    -- Correct range of atan2's output from -pi..pi to 0..2pi
+    --if angleError < 0 then angleError = angleError + 2 * math.pi end
     -- Move current angle towards pointing at destination
     if angleError >= 0 then
-      currAngle = currAngle + angleError --math.min(angleError, maxAngleDelta)
+      currAngle = currAngle + math.min(angleError, maxAngleDelta)
     else 
-      currAngle = currAngle + angleError --math.min(-angleError, maxAngleDelta)
+      currAngle = currAngle - math.min(-angleError, maxAngleDelta)
     end
 
-    --angleToDest = math.atan2(destY - startY, destX - startX)
-    --currAngle = angleToDest
-    
     -- Ensure currAngle remains between 0 and 2pi
     currAngle = clampAngle(currAngle)
-    
+
     -- Move robot along line segment towards destination
     local moveDist = math.min(dist(currX, currY, destX, destY), segLength)
     currX = currX + moveDist * math.cos(currAngle)
@@ -138,15 +142,23 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
     -- Buffer this destination for future comparisions
     lastDist = dist(currX, currY, destX, destY)
   end
-  
+
   -- Note the robot's final location
   if not didReach then
-    positions[#positions+1] = {currX, currY, currAngle}
+    if not movingBackward then
+      positions[#positions+1] = {currX, currY, currAngle}
+    else
+      positions[#positions+1] = {currX, currY, clampAngle(currAngle + math.pi)}
+    end
   else
     -- add actual destination as last point, since it was reached
-    positions[#positions+1] = {destX, destY, currAngle}
+    if not movingBackward then
+      positions[#positions+1] = {destX, destY, currAngle}
+    else
+      positions[#positions+1] = {destX, destY, clampAngle(currAngle + math.pi)}
+    end
   end
-  
+
   return {didReach=didReach, didCollide=didCollide, positions=positions}
 end
 
