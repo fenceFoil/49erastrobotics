@@ -20,9 +20,12 @@ robotinfo = require "robotinfo"
 movement = require "movementmodel"
 
 function love.load()
-  --if arg[#arg] == "-debug" then require("mobdebug").start() end
+  if arg[#arg] == "-debug" then require("mobdebug").start() end
   
   arenaBG = love.graphics.newImage(arenaBGFilename)
+  
+  -- debug movement
+  --movement.move (3, 3, 0, 2, 2, 1, 0.1, 0.1)
 
 end
 
@@ -92,11 +95,12 @@ function love.draw()
   end
   love.graphics.line(cornerPoints)
   -- draw arrow
-  if movement.getCloserEnd(mxm, mym, robotAngle, destX, destY) == 1 then
-    drawArrow(mx, my, mToPixels1(robotinfo.length / 3), robotAngle)
-  else 
-    drawArrow(mx, my, mToPixels1(robotinfo.length / 3), robotAngle+math.pi)
-  end
+  drawArrow(mx, my, mToPixels1(robotinfo.length / 3), robotAngle)
+--  if movement.getCloserEnd(mxm, mym, robotAngle, destX, destY) == 1 then
+--    drawArrow(mx, my, mToPixels1(robotinfo.length / 3), robotAngle)
+--  else 
+--    drawArrow(mx, my, mToPixels1(robotinfo.length / 3), robotAngle+math.pi)
+--  end
 
   -- Draw lines from corners of robot to destination
   for i = 1, 8, 2 do
@@ -114,7 +118,7 @@ function love.draw()
 --  end
 
   -- Draw simulated robot movement towards destination
-  move = movement.move(mxm, mym, robotAngle, destX, destY, 1, 0.1, 0.1)
+  move = movement.move(mxm, mym, robotAngle, destX, destY, 2, 0.05, 0.1)
   if (#move.positions > 1) then
     -- Convert movement points to pixel points for rendering
     local movePixelPoints = {}
