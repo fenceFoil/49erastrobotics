@@ -25,7 +25,7 @@ robotinfo.length = 1.117
 
 -- botAngle is in radians
 -- returns a list of x,y coordinates for the 4 corners of the robot (8 number array)
-function robotinfo.getcorners(botX, botY, botAngle)
+function robotinfo.getCorners(botX, botY, botAngle)
   -- assume robot is not at an angle yet, find corner coords in polar
   -- get radian coordinates
   local theta1 = math.atan((robotinfo.width/2)/(robotinfo.length/2))
@@ -48,8 +48,8 @@ function robotinfo.getcorners(botX, botY, botAngle)
 end
 
 -- same as robotinfo.getcorners, except with a fifth point back at corner 0
-function robotinfo.getcornersloop(botX, botY, botAngle)
-  local coords = robotinfo.getcorners(botX, botY, botAngle)
+function robotinfo.getCornersLoop(botX, botY, botAngle)
+  local coords = robotinfo.getCorners(botX, botY, botAngle)
   coords[#coords+1] = coords[1]
   coords[#coords+1] = coords[2]
   

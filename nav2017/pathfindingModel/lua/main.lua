@@ -86,7 +86,7 @@ function love.draw()
 
   -- Draw the robot at the mouse cursor
   local cornerPoints = {}
-  local cornerPointsMeters = robotinfo.getcornersloop(mxm, mym, robotAngle)
+  local cornerPointsMeters = robotinfo.getCornersLoop(mxm, mym, robotAngle)
   for i = 1, #cornerPointsMeters, 2 do
     cornerPoints[i], cornerPoints[i+1] = mToPixels(cornerPointsMeters[i], cornerPointsMeters[i+1])
     if i < 8 then love.graphics.printf(math.floor(i/2)+1, cornerPoints[i], cornerPoints[i+1], 10, "center") end
