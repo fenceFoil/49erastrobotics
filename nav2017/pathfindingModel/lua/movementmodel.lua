@@ -21,7 +21,7 @@ local function clampAngle(a) return math.fmod(((math.fmod(a, 2*math.pi)) + 2*mat
 
 -- returns 1 for front, 2 for back side of robot
 function movementmodel.getCloserEnd(botX, botY, botAngle, destX, destY)
-  local corners = robotinfo.getcorners(botX, botY, botAngle)
+  local corners = robotinfo.getCorners(botX, botY, botAngle)
   -- Get distances from corners to destination
   local cornerDists = {}
   -- step through corner points
@@ -128,9 +128,25 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
     currX = currX + moveDist * math.cos(currAngle)
     currY = currY + moveDist * math.sin(currAngle)
 
-    -- TO DO: Collision detection: walls
+    -- Collision Detection: Walls
+    -- Check each corner of the robot to ensure it is inside arena.
+    local corners = robotinfo.getCorners(currX, currY, currAngle)
+    for i = 1, 8, 2 do
+      if corners[i] < 0 or corners[i] >= robotinfo.arenaWidth then
+        didReach = false
+        didCollide = true
+      end
+      
+      if corners[i+1] < 0 or corners[i+1] >= robotinfo.arenaHeight then
+        didReach = false
+        didCollide = true
+      end
+    end
 
     -- TO DO: Collision detection: dug pits
+    
+    -- Stop moving if a collision has occurred
+    if didCollide then break end
 
     -- Move towards destination, but only while still growing closer.
     -- Catch the robot moving away from destination
