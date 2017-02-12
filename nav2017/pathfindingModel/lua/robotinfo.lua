@@ -23,6 +23,11 @@ robotinfo.arenaHeight = 3.78 -- meters
 robotinfo.width = 0.71
 robotinfo.length = 1.117
 
+-- robot "radius", a bubble outside of which collisions are impossible
+-- padded a little bit just to be safe
+-- (an optimization for movement modelling)
+robotinfo.bubble = 0.1 + ((robotinfo.width/2)^2+(robotinfo.length/2)^2)^0.5
+
 -- botAngle is in radians
 -- returns a list of x,y coordinates for the 4 corners of the robot (8 number array)
 function robotinfo.getCorners(botX, botY, botAngle)

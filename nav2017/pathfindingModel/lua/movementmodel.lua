@@ -42,7 +42,7 @@ function movementmodel.getCloserEnd(botX, botY, botAngle, destX, destY)
 end
 
 movementmodel.turnRadius = 2
-movementmodel.tolerance = 0.05
+movementmodel.tolerance = 0.01
 movementmodel.segLength = 0.1
 
 --[[
@@ -162,16 +162,19 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
 
     -- Collision Detection: Walls
     -- Check each corner of the robot to ensure it is inside arena.
-    local corners = robotinfo.getCorners(currX, currY, currAngle)
-    for i = 1, 8, 2 do
-      if corners[i] < 0 or corners[i] >= robotinfo.arenaWidth then
-        didReach = false
-        didCollide = true
-      end
+    -- Only perform corner check if robot is close enough to walls
+    if currX - robotinfo.bubble < 0 or currX + robotinfo.bubble > robotinfo.arenaWidth or currY - robotinfo.bubble < 0 or currY + robotinfo.bubble > robotinfo.arenaHeight then
+      local corners = robotinfo.getCorners(currX, currY, currAngle)
+      for i = 1, 8, 2 do
+        if corners[i] < 0 or corners[i] >= robotinfo.arenaWidth then
+          didReach = false
+          didCollide = true
+        end
 
-      if corners[i+1] < 0 or corners[i+1] >= robotinfo.arenaHeight then
-        didReach = false
-        didCollide = true
+        if corners[i+1] < 0 or corners[i+1] >= robotinfo.arenaHeight then
+          didReach = false
+          didCollide = true
+        end
       end
     end
 

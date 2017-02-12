@@ -117,6 +117,11 @@ function love.draw()
     love.graphics.setColor(HSV(40, 255, 255))
     love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
     love.graphics.setColor(255, 255, 255)
+    
+    -- Draw bubble for collisions around robot
+    love.graphics.setColor(255, 255, 255, 45)
+    love.graphics.circle("line", mx, my, mToPixels1(robotinfo.bubble))
+    love.graphics.setColor(255, 255, 255, 255)
 
     -- Draw lines from corners of robot to destination
     for i = 1, 8, 2 do
