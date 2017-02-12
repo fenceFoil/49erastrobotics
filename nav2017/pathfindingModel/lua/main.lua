@@ -15,8 +15,9 @@ arenaBGFilename = "sand-texture1.png"
 -- 2: A "sea of arrows", at arbitrary resolution
 -- 3: Positions used in pathfinding
 -- 4: A "sea of arrows", at each pathfinding position
-currVisualization = 1
-numVisualizations = 4
+-- 5: Top-scoring path between mouse pos and destination marker
+currVisualization = 5
+numVisualizations = 5
 
 -- Imports
 robotinfo = require "robotinfo"
@@ -126,7 +127,7 @@ function love.draw()
     end
 
     -- Draw simulated robot movement towards destination
-    move = movement.move(mxm, mym, robotAngle, destX, destY)
+    local move = movement.move(mxm, mym, robotAngle, destX, destY)
     if (#move.positions > 1) then
       -- Convert movement points to pixel points for rendering
       local movePixelPoints = {}
@@ -198,6 +199,48 @@ function love.draw()
         love.graphics.circle("fill", px, py, 10)
         love.graphics.setColor(255, 255, 255, 255)
       end
+    end
+  elseif currVisualization == 5 then
+    -- simple pathfinding best path, drawn
+
+    -- Draw destination point
+    love.graphics.setColor(HSV(40, 255, 255))
+    love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
+    love.graphics.setColor(255, 255, 255)
+
+    -- Run pathfinding
+    local pathsFound = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement)
+
+    if #pathsFound >= 1 then
+      -- Choose top path
+      local path = pathsFound[1]
+      
+      love.graphics.print("Paths found: "..#pathsFound)
+
+      -- Draw movement between each point of path
+      local lastPos = {mxm, mym, robotAngle}
+      for i,nextPos in ipairs(path.positions) do
+        love.graphics.print(round2(nextPos[1])..","..round2(nextPos[2])..","..round2(nextPos[3]), 400, 20*i)
+        
+        -- Draw simulated robot movement towards destination
+        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2])
+        if (#move.positions > 1) then
+          -- Convert movement points to pixel points for rendering
+          local movePixelPoints = {}
+          for j,point in ipairs(move.positions) do
+            local pixX, pixY = mToPixels(point[1], point[2])
+            movePixelPoints[(j-1)*2+1] = pixX
+            movePixelPoints[(j-1)*2+1+1] = pixY
+          end
+          love.graphics.setColor(0, 255, 0)
+          love.graphics.line(movePixelPoints)
+          love.graphics.setColor(255, 255, 255, 255)
+        end
+        
+        lastPos = nextPos
+      end
+    else
+      love.graphics.print("No paths found!", 100, 100)
     end
   end
 end
