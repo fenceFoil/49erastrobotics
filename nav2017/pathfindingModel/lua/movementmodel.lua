@@ -136,8 +136,8 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
     -- Find error in robot's angle
     local angleToDest = math.atan2((destY - currY), (destX - currX))
     -- Find the smallest signed, acute angle between current 
-    -- angle and angle towards destination. Inputs must lie between 0 and 2pi
-    local angleError = math.atan2(math.sin(angleToDest-currAngle), math.cos(angleToDest-currAngle))
+    -- angle and angle towards destination. Inputs must lie between 0 and 2pi(?)
+    local angleError = ((angleToDest-currAngle)+math.pi) % (2*math.pi) - math.pi
     -- Correct range of atan2's output from -pi..pi to 0..2pi
     --if angleError < 0 then angleError = angleError + 2 * math.pi end
     -- Move current angle towards pointing at destination
