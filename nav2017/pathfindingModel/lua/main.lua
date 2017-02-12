@@ -250,7 +250,7 @@ function love.update(dt)
   arenaWidth = love.graphics.getWidth()
 
   if love.timer.getTime() - lastScrollTime > 5 then
-    robotAngle = robotAngle + dt*0.4
+    robotAngle = robotAngle + dt*0.05
   end
 end
 
