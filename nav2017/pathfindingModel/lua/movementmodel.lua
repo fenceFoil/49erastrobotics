@@ -115,7 +115,9 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
 
   -- Keep inching robot forward, one segment at a time, until it is within tolerance of
   -- its destination
-  local lastDist = dist(startX, startY, destX, destY)
+  -- needless sqrt in dist
+  --local lastDist = dist(startX, startY, destX, destY)
+  local lastDist = (startX-destX)*(startX-destX)+(startY-destY)*(startY-destY)
   while (dist(currX, currY, destX, destY) > tolerance) do
     if logAllPoints or #positions == 0 then
       -- Log robot's current position
@@ -185,13 +187,17 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
 
     -- Move towards destination, but only while still growing closer.
     -- Catch the robot moving away from destination
-    if (dist(currX, currY, destX, destY) >= lastDist) then
+    local unrootedDist = (currX-destX)*(currX-destX) + (currY-destY)*(currY-destY)
+    -- needless sqrt if (dist(currX, currY, destX, destY) >= lastDist) then
+    if (unrootedDist >= lastDist) then
       didReach = false
       break
     end
 
     -- Buffer this destination for future comparisions
-    lastDist = dist(currX, currY, destX, destY)
+    -- needles sqrt
+    --lastDist = dist(currX, currY, destX, destY)
+    lastDist = unrootedDist
   end
 
   -- Note the robot's final location
