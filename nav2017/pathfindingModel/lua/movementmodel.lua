@@ -66,6 +66,8 @@ TO DO:
 Returns a movement table:
 - didReach
 - didCollide
+- angleSum (how many radians robot turned over course of movement)
+- length (sum length of segments)
 - array of positions:
   - {x, y, angle}
 --]]
@@ -100,6 +102,8 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
 
   local didReach = true
   local didCollide = false
+  local angleSum = 0
+  local length = 0
 
   -- Calculate the max angle the robot is capable of turning each segLength 
   -- of movement.
@@ -135,8 +139,13 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
     -- Move current angle towards pointing at destination
     if angleError >= 0 then
       currAngle = currAngle + math.min(angleError, maxAngleDelta)
+      -- note turn
+      angleSum = angleSum + math.min(angleError, maxAngleDelta)
     else 
       currAngle = currAngle - math.min(-angleError, maxAngleDelta)
+      -- note turn. Turning a negative angle is still more curviness,
+      -- so note the abs of the previous expression
+      angleSum = angleSum + math.abs(math.min(-angleError, maxAngleDelta)) 
     end
 
     -- Ensure currAngle remains between 0 and 2pi
@@ -146,6 +155,8 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
     local moveDist = math.min(dist(currX, currY, destX, destY), segLength)
     currX = currX + moveDist * math.cos(currAngle)
     currY = currY + moveDist * math.sin(currAngle)
+    -- Note movement
+    length = length + moveDist
 
     -- Collision Detection: Walls
     -- Check each corner of the robot to ensure it is inside arena.
@@ -194,7 +205,7 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
     end
   end
 
-  return {didReach=didReach, didCollide=didCollide, positions=positions}
+  return {didReach=didReach, didCollide=didCollide, length=length, angleSum=angleSum, positions=positions}
 end
 
 return movementmodel
