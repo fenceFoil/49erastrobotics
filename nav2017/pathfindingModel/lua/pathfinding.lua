@@ -127,25 +127,26 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
   if directMove.didReach then 
     -- Add this movement as a path to destination paths
     pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum)
-  end
+  else
+    -- If can't get to destination in one hop, consider alternatives
+    if movesLeft > 0 then
+      -- Examine each possible step from current point to destination
+      for i,pos in ipairs(pathfinding.getAllPositions()) do
+        local move = movementModel.move(startX, startY, startAngle, pos[1], pos[2])
 
-  if movesLeft > 0 then
-    -- Examine each possible step from current point to destination
-    for i,pos in ipairs(pathfinding.getAllPositions()) do
-      local move = movementModel.move(startX, startY, startAngle, pos[1], pos[2])
+        if move.didReach then
+          -- Recurse and try to reach destination from here
+          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1)
 
-      if move.didReach then
-        -- Recurse and try to reach destination from here
-        local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1)
-
-        -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
-        for j,path in ipairs(subPathsToDest) do
-          local moveInfo = {length=move.length, angleSum=move.angleSum}
-          moveInfo[1] = pos[1]
-          moveInfo[2] = pos[2]
-          moveInfo[3] = move.positions[#move.positions][3]
-          table.insert(path.positions, 1, moveInfo)
-          pathsToDest[#pathsToDest+1] = path
+          -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
+          for j,path in ipairs(subPathsToDest) do
+            local moveInfo = {length=move.length, angleSum=move.angleSum}
+            moveInfo[1] = pos[1]
+            moveInfo[2] = pos[2]
+            moveInfo[3] = move.positions[#move.positions][3]
+            table.insert(path.positions, 1, moveInfo)
+            pathsToDest[#pathsToDest+1] = path
+          end
         end
       end
     end
