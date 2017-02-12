@@ -127,7 +127,7 @@ function love.draw()
     end
 
     -- Draw simulated robot movement towards destination
-    local move = movement.move(mxm, mym, robotAngle, destX, destY)
+    local move = movement.move(mxm, mym, robotAngle, destX, destY, true)
     if (#move.positions > 1) then
       -- Convert movement points to pixel points for rendering
       local movePixelPoints = {}
@@ -149,7 +149,7 @@ function love.draw()
     end
   elseif currVisualization == 2 then
     -- sea of arrows
-    local step = 30
+    local step = 20
     for x = 0, arenaWidth, step do
       for y = 0, arenaHeight, step do
         -- draw an arrow
@@ -223,7 +223,7 @@ function love.draw()
         love.graphics.print(round2(nextPos[1])..","..round2(nextPos[2])..","..round2(nextPos[3]), 400, 20*i)
         
         -- Draw simulated robot movement towards destination
-        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2])
+        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true)
         if (#move.positions > 1) then
           -- Convert movement points to pixel points for rendering
           local movePixelPoints = {}
