@@ -71,10 +71,10 @@ Returns a movement table:
 - array of positions:
   - {x, y, angle}
 --]]
-function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius, tolerance, segLength)
+function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, turnRadius, tolerance, segLength)
   local currX, currY = startX, startY
   local currAngle = startAngle
-  
+
   if turnRadius == nil then
     turnRadius = movementmodel.turnRadius
   end
@@ -117,11 +117,13 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
   -- its destination
   local lastDist = dist(startX, startY, destX, destY)
   while (dist(currX, currY, destX, destY) > tolerance) do
-    -- Log robot's current position
-    if not movingBackward then
-      positions[#positions+1] = {currX, currY, currAngle}
-    else
-      positions[#positions+1] = {currX, currY, clampAngle(currAngle + math.pi)}
+    if logAllPoints or #positions == 0 then
+      -- Log robot's current position
+      if not movingBackward then
+        positions[#positions+1] = {currX, currY, currAngle}
+      else
+        positions[#positions+1] = {currX, currY, clampAngle(currAngle + math.pi)}
+      end
     end
 
     -- Calculate next line segment towards destination
@@ -166,7 +168,7 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
         didReach = false
         didCollide = true
       end
-      
+
       if corners[i+1] < 0 or corners[i+1] >= robotinfo.arenaHeight then
         didReach = false
         didCollide = true
@@ -174,7 +176,7 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, turnRadius
     end
 
     -- TO DO: Collision detection: dug pits
-    
+
     -- Stop moving if a collision has occurred
     if didCollide then break end
 
