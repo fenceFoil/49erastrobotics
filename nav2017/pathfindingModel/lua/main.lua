@@ -4,6 +4,9 @@ Main file of NAVTune.
 
 Visualizer code, making calls out to the movement and pathfinding models.
 
+Creates a TCP socket server on port 31336 (see PORT_NUM) that will execute any
+string sent over the connection, enabling external control of the script.
+
 --]]
 
 -- Background image
@@ -28,8 +31,9 @@ movement.segLength = 0.1
 pathfinding = require "pathfinding"
 
 -- Controls server imports and setup
+local PORT_NUM = 31336
 socket = require "socket"
-server = assert(socket.bind("*", 31336))
+server = assert(socket.bind("*", PORT_NUM))
 server:settimeout(0) -- do not block while waiting for requests
 
 function love.load()
@@ -96,8 +100,8 @@ function love.draw()
   love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
   -- Print position in meters by the mouse
-  mx, my = love.mouse.getPosition()
-  mxm, mym = pixelsToM(mx, my)
+  local mx, my = love.mouse.getPosition()
+  local mxm, mym = pixelsToM(mx, my)
   love.graphics.print(round2(mxm).."m, "..round2(mym).."m", mx+16, my+16)
 
   -- Draw the robot at the mouse cursor
@@ -269,7 +273,7 @@ function love.update(dt)
     if not err then 
       -- execute line received
       loadstring(line)()
-    else
+    elseif err ~= "timeout" then
       controlClient:close()
       controlClient = nil
     end
