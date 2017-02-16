@@ -101,6 +101,7 @@ function love.draw()
 
   -- Print position in meters by the mouse
   local mx, my = love.mouse.getPosition()
+  mx, my = 200, 200
   local mxm, mym = pixelsToM(mx, my)
   love.graphics.print(round2(mxm).."m, "..round2(mym).."m", mx+16, my+16)
 
