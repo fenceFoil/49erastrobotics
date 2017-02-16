@@ -1,16 +1,5 @@
 --[[
 
-Movement Model for NAVTune.
-
-Models movement of the UNCC_ASTR1 robot as a circular curve, followed
-by a line segment. Uses iterative method to find points.
-
-All positions are in meters.
-
-tolerance, segLength, and turnRadius can be set either with the public
-variables provided below, or passed as arguments to a call of move(). 
-The public varaibles are the default.
-
 Positions range between 1..getNumPositions(), and each maps to an XY position
 in meters, in columns along X and then rows along Y.
 
