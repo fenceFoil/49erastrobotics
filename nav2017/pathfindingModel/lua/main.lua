@@ -27,15 +27,16 @@ movement.tolerance = 0.05
 movement.segLength = 0.1
 pathfinding = require "pathfinding"
 
+-- Controls server imports and setup
+socket = require "socket"
+server = assert(socket.bind("*", 31336))
+server:settimeout(0) -- do not block while waiting for requests
+
 function love.load()
   if arg[#arg] == "-debug" then require("mobdebug").start() end
 
   arenaBG = love.graphics.newImage(arenaBGFilename)
   boomImage = love.graphics.newImage("boom.png")
-
-  -- debug movement
-  --movement.move (3, 3, 0, 2, 2, 1, 0.1, 0.1)
-
 end
 
 robotAngle = 0
@@ -117,7 +118,7 @@ function love.draw()
     love.graphics.setColor(HSV(40, 255, 255))
     love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
     love.graphics.setColor(255, 255, 255)
-    
+
     -- Draw bubble for collisions around robot
     love.graphics.setColor(255, 255, 255, 45)
     love.graphics.circle("line", mx, my, mToPixels1(robotinfo.bubble))
@@ -219,14 +220,14 @@ function love.draw()
     if #pathsFound >= 1 then
       -- Choose top path
       local path = pathsFound[1]
-      
+
       love.graphics.print("Paths found: "..#pathsFound)
 
       -- Draw movement between each point of path
       local lastPos = {mxm, mym, robotAngle}
       for i,nextPos in ipairs(path.positions) do
         love.graphics.print(round2(nextPos[1])..","..round2(nextPos[2])..","..round2(nextPos[3]), 400, 20*i)
-        
+
         -- Draw simulated robot movement towards destination
         local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true)
         if (#move.positions > 1) then
@@ -241,7 +242,7 @@ function love.draw()
           love.graphics.line(movePixelPoints)
           love.graphics.setColor(255, 255, 255, 255)
         end
-        
+
         lastPos = nextPos
       end
     else
@@ -256,6 +257,22 @@ function love.update(dt)
 
   if love.timer.getTime() - lastScrollTime > 5 then
     robotAngle = robotAngle + dt*0.05
+  end
+
+  -- Check for new server connections
+  if controlClient == nil then
+    -- will remain nil if timeout occurs
+    controlClient = server:accept()
+  else
+    controlClient:settimeout(0) -- no blocking here!
+    local line, err = controlClient:receive()
+    if not err then 
+      -- execute line received
+      loadstring(line)()
+    else
+      controlClient:close()
+      controlClient = nil
+    end
   end
 end
 
@@ -280,4 +297,8 @@ end
 -- Source: http://lua-users.org/wiki/SimpleRound
 function round2(num, numDecimalPlaces)
   return tonumber(string.format("%." .. (numDecimalPlaces or 2) .. "f", num))
+end
+
+function love.quit()
+  server:close()
 end
