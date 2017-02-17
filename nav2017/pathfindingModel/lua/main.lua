@@ -29,6 +29,9 @@ movement.turnRadius = 2
 movement.tolerance = 0.05
 movement.segLength = 0.1
 pathfinding = require "pathfinding"
+pidmoveleft = require "pidmove"
+pidmoveright = require "pidmove"
+
 
 -- Controls server imports and setup
 local PORT_NUM = 31336
@@ -101,7 +104,7 @@ function love.draw()
 
   -- Print position in meters by the mouse
   local mx, my = love.mouse.getPosition()
-  --mx, my = 200, 200
+  mx, my = 100, 150
   local mxm, mym = pixelsToM(mx, my)
   love.graphics.print(round2(mxm).."m, "..round2(mym).."m", mx+16, my+16)
 
@@ -260,6 +263,7 @@ function love.draw()
 end
 
 lastdt = 0
+lastPIDTick = 0
 function love.update(dt)
   arenaHeight = love.graphics.getHeight()
   arenaWidth = love.graphics.getWidth()
@@ -267,8 +271,6 @@ function love.update(dt)
   if love.timer.getTime() - lastScrollTime > 5 then
     robotAngle = robotAngle + dt*0.05
   end
-  
-  
 
   -- Check for new server connections
   if controlClient == nil then
@@ -276,13 +278,18 @@ function love.update(dt)
     controlClient = server:accept()
   else
     controlClient:settimeout(0) -- no blocking here!
-    local line, err = controlClient:receive()
-    if not err then 
-      -- execute line received
-      loadstring(line)()
-    elseif err ~= "timeout" then
-      controlClient:close()
-      controlClient = nil
+    while true do
+      local line, err = controlClient:receive()
+      if not err then 
+        -- execute line received
+        loadstring(line)()
+      elseif err ~= "timeout" then
+        controlClient:close()
+        controlClient = nil
+        break
+      else
+        break
+      end
     end
   end
   
