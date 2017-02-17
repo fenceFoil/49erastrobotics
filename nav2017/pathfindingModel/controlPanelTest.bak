@@ -1,0 +1,160 @@
+(saveFormat "2.3")
+(date "Fri 17/Feb/2017 01:58:24 ")
+(veerev "6.0")
+(platform "PC")
+(execMode v6)
+(filterNAN 0)
+(workspaceStackingOrder M)
+(sysconfig)
+(SaveCF no)
+(device 0 ROOTCONTEXT
+(properties
+(trigMode deg)
+(nextID 7)
+(popupTitleText "Untitled")
+(popupMoveable 1))
+(deviceList
+(device 1 LITERALCONSTANT
+(properties
+(name "Text"))
+(interface
+(output 1
+(name "Text")
+(lock name constraints)))
+(implementation
+(value Text
+(data  "movement.turnRadius = "))
+(initValue Text
+(data  ""))))
+(device 2 SLIDER
+(properties
+(name "Real64 Slider")
+(range 0 3)
+(detents 0.001))
+(interface
+(output 1
+(name "Real64")
+(lock name constraints)))
+(implementation
+(value Real64
+(data  2.39))
+(initValue Real
+(data  0))))
+(device 3 FORMULA
+(properties
+(name "A+B")
+(expr 1 "A+B"))
+(interface
+(input 1
+(name "A")
+(optional yes))
+(input 2
+(name "B")
+(optional yes))
+(output 1
+(name "Result")
+(tag "Result")
+(lock name constraints)
+(optional yes))))
+(device 4 REPEATUNTILBREAK
+(interface
+(output 1
+(name "Continuous")
+(lock name constraints))))
+(device 5 TOFROMSOCKET
+(properties
+(transactions 1 "WRITE TEXT a"))
+(interface
+(input 1
+(name "a")
+(optional yes)))
+(implementation
+(attr iopath socket "connect" "gilbert" 31336
+(readTerm "\n")
+(fs " ")
+(eol "\n")
+(multiField fullSyntax)
+(arrayFormat block)
+(timeout 0)
+(byteOrder 0))))
+(device 6 DELAY
+(properties
+(delay 1))
+(interface
+(output 1
+(name "Done"))))
+(configuration
+(connect D3:1 D1:0)
+(connect D0:1 D2:1)
+(connect D1:1 D2:2)
+(connect D2:1 D4:1)
+(connect D4:0 D5:0)))
+(contextCarrier
+(wndRestoredOrigin 2 2)
+(wndRestoredExtent 519 348)
+(wndState max)
+(active detail)
+(detail
+(extent 747 559)
+(anchorPt 51 55)
+(configuration
+(devCarrierFor 1
+(active open)
+(icon)
+(open
+(extent 174 29))
+(pinCenter 190 70))
+(devCarrierFor 2
+(active open)
+(icon)
+(open
+(extent 118 222)
+(layout vertical)
+(fastmode off)
+(extratics))
+(pinCenter 70 270))
+(devCarrierFor 3
+(active icon)
+(icon
+(extent 26 25))
+(open
+(extent 71 42))
+(terminals on)
+(pinCenter 260 250))
+(devCarrierFor 4
+(active icon)
+(icon
+(extent 68 51)
+(iconImage "loop.icn"))
+(open)
+(terminals on)
+(pinCenter 10 70))
+(devCarrierFor 5
+(active open)
+(icon)
+(open
+(extent 231 157))
+(terminals on)
+(pinCenter 520 270))
+(devCarrierFor 6
+(active open)
+(icon)
+(open
+(extent 71 31))
+(pinCenter 500 430))
+(connect D3:1 D1:0
+(points 3 46 70 70 70 70 138))
+(connect D0:1 D2:1
+(points 6 279 70 300 70 300 110 230 110 230 240 244 240))
+(connect D1:1 D2:2
+(points 4 131 270 150 270 150 260 244 260))
+(connect D2:1 D4:1
+(points 4 275 250 300 250 300 270 372 270))
+(connect D4:0 D5:0
+(points 4 520 351 520 370 500 370 500 394)))
+(stackingOrder 2 3 4 5 1 0))
+(numberFormats
+(realFormat standard)
+(realSigDigits 4)
+(realRadixSpec 4)
+(integerBase decimal))))
