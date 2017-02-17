@@ -101,7 +101,7 @@ function love.draw()
 
   -- Print position in meters by the mouse
   local mx, my = love.mouse.getPosition()
-  mx, my = 200, 200
+  --mx, my = 200, 200
   local mxm, mym = pixelsToM(mx, my)
   love.graphics.print(round2(mxm).."m, "..round2(mym).."m", mx+16, my+16)
 
@@ -238,13 +238,16 @@ function love.draw()
         if (#move.positions > 1) then
           -- Convert movement points to pixel points for rendering
           local movePixelPoints = {}
+          love.graphics.setColor(0, 255, 0)
           for j,point in ipairs(move.positions) do
             local pixX, pixY = mToPixels(point[1], point[2])
             movePixelPoints[(j-1)*2+1] = pixX
             movePixelPoints[(j-1)*2+1+1] = pixY
+            
+            love.graphics.circle("fill", pixX, pixY, 4)
           end
           love.graphics.setColor(0, 255, 0)
-          love.graphics.line(movePixelPoints)
+          --love.graphics.line(movePixelPoints)
           love.graphics.setColor(255, 255, 255, 255)
         end
 
@@ -256,6 +259,7 @@ function love.draw()
   end
 end
 
+lastdt = 0
 function love.update(dt)
   arenaHeight = love.graphics.getHeight()
   arenaWidth = love.graphics.getWidth()
@@ -263,6 +267,8 @@ function love.update(dt)
   if love.timer.getTime() - lastScrollTime > 5 then
     robotAngle = robotAngle + dt*0.05
   end
+  
+  
 
   -- Check for new server connections
   if controlClient == nil then
@@ -279,6 +285,8 @@ function love.update(dt)
       controlClient = nil
     end
   end
+  
+  lastdt = dt
 end
 
 -- Converts a position on the screen in pixels to a position in meters
