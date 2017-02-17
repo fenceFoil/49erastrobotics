@@ -1,0 +1,72 @@
+package edu.uncc.astrobotics.navProtoControls;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import java.awt.Dimension;
+import java.awt.Component;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.SpinnerNumberModel;
+import java.awt.Font;
+
+public class JNavValueSlider extends JPanel {
+	
+	private String variable = "<<< NO VARIABLE ASSIGNED >>>";
+
+	/**
+	 * Create the panel.
+	 */
+	public JNavValueSlider(String variable, double minValue, double maxValue, double defaultValue) {
+		this.variable = variable;
+		
+		setSize(new Dimension(500, 100));
+		setLayout(new BorderLayout(0, 0));
+		
+		JSpinner minSpinner = new JSpinner();
+		minSpinner.setPreferredSize(new Dimension(70, 28));
+		add(minSpinner, BorderLayout.WEST);
+		
+		JSpinner maxSpinner = new JSpinner();
+		maxSpinner.setPreferredSize(new Dimension(70, 28));
+		add(maxSpinner, BorderLayout.EAST);
+		
+		JPanel topPanel = new JPanel();
+		add(topPanel, BorderLayout.NORTH);
+		
+		JLabel variableLabel = new JLabel(variable);
+		variableLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+		variableLabel.setHorizontalTextPosition(SwingConstants.LEADING);
+		topPanel.add(variableLabel);
+		variableLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel spacer_panel_1 = new JPanel();
+		spacer_panel_1.setPreferredSize(new Dimension(80, 10));
+		spacer_panel_1.setMinimumSize(new Dimension(50, 10));
+		topPanel.add(spacer_panel_1);
+		
+		JSpinner valueSpinner = new JSpinner();
+		valueSpinner.setPreferredSize(new Dimension(100, 28));
+		valueSpinner.setModel(new SpinnerNumberModel(new Double(0), null, null, new Double(1)));
+		topPanel.add(valueSpinner);
+		
+		JSlider slider = new JSlider();
+		slider.setMaximum(32767);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		add(slider);
+
+	}
+
+}

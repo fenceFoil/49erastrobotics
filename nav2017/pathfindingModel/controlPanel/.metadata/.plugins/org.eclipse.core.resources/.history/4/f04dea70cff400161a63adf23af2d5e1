@@ -1,0 +1,14 @@
+package edu.uncc.astrobotics.navProtoControls;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class VisualizerClient {
+	
+	
+	public static void connectToServer(JFrame frame) {
+		// Try to connect to localhost at port 31336
+		
+	}
+
+}

@@ -1,0 +1,10 @@
+package edu.uncc.astrobotics.navProtoControls;
+
+public class VisualizerClient {
+	
+	
+	public static void connectToServer() {
+		
+	}
+
+}

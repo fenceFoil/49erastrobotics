@@ -1,0 +1,6 @@
+package edu.uncc.astrobotics.navProtoControls;
+
+public class VisualizerClient {
+	
+
+}

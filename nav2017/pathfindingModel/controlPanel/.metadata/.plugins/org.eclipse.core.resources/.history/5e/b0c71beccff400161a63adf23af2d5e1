@@ -1,0 +1,19 @@
+package edu.uncc.astrobotics.navProtoControls;
+
+import java.net.Socket;
+
+import javax.swing.JFrame;
+
+public class VisualizerClient {
+	public static final int PORT_NUM = 31336;
+	
+	private static Socket socket;
+	
+	public static void connectToServer(JFrame frame) {
+		// Try to connect to localhost at port 31336
+		socket = new Socket("localhost", PORT_NUM);
+		
+		
+	}
+
+}

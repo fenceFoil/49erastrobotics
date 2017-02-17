@@ -1,0 +1,31 @@
+package edu.uncc.astrobotics.navProtoControls.config;
+
+import java.util.List;
+
+public class NavProtoConfig {
+	private List<SliderConfig> sliders;
+	
+	public static NavProtoConfig readConfig() {
+		//read json file data to String
+		byte[] jsonData = Files.readAllBytes(Paths.get("sliders.json"));
+		
+		//create ObjectMapper instance
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		//convert json string to object
+		Employee emp = objectMapper.readValue(jsonData, Employee.class);
+	}
+
+	@Override
+	public String toString() {
+		return "NavProtoConfig [sliders=" + sliders + "]";
+	}
+
+	public List<SliderConfig> getSliders() {
+		return sliders;
+	}
+
+	public void setSliders(List<SliderConfig> sliders) {
+		this.sliders = sliders;
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"sliders":[
+		{
+			"variable":"movement.turnRadius",
+			"defaultMin":0,
+			"defaultMax":3,
+			"defaultValue": 2
+		},
+		{
+			"variable":"robotinfo.length",
+			"defaultMin":0.1,
+			"defaultMax":3,
+			"defaultValue": 1.117
+		}
+	]
+}

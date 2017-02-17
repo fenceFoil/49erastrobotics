@@ -1,0 +1,10 @@
+{
+	"sliders":[
+		{
+			"variable":"movement.turnRadius",
+			"defaultMin":0,
+			"defaultMax":3,
+			"defaultValue": 2
+		}
+	]
+}

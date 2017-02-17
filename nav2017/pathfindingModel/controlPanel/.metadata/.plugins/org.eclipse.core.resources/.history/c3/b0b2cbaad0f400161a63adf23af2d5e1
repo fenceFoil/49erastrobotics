@@ -1,0 +1,65 @@
+package edu.uncc.astrobotics.navProtoControls;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.util.prefs.Preferences;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+
+public class NavProtoControls extends JFrame {
+
+	private JPanel contentPane;
+	private JPanel sliderControlsPanel;
+	
+	private static Preferences prefs;
+	static {
+		prefs = 
+	}
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					NavProtoControls frame = new NavProtoControls();
+					frame.setVisible(true);
+					VisualizerClient.connectToServer(frame);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public NavProtoControls() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(NavProtoControls.class.getResource("/edu/uncc/astrobotics/navProtoControls/icon.png")));
+		setTitle("NASA RMC 2017 - Astrobotics - Navigation Prototype Controls");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane);
+		
+		sliderControlsPanel = new JPanel();
+		scrollPane.setViewportView(sliderControlsPanel);
+		
+		createSliderControls();
+	}
+
+	private void createSliderControls() {
+		// TODO
+	}
+
+}
