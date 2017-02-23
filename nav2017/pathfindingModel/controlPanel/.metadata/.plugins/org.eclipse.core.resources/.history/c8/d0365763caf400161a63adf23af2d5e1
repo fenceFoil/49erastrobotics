@@ -1,0 +1,5 @@
+package edu.uncc.astrobotics.navProtoControls.config;
+
+public class NavProtoConfig {
+
+}
