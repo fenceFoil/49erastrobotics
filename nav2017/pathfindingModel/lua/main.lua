@@ -49,7 +49,7 @@ end
 robotAngle = 0
 lastScrollTime = love.timer.getTime()
 function love.wheelmoved(x, y)
-  robotAngle = robotAngle + y * (math.pi / 16)
+  robotAngle = robotAngle + y * (math.pi / 4)
   lastScrollTime = love.timer.getTime()
 end
 function love.mousemoved(x, y, d, dy, istouch)
@@ -264,12 +264,20 @@ end
 
 lastdt = 0
 lastPIDTick = 0
+lastAngle = 0
+lastAngleChange = 0
 function love.update(dt)
   arenaHeight = love.graphics.getHeight()
   arenaWidth = love.graphics.getWidth()
 
-  if love.timer.getTime() - lastScrollTime > 5 then
-    robotAngle = robotAngle + dt*0.05
+  -- spin robot in 45 degree incrments each second
+  if love.timer.getTime() - lastScrollTime > 10 then
+    if love.timer.getTime() - lastAngleChange > 2 then
+      lastAngle = (lastAngle + 1) % 8
+      robotAngle = lastAngle * (math.pi / 4)
+      
+      lastAngleChange = love.timer.getTime()
+    end
   end
 
   -- Check for new server connections

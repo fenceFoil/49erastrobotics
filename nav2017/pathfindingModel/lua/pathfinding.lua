@@ -26,6 +26,8 @@ pathfinding.deadZone = 0.75
 pathfinding.lengthWeight = 1
 pathfinding.angleWeight = 1
 
+pathfinding.maxMoves = 3
+
 local function getGridWidth()
   return math.ceil((robotinfo.arenaWidth - 2*pathfinding.deadZone) / pathfinding.pathResolution)
 end
@@ -104,7 +106,7 @@ Returns a list of paths from starting point to destination. Considers paths pass
 --]]
 local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft)
   -- By default, recurse THREE times
-  if movesLeft == nil then movesLeft = 2 end
+  if movesLeft == nil then movesLeft = pathfinding.maxMoves-1 end
 
   -- TODO: How handle end of recursion?
 
