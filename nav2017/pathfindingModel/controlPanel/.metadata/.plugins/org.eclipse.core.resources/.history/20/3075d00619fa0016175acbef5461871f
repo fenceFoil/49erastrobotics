@@ -1,0 +1,6 @@
+package edu.uncc.astrobotics.navProtoControls.config;
+
+public class CheckboxConfig {
+	private String label;
+	private String code;
+}

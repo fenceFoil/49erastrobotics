@@ -1,0 +1,54 @@
+{
+	"buttons":[],
+	"checkboxes":[],
+	"sliders":[
+		{
+			"variable":"movement.turnRadius",
+			"defaultMin":0,
+			"defaultMax":3,
+			"defaultValue": 2
+		},
+		{
+			"variable":"pathfinding.deadZone",
+			"defaultMin":0,
+			"defaultMax":2,
+			"defaultValue": 0.75
+		},
+		{
+			"variable":"pathfinding.pathResolution",
+			"defaultMin":0.1,
+			"defaultMax":1,
+			"defaultValue": 0.3
+		},
+		{
+			"variable":"pathfinding.lengthWeight",
+			"defaultMin":0,
+			"defaultMax":10,
+			"defaultValue": 1
+		},
+		{
+			"variable":"pathfinding.angleWeight",
+			"defaultMin":0,
+			"defaultMax":100,
+			"defaultValue": 1
+		},
+		{
+			"variable":"pathfinding.maxMoves",
+			"defaultMin":0,
+			"defaultMax":5,
+			"defaultValue": 3
+		},
+		{
+			"variable":"movement.tolerance",
+			"defaultMin":0,
+			"defaultMax":1,
+			"defaultValue": 0.01
+		},
+		{
+			"variable":"movement.segLength",
+			"defaultMin":0.001,
+			"defaultMax":1,
+			"defaultValue": 0.1
+		}
+	]
+}

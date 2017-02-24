@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;edu.uncc.astrobotics.navProtoControls.config.CheckboxConfig.isDefaultValue()&apos; to &apos;getDefaultValue&apos;&#x0D;&#x0A;- Original project: &apos;PathfindingProtoControls&apos;&#x0D;&#x0A;- Original element: &apos;edu.uncc.astrobotics.navProtoControls.config.CheckboxConfig.isDefaultValue()&apos;&#x0D;&#x0A;- Renamed element: &apos;edu.uncc.astrobotics.navProtoControls.config.CheckboxConfig.getDefaultValue()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;isDefaultValue&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;edu.uncc.astrobotics.navProtoControls.config{CheckboxConfig.java[CheckboxConfig~isDefaultValue" name="getDefaultValue" references="true" stamp="1487917800528" version="1.0"/>
+</session>

@@ -1,4 +1,4 @@
-# List of external plug-in models previously loaded. Timestamp: 1487302279711
+# List of external plug-in models previously loaded. Timestamp: 1487914652900
 file:/C:/Users/BJ/.p2/pool/plugins/ch.qos.logback.classic_1.0.7.v20121108-1250.jar
 file:/C:/Users/BJ/.p2/pool/plugins/ch.qos.logback.core_1.0.7.v20121108-1250.jar
 file:/C:/Users/BJ/.p2/pool/plugins/ch.qos.logback.slf4j_1.0.7.v201505121915.jar
@@ -19,6 +19,14 @@ file:/C:/Users/BJ/.p2/pool/plugins/javax.inject_1.0.0.v20091030.jar
 file:/C:/Users/BJ/.p2/pool/plugins/javax.servlet_3.1.0.v201410161800.jar
 file:/C:/Users/BJ/.p2/pool/plugins/javax.servlet.jsp_2.2.0.v201112011158.jar
 file:/C:/Users/BJ/.p2/pool/plugins/javax.xml_1.3.4.v201005080400.jar
+file:/C:/Users/BJ/.p2/pool/plugins/jsonedit-core_1.0.1.jar
+file:/C:/Users/BJ/.p2/pool/plugins/jsonedit-editor_1.0.0.final.jar
+file:/C:/Users/BJ/.p2/pool/plugins/jsonedit-folding_1.0.1.jar
+file:/C:/Users/BJ/.p2/pool/plugins/jsonedit-model_1.0.1.jar
+file:/C:/Users/BJ/.p2/pool/plugins/jsonedit-outline_1.0.1.jar
+file:/C:/Users/BJ/.p2/pool/plugins/jsonedit-preferences_1.0.1.jar
+file:/C:/Users/BJ/.p2/pool/plugins/jsonedit-text_1.0.1.jar
+file:/C:/Users/BJ/.p2/pool/plugins/org.antlr.antlr4-runtime-osgi_4.5.2.1.jar
 file:/C:/Users/BJ/.p2/pool/plugins/org.apache.ant_1.9.6.v201510161327/
 file:/C:/Users/BJ/.p2/pool/plugins/org.apache.batik.css_1.7.0.v201011041433.jar
 file:/C:/Users/BJ/.p2/pool/plugins/org.apache.batik.util_1.7.0.v201011041433.jar
@@ -523,3 +531,4 @@ file:/C:/Users/BJ/.p2/pool/plugins/org.w3c.css.sac_1.3.1.v200903091627.jar
 file:/C:/Users/BJ/.p2/pool/plugins/org.w3c.dom.events_3.0.0.draft20060413_v201105210656.jar
 file:/C:/Users/BJ/.p2/pool/plugins/org.w3c.dom.smil_1.0.1.v200903091627.jar
 file:/C:/Users/BJ/.p2/pool/plugins/org.w3c.dom.svg_1.1.0.v201011041433.jar
+file:/C:/Users/BJ/.p2/pool/plugins/org.antlr.antlr4-runtime-osgi.source_4.5.2.1.jar

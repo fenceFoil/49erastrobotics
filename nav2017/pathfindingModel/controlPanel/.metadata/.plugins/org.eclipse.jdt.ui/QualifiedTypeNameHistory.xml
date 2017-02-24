@@ -10,5 +10,9 @@
 <fullyQualifiedTypeName name="edu.uncc.astrobotics.navProtoControls.JNavValueSlider"/>
 <fullyQualifiedTypeName name="edu.uncc.astrobotics.navProtoControls.config.NavProtoConfig"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="javax.swing.JCheckBox"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="edu.uncc.astrobotics.navProtoControls.VisualizerClient"/>
 </qualifiedTypeNameHistroy>
