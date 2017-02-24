@@ -1,5 +1,7 @@
 --[[
 
+Pathfinding.
+
 Positions range between 1..getNumPositions(), and each maps to an XY position
 in meters, in columns along X and then rows along Y.
 
@@ -25,8 +27,6 @@ pathfinding.deadZone = 0.75
 -- weights
 pathfinding.lengthWeight = 1
 pathfinding.angleWeight = 1
-
-pathfinding.maxMoves = 3
 
 local function getGridWidth()
   return math.ceil((robotinfo.arenaWidth - 2*pathfinding.deadZone) / pathfinding.pathResolution)
