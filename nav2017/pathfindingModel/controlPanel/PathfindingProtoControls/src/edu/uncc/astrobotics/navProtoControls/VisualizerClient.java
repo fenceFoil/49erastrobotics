@@ -68,5 +68,9 @@ public class VisualizerClient {
 	public static void updateVariable(String variable, double value) {
 		sendCode(variable + " = " + value);
 	}
+	
+	public static void updateVariable(String variable, boolean value) {
+		sendCode(variable + " = " + value);
+	}
 
 }
