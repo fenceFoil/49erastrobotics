@@ -1,18 +1,22 @@
 --[[
 
-Pathfinding.
+Pathfinding. Algorithm will vary, as this is the very core of this prototype: 
+a testbed for different pathfinding formulas.
 
+
+
+Intermediate positions between curves are specified as an index in a fixed set.
 Positions range between 1..getNumPositions(), and each maps to an XY position
-in meters, in columns along X and then rows along Y.
+in meters, in columns along X and then rows along Y (last bit subject to change).
 
 PATH OBJECTS:
 - positions (an array of positions)
   - for each item:
-    - 1 - x
-    - 2 - y
-    - 3 - angle
-    - length
-    - curviness
+    - 1 - x (m)
+    - 2 - y (m)
+    - 3 - angle (rad)
+    - length (m)
+    - curviness (sum of absolute rad deltas)
 
 --]]
 
@@ -79,7 +83,7 @@ local function createEmptyPath()
   return newPath
 end
 
--- 
+-- Path object factory.
 local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum)
   local newPath = createEmptyPath()
   local newPos = {}
@@ -99,9 +103,8 @@ function pathfinding.compareCosts(path1, path2)
 end
 
 --[[
-Returns a list of paths from starting point to destination. Considers paths passing through a grid of positions defined by pathResolution, deadZone, etc.
-
--- current problem: destination: should it be a "position?"
+Returns a list of paths from starting point to destination. 
+Considers paths passing through a grid of positions defined by pathResolution, deadZone, etc.
 
 --]]
 local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft)

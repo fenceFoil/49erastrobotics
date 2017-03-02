@@ -1,6 +1,7 @@
 --[[
 
 Contains relatively constant info about the robot, such as dimensions.
+Also arena info.
 
 Corners are numbered as follows: (following angles in radians)
 
@@ -30,6 +31,7 @@ robotinfo.bubble = 0.1 + ((robotinfo.width/2)^2+(robotinfo.length/2)^2)^0.5
 
 -- botAngle is in radians
 -- returns a list of x,y coordinates for the 4 corners of the robot (8 number array)
+-- x, y in meters
 function robotinfo.getCorners(botX, botY, botAngle)
   -- assume robot is not at an angle yet, find corner coords in polar
   -- get radian coordinates
