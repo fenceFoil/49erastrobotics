@@ -24,6 +24,8 @@ local pathfinding = {}
 
 local robotinfo = require "robotinfo"
 
+pathfinding.maxMoves = 3
+
 -- positions per meter
 pathfinding.pathResolution = 0.3
 pathfinding.deadZone = 0.75
