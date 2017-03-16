@@ -94,7 +94,7 @@ local function createEmptyPath()
 end
 
 -- Path object factory.
-local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isReversal=false)
+local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isReversal)
   local newPath = createEmptyPath()
   local newPos = {}
   newPos[1] = nodeX
@@ -103,6 +103,7 @@ local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isRevers
   newPos.length = length
   newPos.angleSum = angleSum
   newPos.isReversal = isReversal
+  if isReversal == nil then newPos.isReversal = false end
 
   newPath.positions[#newPath.positions+1] = newPos
   return newPath
