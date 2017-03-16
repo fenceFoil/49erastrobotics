@@ -70,6 +70,7 @@ Returns a movement table:
 - length (sum length of segments)
 - array of positions:
   - {x, y, angle}
+- movedFwd (boolean)
 --]]
 function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, turnRadius, tolerance, segLength)
   local currX, currY = startX, startY
@@ -216,7 +217,7 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
     end
   end
 
-  return {didReach=didReach, didCollide=didCollide, length=length, angleSum=angleSum, positions=positions}
+  return {didReach=didReach, didCollide=didCollide, length=length, angleSum=angleSum, positions=positions, movedFwd=(not movingBackward)}
 end
 
 return movementmodel
