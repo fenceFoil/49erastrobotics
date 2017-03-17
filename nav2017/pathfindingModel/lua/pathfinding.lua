@@ -5,9 +5,9 @@ a testbed for different pathfinding formulas.
 
 
 
-Intermediate positions between curves are specified as an index in a fixed set.
-Positions range between 1..getNumPositions(), and each maps to an XY position
-in meters, in columns along X and then rows along Y (last bit subject to change).
+Intermediate positions between curves are given by getAllPositions(), and
+are selected to be arranged in a higher density where the pathfinding
+algorithm needs to look harder for valid paths.
 
 Note: Position logic holds state during a particular path search with desperation,
 so a single instance of pathfinding is not thread-safe!
@@ -20,7 +20,7 @@ PATH OBJECTS:
     - 3 - angle (rad)
     - length (m)
     - curviness (sum of absolute rad deltas)
-
+    - isFwd - (boolean) (was movement to this position foreward)
 --]]
 
 local pathfinding = {}
@@ -41,6 +41,7 @@ pathfinding.angleWeight = 0
 pathfinding.tooShortPenalty = 1000
 pathfinding.tooShortThreshold = 2
 
+--[[
 local function getGridWidth()
   return math.ceil((robotinfo.arenaWidth - 2*pathfinding.deadZone) / pathfinding.pathResolution)
 end
@@ -69,6 +70,42 @@ function pathfinding.getAllPositions()
   for i = 1, getNumPositions() do
     local x, y = pathfinding.posToXY(i)
     positions[#positions+1] = {x, y}
+  end
+  return positions
+end
+--]]
+
+
+--[[
+Returns a grid of positions. Positions are distributed in a rectangular grid, 
+split into three sections (for the starting, obstacle, and mining areas),
+each with different densities of positions.
+--]]
+pathfinding.positionGrids = {
+  {x1=0, x2=1.75, density=0.15},
+  {x1=1.75, x2=4.5, density=0.5},
+  {x1=4.5, x2=robotinfo.arenaWidth, density=0.5}
+}
+-- note: positions are cached for performance. to refresh after changing
+-- position grid densities, etc, set pathfinding.allPositinos to nil as a dirty
+-- flag
+pathfinding.allPositions = nil
+function pathfinding.getAllPositions()
+  local positions = {}
+  if pathfinding.allPositions == nil then
+    for i, grid in pairs(pathfinding.positionGrids) do
+      -- for each grid, create an even distribution of points throughout
+      -- start with columns across x-axis, then go down columns
+      for x = math.max(grid.x1, pathfinding.deadZone), 
+      math.min(grid.x2, robotinfo.arenaWidth-pathfinding.deadZone), grid.density do
+        for y = pathfinding.deadZone, robotinfo.arenaHeight-pathfinding.deadZone, grid.density do
+          positions[#positions+1] = {x, y}
+        end
+      end
+    end
+    pathfinding.allPositions = positions
+  else
+    positions = pathfinding.allPositions
   end
   return positions
 end
