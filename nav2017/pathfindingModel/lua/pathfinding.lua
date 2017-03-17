@@ -32,11 +32,11 @@ pathfinding.deadZone = 0.75
 
 -- weights
 pathfinding.lengthWeight = 1
-pathfinding.angleWeight = 1
+pathfinding.angleWeight = 0
 
 -- anti-spin-in-place path segment penalty
-pathfinding.tooShortPenalty = 4
-pathfinding.tooShortThreshold = 1.5
+pathfinding.tooShortPenalty = 1000
+pathfinding.tooShortThreshold = 2
 
 local function getGridWidth()
   return math.ceil((robotinfo.arenaWidth - 2*pathfinding.deadZone) / pathfinding.pathResolution)
@@ -84,7 +84,7 @@ local function createEmptyPath()
       angleSum = angleSum + pos.angleSum
     end
     local costCounter =  lenSum * pathfinding.lengthWeight + angleSum * pathfinding.angleWeight
-    if lenSum < pathfinding.tooShortThreshold and self.isReversal then
+    if (lenSum < pathfinding.tooShortThreshold) and self.isReversal then
       costCounter = costCounter + pathfinding.tooShortPenalty
     end
     return costCounter
@@ -146,7 +146,7 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
 
         if move.didReach then
           -- Recurse and try to reach destination from here
-          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, lastMoveFwd)
+          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, move.movedFwd)
           -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
           for j,path in ipairs(subPathsToDest) do
             local moveInfo = {length=move.length, angleSum=move.angleSum}
