@@ -2,7 +2,9 @@
 <Project Type="Project" LVVersion="15008000">
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
 	<Property Name="NI.Project.Description" Type="Str"></Property>
+	<Property Name="SMProvider.SMVersion" Type="Int">201310</Property>
 	<Property Name="varPersistentID:{039C0131-5F42-4503-8E20-B179E81A2B70}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Scale - Left</Property>
+	<Property Name="varPersistentID:{0B233DEB-3AEF-48E0-A4D8-53218411EA0A}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Full</Property>
 	<Property Name="varPersistentID:{0C5B20BA-18EF-4333-92D7-CCEC650DA1AA}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_Scales</Property>
 	<Property Name="varPersistentID:{1293F181-9DD4-47ED-A979-934E1CEB8270}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Image Lock - L</Property>
 	<Property Name="varPersistentID:{18889B27-B07E-496F-8A6C-75207E8985EF}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/loc_y</Property>
@@ -19,6 +21,7 @@
 	<Property Name="varPersistentID:{4EC7E30F-0746-45F9-A9F3-0A36B11BAB20}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Destination Reached</Property>
 	<Property Name="varPersistentID:{54B7EDE8-8E01-4444-A53F-54AAF977913B}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Left Servo Angle_Image</Property>
 	<Property Name="varPersistentID:{55AD1A9B-E494-4793-80BF-D255A66C35C4}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Servo Stop</Property>
+	<Property Name="varPersistentID:{5C53B893-1A8A-40ED-A5F0-122F3314CD14}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/unjam</Property>
 	<Property Name="varPersistentID:{5F78DB51-8CCB-4A17-82A7-B6EF6546F911}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum</Property>
 	<Property Name="varPersistentID:{6009D1EB-47EC-450D-8B6B-11A073A21951}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Info - Left</Property>
 	<Property Name="varPersistentID:{62809F78-958C-481C-AF89-6B3100843F8A}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Info - Right</Property>
@@ -35,6 +38,7 @@
 	<Property Name="varPersistentID:{86FC34F1-2CE5-419D-A801-9EFDD4705588}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Dig</Property>
 	<Property Name="varPersistentID:{88019964-4E7A-47AA-B633-877C3B776F5D}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Joystick Direction</Property>
 	<Property Name="varPersistentID:{8D51C155-E041-4878-A870-069F26025B42}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/myRIO Accel x</Property>
+	<Property Name="varPersistentID:{92A60328-5629-494A-AA8A-DF86187CC7F1}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Orientation complete</Property>
 	<Property Name="varPersistentID:{94E1FAAA-B2FC-400A-9C51-C1338365DDAD}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Right Servo Angle_Image</Property>
 	<Property Name="varPersistentID:{98CF2629-72C8-41FF-B1AA-0DD43BBA302D}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Start Run</Property>
 	<Property Name="varPersistentID:{9C828DC4-66B7-4019-9A81-3A24AA44BCF0}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_X_array</Property>
@@ -44,6 +48,7 @@
 	<Property Name="varPersistentID:{B3FC3AF5-50F3-4C9E-A3FD-3CBC7F8D5829}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Position_Lock</Property>
 	<Property Name="varPersistentID:{B8E60758-D702-4426-AA2B-C92C9114E43D}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Goal Position X</Property>
 	<Property Name="varPersistentID:{BA9B583E-4A65-44B2-8B1F-FEB3991EE1E2}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Right Duty Cycle</Property>
+	<Property Name="varPersistentID:{BACC9AC2-1EDE-4193-BCC9-2B830D3FFEF0}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch going down</Property>
 	<Property Name="varPersistentID:{C02B1DEA-4341-40D0-BCE6-E6DDBE5529B5}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Mining Complete</Property>
 	<Property Name="varPersistentID:{C2039A42-9A29-4E13-B6D2-D18FB8EE01BB}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Scoops</Property>
 	<Property Name="varPersistentID:{C48AF694-B9FC-4606-8DC4-202FC7F153DD}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch Accel x</Property>
@@ -67,6 +72,14 @@
 	<Property Name="varPersistentID:{F3CF621B-3A6A-4541-BD2D-DC0F3B79939C}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Scale - Right</Property>
 	<Property Name="varPersistentID:{F6069745-149B-4850-B620-6A1065BF7BCB}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/loc_theta</Property>
 	<Item Name="My Computer" Type="My Computer">
+		<Property Name="IOScan.Faults" Type="Str"></Property>
+		<Property Name="IOScan.NetVarPeriod" Type="UInt">100</Property>
+		<Property Name="IOScan.NetWatchdogEnabled" Type="Bool">false</Property>
+		<Property Name="IOScan.Period" Type="UInt">10000</Property>
+		<Property Name="IOScan.PowerupMode" Type="UInt">0</Property>
+		<Property Name="IOScan.Priority" Type="UInt">9</Property>
+		<Property Name="IOScan.ReportModeConflict" Type="Bool">true</Property>
+		<Property Name="IOScan.StartEngineOnDeploy" Type="Bool">false</Property>
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.control.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.tcp.enabled" Type="Bool">false</Property>
@@ -376,6 +389,7 @@ AddOutputFilter chunkFilter
 				<Item Name="roboRIO v1.0 Unreserve Channel List.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/roboRIO v1.0/Resource Manager/vis/roboRIO v1.0 Unreserve Channel List.vi"/>
 				<Item Name="roboRIO v1.0 Build MUX Configuration DIO.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/roboRIO v1.0/DIO/vis/roboRIO v1.0 Build MUX Configuration DIO.vi"/>
 				<Item Name="roboRIO v1.0 Shutdown DIO.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/roboRIO v1.0/DIO/vis/roboRIO v1.0 Shutdown DIO.vi"/>
+				<Item Name="niLvFpga_Open_roboRIO.vi" Type="VI" URL="/&lt;vilib&gt;/FPGAPlugInAG/roboRIO/niLvFpga_Open_roboRIO.vi"/>
 			</Item>
 			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
@@ -2546,6 +2560,7 @@ DirectoryIndex index.htm
 				<Item Name="Dependencies" Type="Dependencies">
 					<Item Name="vi.lib" Type="Folder">
 						<Item Name="lvSimController.dll" Type="Document" URL="/&lt;vilib&gt;/rvi/Simulation/lvSimController.dll"/>
+						<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
 					</Item>
 				</Item>
 				<Item Name="Build Specifications" Type="Build">
