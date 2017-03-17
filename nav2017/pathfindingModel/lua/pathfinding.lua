@@ -127,20 +127,24 @@ local function createEmptyPath()
 
     -- note number of anti-spin-in-place penalties (reversals and too-short paths)
     local lastDirection = nil
+    local distanceThisDirection = 0
     for i,pos in pairs(self.positions) do
       if lastDirection == nil then
         lastDirection = pos.isFwd
       else
         if lastDirection ~= pos.isFwd then
-          -- this segment is a reversal
-          -- is it too short? penalize it like heck
-          if pos.length < pathfinding.tooShortThreshold then
+          -- this segment is the start of a reversal
+          -- was movement before it it too short? penalize it like heck
+          if distanceThisDirection < pathfinding.tooShortThreshold then
             costCounter = costCounter + pathfinding.tooShortPenalty
           end
+
+          distanceThisDirection = 0
         end
 
         lastDirection = pos.isFwd
       end
+      distanceThisDirection = distanceThisDirection + pos.length
     end
 
     return costCounter
