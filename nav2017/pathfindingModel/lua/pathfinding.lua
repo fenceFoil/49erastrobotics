@@ -9,6 +9,9 @@ Intermediate positions between curves are specified as an index in a fixed set.
 Positions range between 1..getNumPositions(), and each maps to an XY position
 in meters, in columns along X and then rows along Y (last bit subject to change).
 
+Note: Position logic holds state during a particular path search with desperation,
+so a single instance of pathfinding is not thread-safe!
+
 PATH OBJECTS:
 - positions (an array of positions)
   - for each item:
@@ -56,7 +59,6 @@ end
 function pathfinding.posToXY (pos)
   local gridWidth = getGridWidth()
 
-  -- XXX: Broken. Are positions 1-indexed or 0-indexed?
   local pointX = ((pos-1) % gridWidth) * pathfinding.pathResolution + pathfinding.deadZone
   local pointY = math.floor((pos-1) / gridWidth) * pathfinding.pathResolution + pathfinding.deadZone
   return pointX, pointY
@@ -139,11 +141,9 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
   -- By default, recurse THREE times
   if movesLeft == nil then movesLeft = pathfinding.maxMoves-1 end
 
-  -- TODO: How handle end of recursion?
-
   local pathsToDest = {}
 
-  -- TO DO Examine movement directly from current position to destination
+  -- Examine movement directly from current position to destination
   local directMove = movementModel.move(startX, startY, startAngle, destX, destY)
   if directMove.didReach then 
     -- Add this movement as a path to destination paths
