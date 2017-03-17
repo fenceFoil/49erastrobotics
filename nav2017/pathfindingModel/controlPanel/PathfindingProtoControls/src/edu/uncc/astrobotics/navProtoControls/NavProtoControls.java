@@ -13,6 +13,10 @@ import javax.swing.border.EmptyBorder;
 
 import edu.uncc.astrobotics.navProtoControls.config.NavProtoConfig;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+
 import java.awt.GridBagLayout;
 
 public class NavProtoControls extends JFrame {
@@ -61,19 +65,20 @@ public class NavProtoControls extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-				sliderControlsPanel = new JPanel();
-				contentPane.add(sliderControlsPanel);
-				sliderControlsPanel.setLayout(new BoxLayout(sliderControlsPanel, BoxLayout.PAGE_AXIS));
+
+		sliderControlsPanel = new JPanel();
+		contentPane.add(sliderControlsPanel);
+		sliderControlsPanel.setLayout(new BoxLayout(sliderControlsPanel, BoxLayout.PAGE_AXIS));
 
 		createSliderControls();
+		pack();
 	}
 
 	private void createSliderControls() {
 		NavProtoConfig config = NavProtoConfig.readConfig();
-		List<JPanel> controls = config.createControls();
+		List<JComponent> controls = config.createControls();
 
-		for (JPanel panel : controls) {
+		for (JComponent panel : controls) {
 			sliderControlsPanel.add(panel, null);
 		}
 	}

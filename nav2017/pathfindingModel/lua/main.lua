@@ -22,6 +22,10 @@ arenaBGFilename = "sand-texture1.png"
 currVisualization = 5
 numVisualizations = 5
 
+lockRobotPos = false
+lock8Angles = true
+autoSpin = true
+
 -- Imports
 robotinfo = require "robotinfo"
 movement = require "movementmodel"
@@ -37,7 +41,7 @@ pidmoveright = require "pidmove"
 local PORT_NUM = 31336
 socket = require "socket"
 server = assert(socket.bind("*", PORT_NUM))
-server:settimeout(0) -- do not block while waiting for requests
+server:settimeout(0) -- do not block while waiting for request
 
 function love.load()
   if arg[#arg] == "-debug" then require("mobdebug").start() end
@@ -49,7 +53,11 @@ end
 robotAngle = 0
 lastScrollTime = love.timer.getTime()
 function love.wheelmoved(x, y)
-  robotAngle = robotAngle + y * (math.pi / 16)
+  if lock8Angles then
+    robotAngle = robotAngle + y * (math.pi / 4)
+  else 
+    robotAngle = robotAngle + y * (math.pi / 16)
+  end
   lastScrollTime = love.timer.getTime()
 end
 function love.mousemoved(x, y, d, dy, istouch)
@@ -89,11 +97,11 @@ destX = 4
 destY = 2
 
 function love.mousereleased(x, y, button)
-  if button == 1 then
-    -- change visualization
-    currVisualization = currVisualization + 1
-    if currVisualization > numVisualizations then currVisualization = 1 end
-  elseif button == 2 then
+--  if button == 1 then
+--    -- change visualization
+--    currVisualization = currVisualization + 1
+--    if currVisualization > numVisualizations then currVisualization = 1 end
+  if button == 2 then
     destX, destY = pixelsToM(x, y)
   end
 end
@@ -102,10 +110,16 @@ function love.draw()
   love.graphics.draw(arenaBG)
   love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
-  -- Print position in meters by the mouse
-  local mx, my = love.mouse.getPosition()
-  mx, my = 100, 150
+
+  -- update robot position to mouse position
+  if not (lockRobotPos and not love.mouse.isDown(1)) then
+    mx, my = love.mouse.getPosition()
+  end
+  if mx == nil or my == nil then
+    mx, my = mToPixels(0.95, 1.12)
+  end
   local mxm, mym = pixelsToM(mx, my)
+  -- Print position in meters by the mouse
   love.graphics.print(round2(mxm).."m, "..round2(mym).."m", mx+16, my+16)
 
   -- Draw the robot at the mouse cursor
@@ -246,7 +260,7 @@ function love.draw()
             local pixX, pixY = mToPixels(point[1], point[2])
             movePixelPoints[(j-1)*2+1] = pixX
             movePixelPoints[(j-1)*2+1+1] = pixY
-            
+
             love.graphics.circle("fill", pixX, pixY, 4)
           end
           love.graphics.setColor(0, 255, 0)
@@ -264,12 +278,26 @@ end
 
 lastdt = 0
 lastPIDTick = 0
+lastAngle = 0
+lastAngleChange = 0
 function love.update(dt)
   arenaHeight = love.graphics.getHeight()
   arenaWidth = love.graphics.getWidth()
 
+  -- spin robot in 45 degree incrments each second
   if love.timer.getTime() - lastScrollTime > 5 then
-    robotAngle = robotAngle + dt*0.05
+    if autoSpin then
+      if lock8Angles then
+        if love.timer.getTime() - lastAngleChange > 2 then
+          lastAngle = (lastAngle + 1) % 8
+          robotAngle = lastAngle * (math.pi / 4)
+
+          lastAngleChange = love.timer.getTime()
+        end
+      else
+        robotAngle = robotAngle + math.pi*dt*0.05
+      end
+    end
   end
 
   -- Check for new server connections
@@ -292,7 +320,7 @@ function love.update(dt)
       end
     end
   end
-  
+
   lastdt = dt
 end
 

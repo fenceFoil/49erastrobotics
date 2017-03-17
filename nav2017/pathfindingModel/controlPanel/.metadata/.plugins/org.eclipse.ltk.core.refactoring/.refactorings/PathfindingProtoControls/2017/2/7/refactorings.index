@@ -1,9 +1,0 @@
-1487304410703	Rename package 'navProtoControls'
-1487304415113	Move file
-1487304423352	Move compilation units
-1487306208774	Rename type 'NavProtoConfig'
-1487306384773	Delete element
-1487307455611	Convert local variable 'slider' to field
-1487307462420	Convert local variable 'valueSpinner' to field
-1487307471295	Convert local variable 'maxSpinner' to field
-1487307479453	Convert local variable 'minSpinner' to field
