@@ -83,10 +83,27 @@ local function createEmptyPath()
       lenSum = lenSum + pos.length
       angleSum = angleSum + pos.angleSum
     end
-    local costCounter =  lenSum * pathfinding.lengthWeight + angleSum * pathfinding.angleWeight
-    if (lenSum < pathfinding.tooShortThreshold) and self.isReversal then
-      costCounter = costCounter + pathfinding.tooShortPenalty
+
+    local costCounter = lenSum * pathfinding.lengthWeight + angleSum * pathfinding.angleWeight
+
+    -- note number of anti-spin-in-place penalties (reversals and too-short paths)
+    local lastDirection = nil
+    for i,pos in pairs(self.positions) do
+      if lastDirection == nil then
+        lastDirection = pos.isFwd
+      else
+        if lastDirection ~= pos.isFwd then
+          -- this segment is a reversal
+          -- is it too short? penalize it like heck
+          if pos.length < pathfinding.tooShortThreshold then
+            costCounter = costCounter + pathfinding.tooShortPenalty
+          end
+        end
+
+        lastDirection = pos.isFwd
+      end
     end
+
     return costCounter
   end
 
@@ -94,7 +111,7 @@ local function createEmptyPath()
 end
 
 -- Path object factory.
-local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isReversal)
+local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isFwd)
   local newPath = createEmptyPath()
   local newPos = {}
   newPos[1] = nodeX
@@ -102,8 +119,7 @@ local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isRevers
   newPos[3] = nodeAngle
   newPos.length = length
   newPos.angleSum = angleSum
-  newPos.isReversal = isReversal
-  if isReversal == nil then newPos.isReversal = false end
+  newPos.isFwd = isFwd
 
   newPath.positions[#newPath.positions+1] = newPos
   return newPath
@@ -119,7 +135,7 @@ Returns a list of paths from starting point to destination.
 Considers paths passing through a grid of positions defined by pathResolution, deadZone, etc.
 
 --]]
-local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft, lastMoveFwd)
+local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft)
   -- By default, recurse THREE times
   if movesLeft == nil then movesLeft = pathfinding.maxMoves-1 end
 
@@ -129,14 +145,9 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
 
   -- TO DO Examine movement directly from current position to destination
   local directMove = movementModel.move(startX, startY, startAngle, destX, destY)
-  local moveWasReversal = true
-  -- In LabVIEW, use xor. Not available in lua
-  if (lastMoveFwd and directMove.movedFwd) or ((not lastMoveFwd) and (not directMove.movedFwd)) then
-    moveWasReversal = false
-  end
   if directMove.didReach then 
     -- Add this movement as a path to destination paths
-    pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, moveWasReversal)
+    pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.movedFwd)
   else
     -- If can't get to destination in one hop, consider alternatives
     if movesLeft > 0 then
@@ -146,10 +157,10 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
 
         if move.didReach then
           -- Recurse and try to reach destination from here
-          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, move.movedFwd)
+          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1)
           -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
           for j,path in ipairs(subPathsToDest) do
-            local moveInfo = {length=move.length, angleSum=move.angleSum}
+            local moveInfo = {length=move.length, angleSum=move.angleSum, isFwd=move.movedFwd}
             moveInfo[1] = pos[1]
             moveInfo[2] = pos[2]
             moveInfo[3] = move.positions[#move.positions][3]

@@ -255,7 +255,11 @@ function love.draw()
         if (#move.positions > 1) then
           -- Convert movement points to pixel points for rendering
           local movePixelPoints = {}
-          love.graphics.setColor(0, 255, 0)
+          if move.movedFwd then
+            love.graphics.setColor(0, 255, 0)
+          else
+            love.graphics.setColor(0, 255, 255)
+          end
           for j,point in ipairs(move.positions) do
             local pixX, pixY = mToPixels(point[1], point[2])
             movePixelPoints[(j-1)*2+1] = pixX
@@ -263,7 +267,6 @@ function love.draw()
 
             love.graphics.circle("fill", pixX, pixY, 4)
           end
-          love.graphics.setColor(0, 255, 0)
           --love.graphics.line(movePixelPoints)
           love.graphics.setColor(255, 255, 255, 255)
         end
