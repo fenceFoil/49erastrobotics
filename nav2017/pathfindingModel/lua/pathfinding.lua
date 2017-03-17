@@ -12,6 +12,9 @@ algorithm needs to look harder for valid paths.
 Note: Position logic holds state during a particular path search with desperation,
 so a single instance of pathfinding is not thread-safe!
 
+Note: getPathsTo changes the values of the movementModel passed to it, so it is
+not thread-safe!
+
 PATH OBJECTS:
 - positions (an array of positions)
   - for each item:
@@ -83,8 +86,8 @@ each with different densities of positions.
 --]]
 pathfinding.positionGrids = {
   {x1=0, x2=1.75, density=0.15},
-  {x1=1.75, x2=4.5, density=0.5},
-  {x1=4.5, x2=robotinfo.arenaWidth, density=0.5}
+  {x1=1.75, x2=4.5, density=0.4},
+  {x1=4.5, x2=robotinfo.arenaWidth, density=0.4}
 }
 -- note: positions are cached for performance. to refresh after changing
 -- position grid densities, etc, set pathfinding.allPositinos to nil as a dirty
@@ -217,7 +220,18 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
 end
 
 function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, movementModel)
-  local paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel)
+  -- save orginal turning radius of movement model, despite desperation below
+  local originalRadius = movementModel.turnRadius
+  -- Desperation: in the odd case no path can be found at a turning radius of x,
+  -- try to assume a tighter turning radius until a path can be found.
+  local paths = {}
+  repeat
+    paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel)
+    movementModel.turnRadius = movementModel.turnRadius * 0.9
+    -- XXX: Tune ^^^ constants
+  until #paths > 0 or movementModel.turnRadius < originalRadius * 0.5
+  -- XXX: Tune ^^^ constants
+  movementModel.turnRadius = originalRadius
 
   table.sort(paths, pathfinding.compareCosts)
 
