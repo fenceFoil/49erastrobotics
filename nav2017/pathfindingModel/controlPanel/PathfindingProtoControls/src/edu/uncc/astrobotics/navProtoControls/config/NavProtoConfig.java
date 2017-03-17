@@ -15,6 +15,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.uncc.astrobotics.navProtoControls.JNavValueSlider;
@@ -42,7 +44,9 @@ public class NavProtoConfig {
 		}
 
 		// create ObjectMapper instance
-		ObjectMapper objectMapper = new ObjectMapper();
+		JsonFactory f = new JsonFactory();
+		f.enable(JsonParser.Feature.ALLOW_COMMENTS);
+		ObjectMapper objectMapper = new ObjectMapper(f);
 
 		// convert json string to object
 		try {
