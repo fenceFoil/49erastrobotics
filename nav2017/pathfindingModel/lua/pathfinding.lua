@@ -5,9 +5,15 @@ a testbed for different pathfinding formulas.
 
 
 
-Intermediate positions between curves are specified as an index in a fixed set.
-Positions range between 1..getNumPositions(), and each maps to an XY position
-in meters, in columns along X and then rows along Y (last bit subject to change).
+Intermediate positions between curves are given by getAllPositions(), and
+are selected to be arranged in a higher density where the pathfinding
+algorithm needs to look harder for valid paths.
+
+Note: Position logic holds state during a particular path search with desperation,
+so a single instance of pathfinding is not thread-safe!
+
+Note: getPathsTo changes the values of the movementModel passed to it, so it is
+not thread-safe!
 
 PATH OBJECTS:
 - positions (an array of positions)
@@ -17,7 +23,7 @@ PATH OBJECTS:
     - 3 - angle (rad)
     - length (m)
     - curviness (sum of absolute rad deltas)
-
+    - isFwd - (boolean) (was movement to this position foreward)
 --]]
 
 local pathfinding = {}
@@ -32,12 +38,13 @@ pathfinding.deadZone = 0.75
 
 -- weights
 pathfinding.lengthWeight = 1
-pathfinding.angleWeight = 1
+pathfinding.angleWeight = 0
 
 -- anti-spin-in-place path segment penalty
-pathfinding.tooShortPenalty = 4
-pathfinding.tooShortThreshold = 1.5
+pathfinding.tooShortPenalty = 1000
+pathfinding.tooShortThreshold = 2
 
+--[[
 local function getGridWidth()
   return math.ceil((robotinfo.arenaWidth - 2*pathfinding.deadZone) / pathfinding.pathResolution)
 end
@@ -56,7 +63,6 @@ end
 function pathfinding.posToXY (pos)
   local gridWidth = getGridWidth()
 
-  -- XXX: Broken. Are positions 1-indexed or 0-indexed?
   local pointX = ((pos-1) % gridWidth) * pathfinding.pathResolution + pathfinding.deadZone
   local pointY = math.floor((pos-1) / gridWidth) * pathfinding.pathResolution + pathfinding.deadZone
   return pointX, pointY
@@ -67,6 +73,42 @@ function pathfinding.getAllPositions()
   for i = 1, getNumPositions() do
     local x, y = pathfinding.posToXY(i)
     positions[#positions+1] = {x, y}
+  end
+  return positions
+end
+--]]
+
+
+--[[
+Returns a grid of positions. Positions are distributed in a rectangular grid, 
+split into three sections (for the starting, obstacle, and mining areas),
+each with different densities of positions.
+--]]
+pathfinding.positionGrids = {
+  {x1=0, x2=1.75, density=0.15},
+  {x1=1.75, x2=4.5, density=0.4},
+  {x1=4.5, x2=robotinfo.arenaWidth, density=0.4}
+}
+-- note: positions are cached for performance. to refresh after changing
+-- position grid densities, etc, set pathfinding.allPositinos to nil as a dirty
+-- flag
+pathfinding.allPositions = nil
+function pathfinding.getAllPositions()
+  local positions = {}
+  if pathfinding.allPositions == nil then
+    for i, grid in pairs(pathfinding.positionGrids) do
+      -- for each grid, create an even distribution of points throughout
+      -- start with columns across x-axis, then go down columns
+      for x = math.max(grid.x1, pathfinding.deadZone), 
+      math.min(grid.x2, robotinfo.arenaWidth-pathfinding.deadZone), grid.density do
+        for y = pathfinding.deadZone, robotinfo.arenaHeight-pathfinding.deadZone, grid.density do
+          positions[#positions+1] = {x, y}
+        end
+      end
+    end
+    pathfinding.allPositions = positions
+  else
+    positions = pathfinding.allPositions
   end
   return positions
 end
@@ -83,10 +125,31 @@ local function createEmptyPath()
       lenSum = lenSum + pos.length
       angleSum = angleSum + pos.angleSum
     end
-    local costCounter =  lenSum * pathfinding.lengthWeight + angleSum * pathfinding.angleWeight
-    if lenSum < pathfinding.tooShortThreshold and self.isReversal then
-      costCounter = costCounter + pathfinding.tooShortPenalty
+
+    local costCounter = lenSum * pathfinding.lengthWeight + angleSum * pathfinding.angleWeight
+
+    -- note number of anti-spin-in-place penalties (reversals and too-short paths)
+    local lastDirection = nil
+    local distanceThisDirection = 0
+    for i,pos in pairs(self.positions) do
+      if lastDirection == nil then
+        lastDirection = pos.isFwd
+      else
+        if lastDirection ~= pos.isFwd then
+          -- this segment is the start of a reversal
+          -- was movement before it it too short? penalize it like heck
+          if distanceThisDirection < pathfinding.tooShortThreshold then
+            costCounter = costCounter + pathfinding.tooShortPenalty
+          end
+
+          distanceThisDirection = 0
+        end
+
+        lastDirection = pos.isFwd
+      end
+      distanceThisDirection = distanceThisDirection + pos.length
     end
+
     return costCounter
   end
 
@@ -94,7 +157,7 @@ local function createEmptyPath()
 end
 
 -- Path object factory.
-local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isReversal)
+local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isFwd)
   local newPath = createEmptyPath()
   local newPos = {}
   newPos[1] = nodeX
@@ -102,8 +165,7 @@ local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isRevers
   newPos[3] = nodeAngle
   newPos.length = length
   newPos.angleSum = angleSum
-  newPos.isReversal = isReversal
-  if isReversal == nil then newPos.isReversal = false end
+  newPos.isFwd = isFwd
 
   newPath.positions[#newPath.positions+1] = newPos
   return newPath
@@ -119,24 +181,17 @@ Returns a list of paths from starting point to destination.
 Considers paths passing through a grid of positions defined by pathResolution, deadZone, etc.
 
 --]]
-local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft, lastMoveFwd)
+local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft)
   -- By default, recurse THREE times
   if movesLeft == nil then movesLeft = pathfinding.maxMoves-1 end
 
-  -- TODO: How handle end of recursion?
-
   local pathsToDest = {}
 
-  -- TO DO Examine movement directly from current position to destination
+  -- Examine movement directly from current position to destination
   local directMove = movementModel.move(startX, startY, startAngle, destX, destY)
-  local moveWasReversal = true
-  -- In LabVIEW, use xor. Not available in lua
-  if (lastMoveFwd and directMove.movedFwd) or ((not lastMoveFwd) and (not directMove.movedFwd)) then
-    moveWasReversal = false
-  end
   if directMove.didReach then 
     -- Add this movement as a path to destination paths
-    pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, moveWasReversal)
+    pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.movedFwd)
   else
     -- If can't get to destination in one hop, consider alternatives
     if movesLeft > 0 then
@@ -146,10 +201,10 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
 
         if move.didReach then
           -- Recurse and try to reach destination from here
-          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, lastMoveFwd)
+          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1)
           -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
           for j,path in ipairs(subPathsToDest) do
-            local moveInfo = {length=move.length, angleSum=move.angleSum}
+            local moveInfo = {length=move.length, angleSum=move.angleSum, isFwd=move.movedFwd}
             moveInfo[1] = pos[1]
             moveInfo[2] = pos[2]
             moveInfo[3] = move.positions[#move.positions][3]
@@ -165,7 +220,18 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
 end
 
 function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, movementModel)
-  local paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel)
+  -- save orginal turning radius of movement model, despite desperation below
+  local originalRadius = movementModel.turnRadius
+  -- Desperation: in the odd case no path can be found at a turning radius of x,
+  -- try to assume a tighter turning radius until a path can be found.
+  local paths = {}
+  repeat
+    paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel)
+    movementModel.turnRadius = movementModel.turnRadius * 0.9
+    -- XXX: Tune ^^^ constants
+  until #paths > 0 or movementModel.turnRadius < originalRadius * 0.5
+  -- XXX: Tune ^^^ constants
+  movementModel.turnRadius = originalRadius
 
   table.sort(paths, pathfinding.compareCosts)
 
