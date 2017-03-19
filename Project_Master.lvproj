@@ -10,13 +10,16 @@
 	<Property Name="varPersistentID:{18889B27-B07E-496F-8A6C-75207E8985EF}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/loc_y</Property>
 	<Property Name="varPersistentID:{1895318F-32D0-4BC5-BA41-B94FFA00D091}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum Accel y</Property>
 	<Property Name="varPersistentID:{1EDAFC74-E8EB-4AC3-AFA0-496818EF4EF7}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_FLAG</Property>
+	<Property Name="varPersistentID:{26DE1C0B-0959-456E-AE95-C78C34CCCBDA}" Type="Ref">/My Computer/Nav_testing_variables_LV.lvlib/cornerDist2</Property>
 	<Property Name="varPersistentID:{29012277-538E-46A1-A607-ADDB2DBF424C}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Stop</Property>
 	<Property Name="varPersistentID:{334E4111-E55A-40D4-AF6F-4BB3F1BCB5F3}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Goal Position Angle</Property>
 	<Property Name="varPersistentID:{33FB4014-29A9-4F72-9C4A-4E59D22D41EF}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/myRIO Accel y</Property>
 	<Property Name="varPersistentID:{3449D243-C6C3-460B-8878-A1F404F1F933}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Dumping Complete</Property>
 	<Property Name="varPersistentID:{347169E2-B4E9-4327-A977-AC276ED1A767}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum Accel x</Property>
 	<Property Name="varPersistentID:{39B8D874-1325-4472-A9C1-6594571F61F1}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_X_array</Property>
+	<Property Name="varPersistentID:{43D4C988-E02E-4BBF-BBF7-38E7B01941BE}" Type="Ref">/My Computer/Nav_testing_variables_LV.lvlib/cornerDist4</Property>
 	<Property Name="varPersistentID:{4679DBAB-235D-4478-B610-6372E275B7FD}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch Accel z</Property>
+	<Property Name="varPersistentID:{47D4CDB8-61C1-4B48-A24A-40AE3BC7E5D4}" Type="Ref">/My Computer/Localization Mockup.lvlib/ArenaPixelDim</Property>
 	<Property Name="varPersistentID:{4D2D81C5-7470-4559-9528-FE123FB477C1}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch</Property>
 	<Property Name="varPersistentID:{4EC7E30F-0746-45F9-A9F3-0A36B11BAB20}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Destination Reached</Property>
 	<Property Name="varPersistentID:{54B7EDE8-8E01-4444-A53F-54AAF977913B}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Left Servo Angle_Image</Property>
@@ -32,7 +35,9 @@
 	<Property Name="varPersistentID:{6D2DE5BE-9F94-4339-BF8A-93E9458D8035}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Left_Flag</Property>
 	<Property Name="varPersistentID:{6DA6CC0A-0C85-4643-8E63-6FB818A80877}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Goal Position Y</Property>
 	<Property Name="varPersistentID:{7206615D-8AD1-4754-A5C5-A8A8D40DCF67}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch Accel y</Property>
+	<Property Name="varPersistentID:{74592816-49CB-4A88-B503-C6200A0125E8}" Type="Ref">/My Computer/Nav_testing_variables_LV.lvlib/cornerDist1</Property>
 	<Property Name="varPersistentID:{78673029-EE61-44A9-90F4-DB8278D1ADD9}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Image Lock - R</Property>
+	<Property Name="varPersistentID:{7B2BE2C5-1771-4E07-9C91-51EA0903F861}" Type="Ref">/My Computer/Nav_testing_variables_LV.lvlib/cornerDist3</Property>
 	<Property Name="varPersistentID:{7EEE8310-A087-4A65-81A3-10912C727C07}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_Y_array</Property>
 	<Property Name="varPersistentID:{865E9AC8-AD49-418F-8F5F-6CE5D58E348B}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Left Duty Cycle</Property>
 	<Property Name="varPersistentID:{86FC34F1-2CE5-419D-A801-9EFDD4705588}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Dig</Property>
@@ -89,23 +94,41 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
+		<Item Name="res" Type="Folder">
+			<Item Name="arena-bg1.png" Type="Document" URL="../Computer_VIs/res/arena-bg1.png"/>
+		</Item>
 		<Item Name="Control_Panel_r0.vi" Type="VI" URL="../Computer_VIs/Control_Panel_r0.vi"/>
 		<Item Name="Joystick_Control_r0.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r0.vi"/>
 		<Item Name="Joystick_Control_r1.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r1.vi"/>
+		<Item Name="Localization Mockup.lvlib" Type="Library" URL="../Computer_VIs/Localization Mockup.lvlib"/>
+		<Item Name="Nav Testing 2.0.vi" Type="VI" URL="../nav2017/Nav Testing 2.0.vi"/>
+		<Item Name="Nav_testing_variables_LV.lvlib" Type="Library" URL="../nav2017/Nav_testing_variables_LV.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Acquire Input Data.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Acquire Input Data.vi"/>
+				<Item Name="Bit-array To Byte-array.vi" Type="VI" URL="/&lt;vilib&gt;/picture/pictutil.llb/Bit-array To Byte-array.vi"/>
+				<Item Name="Check Path.vi" Type="VI" URL="/&lt;vilib&gt;/picture/jpeg.llb/Check Path.vi"/>
 				<Item Name="Close Input Device.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Close Input Device.vi"/>
 				<Item Name="closeJoystick.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/closeJoystick.vi"/>
 				<Item Name="closeKeyboard.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/closeKeyboard.vi"/>
 				<Item Name="closeMouse.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/closeMouse.vi"/>
+				<Item Name="Create Mask By Alpha.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Create Mask By Alpha.vi"/>
+				<Item Name="Directory of Top Level VI.vi" Type="VI" URL="/&lt;vilib&gt;/picture/jpeg.llb/Directory of Top Level VI.vi"/>
+				<Item Name="Draw Flattened Pixmap.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Draw Flattened Pixmap.vi"/>
+				<Item Name="Draw Multiple Lines.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Draw Multiple Lines.vi"/>
 				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
 				<Item Name="ErrorDescriptions.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/ErrorDescriptions.vi"/>
 				<Item Name="errorList.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/errorList.vi"/>
+				<Item Name="FixBadRect.vi" Type="VI" URL="/&lt;vilib&gt;/picture/pictutil.llb/FixBadRect.vi"/>
+				<Item Name="imagedata.ctl" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/imagedata.ctl"/>
 				<Item Name="Initialize Joystick.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Initialize Joystick.vi"/>
+				<Item Name="Initialize Mouse.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Initialize Mouse.vi"/>
 				<Item Name="joystickAcquire.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/joystickAcquire.vi"/>
 				<Item Name="keyboardAcquire.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/keyboardAcquire.vi"/>
+				<Item Name="LVBoundsTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVBoundsTypeDef.ctl"/>
 				<Item Name="mouseAcquire.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/mouseAcquire.vi"/>
+				<Item Name="Read PNG File.vi" Type="VI" URL="/&lt;vilib&gt;/picture/png.llb/Read PNG File.vi"/>
+				<Item Name="Set Pen State.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Set Pen State.vi"/>
 			</Item>
 			<Item Name="lvinput.dll" Type="Document" URL="/&lt;resource&gt;/lvinput.dll"/>
 		</Item>
@@ -2562,6 +2585,25 @@ DirectoryIndex index.htm
 						<Item Name="lvSimController.dll" Type="Document" URL="/&lt;vilib&gt;/rvi/Simulation/lvSimController.dll"/>
 						<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
 					</Item>
+					<Item Name="Start Boolean.ctl" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/Utilities/Start Boolean.ctl"/>
+					<Item Name="Split myDAQ DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split myDAQ DIO.vi"/>
+					<Item Name="Split myDAQ Function Select.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split myDAQ Function Select.vi"/>
+					<Item Name="DIO 1-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/DIO/DIO 1-bit.vi"/>
+					<Item Name="DIO_Encoder.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_Encoder.vi"/>
+					<Item Name="DIO_PWM.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_PWM.vi"/>
+					<Item Name="Join myDAQ DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join myDAQ DIO.vi"/>
+					<Item Name="Split HDC Function Select.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Function Select.vi"/>
+					<Item Name="Split HDC Bank1 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Bank1 DIO.vi"/>
+					<Item Name="DIO 4-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/DIO/DIO 4-bit.vi"/>
+					<Item Name="Split HDC Bank2 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Bank2 DIO.vi"/>
+					<Item Name="DIO_SPI.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_SPI.vi"/>
+					<Item Name="Falling Edge Trigger.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/Utilities/Falling Edge Trigger.vi"/>
+					<Item Name="Check DI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/Check DI IRQ.vi"/>
+					<Item Name="Join HDC Bank1 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join HDC Bank1 DIO.vi"/>
+					<Item Name="Join HDC Bank2 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join HDC Bank2 DIO.vi"/>
+					<Item Name="Check AI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/Check AI IRQ.vi"/>
+					<Item Name="SPI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/SPI/SPI IRQ.vi"/>
+					<Item Name="DIO IRQ 1-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/DIO IRQ 1-bit.vi"/>
 				</Item>
 				<Item Name="Build Specifications" Type="Build">
 					<Item Name="FPGA Main Navigation Final" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">

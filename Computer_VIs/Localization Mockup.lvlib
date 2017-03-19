@@ -18,6 +18,7 @@
 		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!""01!!!"5!A!!!!!!#!!V!#A!(4H6N:8*J9Q!=1%!!!@````]!!!^"=H*B?3"P:C"%&lt;X6C&lt;'5!!1!"!!!!!!!!!!!!!!!!</Property>
 	</Item>
 	<Item Name="GetRobotCorners.vi" Type="VI" URL="../GetRobotCorners.vi"/>
+	<Item Name="Hypotenuse.vi" Type="VI" URL="../Hypotenuse.vi"/>
 	<Item Name="Localization Mockup.vi" Type="VI" URL="../Localization Mockup.vi"/>
 	<Item Name="PixelsToMeters.vi" Type="VI" URL="../PixelsToMeters.vi"/>
 	<Item Name="RobotConstants.vi" Type="VI" URL="../RobotConstants.vi"/>
