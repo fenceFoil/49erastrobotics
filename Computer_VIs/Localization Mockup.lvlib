@@ -20,6 +20,7 @@
 	<Item Name="GetRobotCorners.vi" Type="VI" URL="../GetRobotCorners.vi"/>
 	<Item Name="Hypotenuse.vi" Type="VI" URL="../Hypotenuse.vi"/>
 	<Item Name="Localization Mockup.vi" Type="VI" URL="../Localization Mockup.vi"/>
+	<Item Name="MetersToPixels.vi" Type="VI" URL="../MetersToPixels.vi"/>
 	<Item Name="PixelsToMeters.vi" Type="VI" URL="../PixelsToMeters.vi"/>
 	<Item Name="RobotConstants.vi" Type="VI" URL="../RobotConstants.vi"/>
 </Library>
