@@ -66,14 +66,14 @@
 		{
 			"variable": "pathfinding.tooShortPenalty",
 			"defaultMin": 0,
-			"defaultMax": 20,
-			"defaultValue": 4
+			"defaultMax": 100,
+			"defaultValue": 100
 		},
 		{
 			"variable": "pathfinding.tooShortThreshold",
 			"defaultMin": 0,
 			"defaultMax": 5,
-			"defaultValue": 1
+			"defaultValue": 1.5
 		},
 		{
 			"variable": "movement.tolerance",
