@@ -212,7 +212,7 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
       --local angleDelta = nil
       local angleError = nil
       if endAngle ~= nil then 
-        angleError = ((endAngle - directMove.positions[#directMove.positions][3])+math.pi) % (2*math.pi) - math.pi
+        angleError = math.abs(((endAngle - directMove.positions[#directMove.positions][3])+math.pi) % (2*math.pi) - math.pi)
         --angleDelta = clampAngleDelta(endAngle, directMove.positions[#directMove.positions][3])
       end
       pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.movedFwd, angleError)

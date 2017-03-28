@@ -231,7 +231,7 @@ function love.draw()
     end
   elseif currVisualization == 5 then
     -- simple pathfinding best path, drawn
-    local destAngle = math.pi/2
+    local destAngle = 0
 
     -- Draw destination point
     love.graphics.setColor(HSV(40, 255, 255))
