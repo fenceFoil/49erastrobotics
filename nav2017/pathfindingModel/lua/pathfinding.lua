@@ -34,7 +34,7 @@ pathfinding.maxMoves = 3
 
 -- positions per meter
 pathfinding.pathResolution = 0.3
-pathfinding.deadZone = 0.75
+pathfinding.deadZone = 0.5
 
 -- weights
 pathfinding.lengthWeight = 1
@@ -43,6 +43,9 @@ pathfinding.angleWeight = 0
 -- anti-spin-in-place path segment penalty
 pathfinding.tooShortPenalty = 1000
 pathfinding.tooShortThreshold = 2
+
+-- Ensure angle given is always within the range 0..pi
+local function clampAngleDelta(a, b) return math.fmod(((math.fmod((math.abs(a-b)), math.pi)) + math.pi), math.pi) end
 
 --[[
 local function getGridWidth()
@@ -157,7 +160,8 @@ local function createEmptyPath()
 end
 
 -- Path object factory.
-local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isFwd)
+-- destAngleDelta: TODO. ALSO, CAN BE NIL.
+local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isFwd, destAngleDelta)
   local newPath = createEmptyPath()
   local newPos = {}
   newPos[1] = nodeX
@@ -181,7 +185,7 @@ Returns a list of paths from starting point to destination.
 Considers paths passing through a grid of positions defined by pathResolution, deadZone, etc.
 
 --]]
-local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft)
+local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft, endAngle)
   -- By default, recurse THREE times
   if movesLeft == nil then movesLeft = pathfinding.maxMoves-1 end
 
@@ -189,9 +193,12 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
 
   -- Examine movement directly from current position to destination
   local directMove = movementModel.move(startX, startY, startAngle, destX, destY)
-  if directMove.didReach then 
-    -- Add this movement as a path to destination paths
-    pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.movedFwd)
+  if directMove.didReach then     
+    local angleDelta = nil
+    if endAngle ~= nil then 
+      angleDelta = clampAngleDelta(endAngle, directMove.positions[#directMove.positions][3])
+    end
+    pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.movedFwd, angleDelta)
   else
     -- If can't get to destination in one hop, consider alternatives
     if movesLeft > 0 then
@@ -201,7 +208,7 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
 
         if move.didReach then
           -- Recurse and try to reach destination from here
-          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1)
+          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, endAngle)
           -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
           for j,path in ipairs(subPathsToDest) do
             local moveInfo = {length=move.length, angleSum=move.angleSum, isFwd=move.movedFwd}
@@ -219,23 +226,24 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
   return pathsToDest
 end
 
-function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, movementModel)
+function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, movementModel, endAngle)
   -- save orginal turning radius of movement model, despite desperation below
   local originalRadius = movementModel.turnRadius
   -- Desperation: in the odd case no path can be found at a turning radius of x,
   -- try to assume a tighter turning radius until a path can be found.
   local paths = {}
   repeat
-    paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel)
+    paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, endAngle)
     movementModel.turnRadius = movementModel.turnRadius * 0.9
     -- XXX: Tune ^^^ constants
-  until #paths > 0 or movementModel.turnRadius < originalRadius * 0.5
+  until #paths > 0 or movementModel.turnRadius < originalRadius * 0.7
   -- XXX: Tune ^^^ constants
+  local usedRadius = movementModel.turnRadius
   movementModel.turnRadius = originalRadius
 
   table.sort(paths, pathfinding.compareCosts)
 
-  return paths
+  return paths, usedRadius
 end
 
 
