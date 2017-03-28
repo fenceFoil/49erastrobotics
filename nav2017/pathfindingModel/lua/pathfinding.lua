@@ -47,8 +47,8 @@ pathfinding.tooShortThreshold = 2
 
 
 
--- Ensure angle given is always within the range 0..pi
-local function clampAngleDelta(a, b) return math.fmod(((math.fmod((math.abs(a-b)), math.pi)) + math.pi), math.pi) end
+-- Ensure angle given is always within the range 0..2pi
+local function clampAngle(a, b) return math.fmod(((math.fmod((math.abs(a-b)), 2*math.pi)) + 2*math.pi), 2*math.pi) end
 
 --[[
 local function getGridWidth()
@@ -155,7 +155,7 @@ local function createEmptyPath()
       end
       distanceThisDirection = distanceThisDirection + pos.length
     end
-    
+
     -- note how close to final destination angle path came
     -- TODO
     if self.destAngleDelta ~= nil then
@@ -195,37 +195,50 @@ Considers paths passing through a grid of positions defined by pathResolution, d
 
 --]]
 local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft, endAngle)
-  -- By default, recurse THREE times
-  if movesLeft == nil then movesLeft = pathfinding.maxMoves-1 end
-
   local pathsToDest = {}
 
-  -- Examine movement directly from current position to destination
-  local directMove = movementModel.move(startX, startY, startAngle, destX, destY)
-  if directMove.didReach then     
-    local angleDelta = nil
-    if endAngle ~= nil then 
-      angleDelta = clampAngleDelta(endAngle, directMove.positions[#directMove.positions][3])
-    end
-    pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.movedFwd, angleDelta)
-  else
-    -- If can't get to destination in one hop, consider alternatives
-    if movesLeft > 0 then
-      -- Examine each possible step from current point to destination
-      for i,pos in ipairs(pathfinding.getAllPositions()) do
-        local move = movementModel.move(startX, startY, startAngle, pos[1], pos[2])
+  -- Perform two movements, one in each direction, if searching endlessly for 
+  -- a particular end angle. Otherwise, let the robot move in the most convenient
+  -- direction.
+  local moveDirections = {nil}
+  if endAngle ~= nil then
+    moveDirections = {true, false}
+  end
 
-        if move.didReach then
-          -- Recurse and try to reach destination from here
-          local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, endAngle)
-          -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
-          for j,path in ipairs(subPathsToDest) do
-            local moveInfo = {length=move.length, angleSum=move.angleSum, isFwd=move.movedFwd}
-            moveInfo[1] = pos[1]
-            moveInfo[2] = pos[2]
-            moveInfo[3] = move.positions[#move.positions][3]
-            table.insert(path.positions, 1, moveInfo)
-            pathsToDest[#pathsToDest+1] = path
+  for i, dir in ipairs(moveDirections) do
+    -- Examine movement directly from current position to destination
+    local directMove = movementModel.move(startX, startY, startAngle, destX, destY, nil, nil, nil, nil, dir)
+    if directMove.didReach then     
+      --local angleDelta = nil
+      local angleError = nil
+      if endAngle ~= nil then 
+        angleError = ((endAngle - directMove.positions[#directMove.positions][3])+math.pi) % (2*math.pi) - math.pi
+        --angleDelta = clampAngleDelta(endAngle, directMove.positions[#directMove.positions][3])
+      end
+      pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.movedFwd, angleError)
+    end
+    -- Explore further routes, if we want to find one that may take longer, but 
+    -- reaches the end destination at a particular angle
+    if not directMove.didReach or endAngle ~= nil then
+      --if (not directMove.didReach) or (endAngle ~= nil) then
+      -- If can't get to destination in one hop, consider alternatives
+      if movesLeft > 0 then
+        -- Examine each possible step from current point to destination
+        for i,pos in ipairs(pathfinding.getAllPositions()) do
+          local move = movementModel.move(startX, startY, startAngle, pos[1], pos[2], nil, nil, nil, nil, dir)
+
+          if move.didReach then
+            -- Recurse and try to reach destination from here
+            local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, endAngle)
+            -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
+            for j,path in ipairs(subPathsToDest) do
+              local moveInfo = {length=move.length, angleSum=move.angleSum, isFwd=move.movedFwd}
+              moveInfo[1] = pos[1]
+              moveInfo[2] = pos[2]
+              moveInfo[3] = move.positions[#move.positions][3]
+              table.insert(path.positions, 1, moveInfo)
+              pathsToDest[#pathsToDest+1] = path
+            end
           end
         end
       end
@@ -235,6 +248,12 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
   return pathsToDest
 end
 
+--[[
+
+TODO: Comments here
+
+Keep endAngle between 0 and 2pi
+--]]
 function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, movementModel, endAngle)
   -- save orginal turning radius of movement model, despite desperation below
   local originalRadius = movementModel.turnRadius
@@ -242,8 +261,8 @@ function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, moveme
   -- try to assume a tighter turning radius until a path can be found.
   local paths = {}
   repeat
-    paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, endAngle)
-    movementModel.turnRadius = movementModel.turnRadius * 0.9
+    paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, pathfinding.maxMoves-1, endAngle)
+    if (#paths <= 0) then movementModel.turnRadius = movementModel.turnRadius * 0.9 end
     -- XXX: Tune ^^^ constants
   until #paths > 0 or movementModel.turnRadius < originalRadius * 0.7
   -- XXX: Tune ^^^ constants

@@ -54,6 +54,8 @@ in meters/iteration of movement. The movement will also fail if the robot collid
 The robot may move forward or backward, depending on the closer of the 
 summed distances of the cameras on the front and back.
 
+logAllPoints defaults to false
+
 tolerance, segLength, and turnRadius can be set either with the public
 variables provided in movementmodel, or passed as arguments to a call of move(). 
 The public varaibles are the default if no values provided for those 3 args.
@@ -72,7 +74,7 @@ Returns a movement table:
   - {x, y, angle}
 - movedFwd (boolean)
 --]]
-function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, turnRadius, tolerance, segLength)
+function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, turnRadius, tolerance, segLength, moveFwd)
   local currX, currY = startX, startY
   local currAngle = startAngle
 
@@ -89,11 +91,20 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
   -- "Spin" robot 180 degrees "logically" here if the the robot moves backwards.
   -- Report the robot's angle as being 180 degrees again off it's "logical" angle here.
   local movingBackward
-  if movementmodel.getCloserEnd(startX, startY, startAngle, destX, destY) == 1 then
-    movingBackward = false
+  if moveFwd == nil then
+    if movementmodel.getCloserEnd(startX, startY, startAngle, destX, destY) == 1 then
+      movingBackward = false
+    else
+      movingBackward = true
+      currAngle = currAngle + math.pi
+    end
   else
-    movingBackward = true
-    currAngle = currAngle + math.pi
+    if moveFwd then
+      movingBackward = false
+    else
+      movingBackward = true
+      currAngle = currAngle + math.pi
+    end
   end
 
   -- Ensure that currAngle is between 0..2pi

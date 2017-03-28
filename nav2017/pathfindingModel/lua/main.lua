@@ -231,20 +231,23 @@ function love.draw()
     end
   elseif currVisualization == 5 then
     -- simple pathfinding best path, drawn
+    local destAngle = math.pi/2
 
     -- Draw destination point
     love.graphics.setColor(HSV(40, 255, 255))
     love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
     love.graphics.setColor(255, 255, 255)
+    drawArrow(mToPixels1(destX), mToPixels1(destY), 20, destAngle)
 
     -- Run pathfinding
-    local pathsFound, usedRadius = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement, math.pi)
+    local pathsFound, usedRadius = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement, destAngle)
 
     if #pathsFound >= 1 then
       -- Choose top path
       local path = pathsFound[1]
 
       love.graphics.print("Paths found: "..#pathsFound)
+      love.graphics.print("Turning Radius Used: "..usedRadius, 0, 20)
 
       -- Draw movement between each point of path
       local lastPos = {mxm, mym, robotAngle}
