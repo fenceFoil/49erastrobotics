@@ -97,10 +97,11 @@ destX = 4
 destY = 2
 
 function love.mousereleased(x, y, button)
---  if button == 1 then
---    -- change visualization
---    currVisualization = currVisualization + 1
---    if currVisualization > numVisualizations then currVisualization = 1 end
+  if button == 3 then
+    -- change visualization
+    currVisualization = currVisualization + 1
+    if currVisualization > numVisualizations then currVisualization = 1 end
+  end
   if button == 2 then
     destX, destY = pixelsToM(x, y)
   end
@@ -237,7 +238,7 @@ function love.draw()
     love.graphics.setColor(255, 255, 255)
 
     -- Run pathfinding
-    local pathsFound = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement)
+    local pathsFound, usedRadius = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement, math.pi)
 
     if #pathsFound >= 1 then
       -- Choose top path
@@ -251,7 +252,10 @@ function love.draw()
         love.graphics.print(round2(nextPos[1])..","..round2(nextPos[2])..","..round2(nextPos[3]), 400, 20*i)
 
         -- Draw simulated robot movement towards destination
+        local tempRad = movement.turnRadius
+        movement.turnRadius = usedRadius
         local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true)
+        movement.turnRadius = tempRad
         if (#move.positions > 1) then
           -- Convert movement points to pixel points for rendering
           local movePixelPoints = {}

@@ -39,10 +39,13 @@ pathfinding.deadZone = 0.5
 -- weights
 pathfinding.lengthWeight = 1
 pathfinding.angleWeight = 0
+pathfinding.angleDeltaWeight = 10000
 
 -- anti-spin-in-place path segment penalty
 pathfinding.tooShortPenalty = 1000
 pathfinding.tooShortThreshold = 2
+
+
 
 -- Ensure angle given is always within the range 0..pi
 local function clampAngleDelta(a, b) return math.fmod(((math.fmod((math.abs(a-b)), math.pi)) + math.pi), math.pi) end
@@ -152,6 +155,12 @@ local function createEmptyPath()
       end
       distanceThisDirection = distanceThisDirection + pos.length
     end
+    
+    -- note how close to final destination angle path came
+    -- TODO
+    if self.destAngleDelta ~= nil then
+      costCounter = costCounter + pathfinding.angleDeltaWeight * self.destAngleDelta
+    end
 
     return costCounter
   end
@@ -160,7 +169,6 @@ local function createEmptyPath()
 end
 
 -- Path object factory.
--- destAngleDelta: TODO. ALSO, CAN BE NIL.
 local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isFwd, destAngleDelta)
   local newPath = createEmptyPath()
   local newPos = {}
@@ -170,6 +178,7 @@ local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isFwd, d
   newPos.length = length
   newPos.angleSum = angleSum
   newPos.isFwd = isFwd
+  newPath.destAngleDelta = destAngleDelta
 
   newPath.positions[#newPath.positions+1] = newPos
   return newPath
