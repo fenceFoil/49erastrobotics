@@ -7,6 +7,14 @@
 		{
 			"label":"Next Visualization",
 			"code":"currVisualization = currVisualization + 1; if currVisualization > numVisualizations then currVisualization = 1 end"
+		},
+		{
+			"label":"Update Intemediate Points",
+			"code":"pathfinding.allPositions = nil"
+		},
+		{
+			"label":"Clear Dest Angle",
+			"code":"destAngle = nil"
 		}
 	],
 	"checkboxes": [
@@ -32,13 +40,19 @@
 			"defaultMin": 0,
 			"defaultMax": 3,
 			"defaultValue": 1.5
-		}, /*
+		}, 
+		{
+			"variable": "destAngle",
+			"defaultMin": 0,
+			"defaultMax": 6.28,
+			"defaultValue": 0
+		},
 		{
 			"variable": "pathfinding.deadZone",
 			"defaultMin": 0,
 			"defaultMax": 2,
-			"defaultValue": 0.5
-		},*/
+			"defaultValue": 0.75
+		},
 		/*{
 			"variable": "pathfinding.pathResolution",
 			"defaultMin": 0.1,
@@ -50,6 +64,18 @@
 			"defaultMin": 0,
 			"defaultMax": 10,
 			"defaultValue": 1
+		},		
+		{
+			"variable": "pathfinding.positionGrids[1].density",
+			"defaultMin": 0,
+			"defaultMax": 1,
+			"defaultValue": 0.25
+		},
+		{
+			"variable": "pathfinding.positionGrids[2].density",
+			"defaultMin": 0,
+			"defaultMax": 1,
+			"defaultValue": 0.4
 		},/*
 		{
 			"variable": "pathfinding.angleWeight",
@@ -85,7 +111,7 @@
 			"variable": "movement.segLength",
 			"defaultMin": 0.001,
 			"defaultMax": 1,
-			"defaultValue": 0.3
+			"defaultValue": 0.2
 		}
 	]
 }

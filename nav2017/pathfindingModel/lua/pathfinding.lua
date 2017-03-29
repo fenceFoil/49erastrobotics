@@ -39,13 +39,14 @@ pathfinding.deadZone = 0.5
 -- weights
 pathfinding.lengthWeight = 1
 pathfinding.angleWeight = 0
-pathfinding.angleDeltaWeight = 10000
+-- (angleError multiplied by this value)
+pathfinding.angleErrorWeight = 1000
+-- (angleError multiplied by Weight, minus this threshold)
+pathfinding.angleErrorThreshold = math.pi/16
 
 -- anti-spin-in-place path segment penalty
 pathfinding.tooShortPenalty = 1000
 pathfinding.tooShortThreshold = 2
-
-
 
 -- Ensure angle given is always within the range 0..2pi
 local function clampAngle(a, b) return math.fmod(((math.fmod((math.abs(a-b)), 2*math.pi)) + 2*math.pi), 2*math.pi) end
@@ -92,8 +93,9 @@ each with different densities of positions.
 --]]
 pathfinding.positionGrids = {
   {x1=0, x2=1.75, density=0.15},
-  {x1=1.75, x2=4.5, density=0.4},
-  {x1=4.5, x2=robotinfo.arenaWidth, density=0.4}
+  --[[{x1=1.75, x2=4.5, density=0.4},
+  {x1=4.5, x2=robotinfo.arenaWidth, density=0.4}]]--
+  {x1=1.75, x2=robotinfo.arenaWidth, density=0.4}
 }
 -- note: positions are cached for performance. to refresh after changing
 -- position grid densities, etc, set pathfinding.allPositinos to nil as a dirty
@@ -158,8 +160,8 @@ local function createEmptyPath()
 
     -- note how close to final destination angle path came
     -- TODO
-    if self.destAngleDelta ~= nil then
-      costCounter = costCounter + pathfinding.angleDeltaWeight * self.destAngleDelta
+    if self.destAngleDelta ~= nil and self.destAngleDelta > pathfinding.angleErrorThreshold then
+      costCounter = costCounter + pathfinding.angleErrorWeight * (self.destAngleDelta - pathfinding.angleErrorThreshold)
     end
 
     return costCounter
@@ -194,20 +196,24 @@ Returns a list of paths from starting point to destination.
 Considers paths passing through a grid of positions defined by pathResolution, deadZone, etc.
 
 --]]
-local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft, endAngle)
+local function getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, movesLeft, endAngle, pathsChecked)
   local pathsToDest = {}
+  
+  if pathsChecked == nil then pathsChecked = 0 end
 
   -- Perform two movements, one in each direction, if searching endlessly for 
   -- a particular end angle. Otherwise, let the robot move in the most convenient
   -- direction.
-  local moveDirections = {nil}
+  local moveDirections = {"nodir"} -- would store a nil, but then array length = 0!
   if endAngle ~= nil then
     moveDirections = {true, false}
   end
 
   for i, dir in ipairs(moveDirections) do
     -- Examine movement directly from current position to destination
+    if dir == "nodir" then dir = nil end
     local directMove = movementModel.move(startX, startY, startAngle, destX, destY, nil, nil, nil, nil, dir)
+    pathsChecked = pathsChecked + 1
     if directMove.didReach then     
       --local angleDelta = nil
       local angleError = nil
@@ -226,10 +232,12 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
         -- Examine each possible step from current point to destination
         for i,pos in ipairs(pathfinding.getAllPositions()) do
           local move = movementModel.move(startX, startY, startAngle, pos[1], pos[2], nil, nil, nil, nil, dir)
+          pathsChecked = pathsChecked + 1
 
           if move.didReach then
             -- Recurse and try to reach destination from here
-            local subPathsToDest = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, endAngle)
+            local subPathsToDest, subPathsChecked = getPathsTo2(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, endAngle, 0)
+            pathsChecked = pathsChecked + subPathsChecked
             -- Take each found path to the destination, prepend our previous move, and add to pathsToDest
             for j,path in ipairs(subPathsToDest) do
               local moveInfo = {length=move.length, angleSum=move.angleSum, isFwd=move.movedFwd}
@@ -245,7 +253,7 @@ local function getPathsTo2(startX, startY, startAngle, destX, destY, movementMod
     end
   end
 
-  return pathsToDest
+  return pathsToDest, pathsChecked
 end
 
 --[[
@@ -253,6 +261,9 @@ end
 TODO: Comments here
 
 Keep endAngle between 0 and 2pi
+
+returns a list of found paths (see object definition above), the turning radius
+used for movement, and the total number of checked paths
 --]]
 function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, movementModel, endAngle)
   -- save orginal turning radius of movement model, despite desperation below
@@ -260,8 +271,11 @@ function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, moveme
   -- Desperation: in the odd case no path can be found at a turning radius of x,
   -- try to assume a tighter turning radius until a path can be found.
   local paths = {}
+  local totalPathsChecked = 0
   repeat
-    paths = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, pathfinding.maxMoves-1, endAngle)
+    local tempPathsChecked = 0
+    paths, tempPathsChecked = getPathsTo2(startX, startY, startAngle, destX, destY, movementModel, pathfinding.maxMoves-1, endAngle)
+    totalPathsChecked = totalPathsChecked + tempPathsChecked
     if (#paths <= 0) then movementModel.turnRadius = movementModel.turnRadius * 0.9 end
     -- XXX: Tune ^^^ constants
   until #paths > 0 or movementModel.turnRadius < originalRadius * 0.7
@@ -271,7 +285,7 @@ function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, moveme
 
   table.sort(paths, pathfinding.compareCosts)
 
-  return paths, usedRadius
+  return paths, usedRadius, totalPathsChecked
 end
 
 

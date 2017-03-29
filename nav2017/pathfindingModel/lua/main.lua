@@ -26,6 +26,8 @@ lockRobotPos = false
 lock8Angles = true
 autoSpin = true
 
+destAngle = 0
+
 -- Imports
 robotinfo = require "robotinfo"
 movement = require "movementmodel"
@@ -231,22 +233,23 @@ function love.draw()
     end
   elseif currVisualization == 5 then
     -- simple pathfinding best path, drawn
-    local destAngle = 0
 
     -- Draw destination point
     love.graphics.setColor(HSV(40, 255, 255))
     love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
     love.graphics.setColor(255, 255, 255)
-    drawArrow(mToPixels1(destX), mToPixels1(destY), 20, destAngle)
+    if destAngle ~= nil then
+      drawArrow(mToPixels1(destX), mToPixels1(destY), 20, destAngle)
+    end
 
     -- Run pathfinding
-    local pathsFound, usedRadius = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement, destAngle)
+    local pathsFound, usedRadius, pathsChecked = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement, destAngle)
 
     if #pathsFound >= 1 then
       -- Choose top path
       local path = pathsFound[1]
 
-      love.graphics.print("Paths found: "..#pathsFound)
+      love.graphics.print("Paths Found: "..#pathsFound.." Paths Checked: "..pathsChecked)
       love.graphics.print("Turning Radius Used: "..usedRadius, 0, 20)
 
       -- Draw movement between each point of path
@@ -257,7 +260,7 @@ function love.draw()
         -- Draw simulated robot movement towards destination
         local tempRad = movement.turnRadius
         movement.turnRadius = usedRadius
-        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true)
+        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true, nil, nil, nil, nextPos.isFwd)
         movement.turnRadius = tempRad
         if (#move.positions > 1) then
           -- Convert movement points to pixel points for rendering

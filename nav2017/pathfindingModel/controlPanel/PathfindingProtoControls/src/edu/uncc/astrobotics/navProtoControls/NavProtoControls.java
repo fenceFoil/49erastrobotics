@@ -100,6 +100,14 @@ public class NavProtoControls extends JFrame {
 		createSliderControls();
 		pack();
 	}
+	
+	
+
+	@Override
+	public void pack() {
+		super.pack();
+		setSize(getSize().width, Toolkit.getDefaultToolkit().getScreenSize().height / 5 * 4);
+	}
 
 	private void createSliderControls() {
 		NavProtoConfig config = NavProtoConfig.readConfig();
