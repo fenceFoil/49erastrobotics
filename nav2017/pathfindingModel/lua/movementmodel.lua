@@ -88,13 +88,13 @@ Returns a movement table:
   - {x, y, angle}
 - movedFwd (boolean)
 --]]
-function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, forceDirection)
+function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, forceDirection, turnRadius, segLength)
   local currX, currY = startX, startY
   local currAngle = startAngle
   
-  local turnRadius = movementmodel.turnRadius
+  if turnRadius == nil then turnRadius = movementmodel.turnRadius end
   local tolerance = movementmodel.tolerance
-  local segLength = movementmodel.segLength
+  if segLength == nil then segLength = movementmodel.segLength end
 
   -- "Spin" robot 180 degrees "logically" here if the the robot moves backwards.
   -- Report the robot's angle as being 180 degrees again off it's "logical" angle here.
