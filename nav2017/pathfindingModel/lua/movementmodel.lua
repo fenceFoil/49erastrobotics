@@ -206,9 +206,7 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
       break
     end
 
-    -- Buffer this destination for future comparisions
-    -- needles sqrt
-    --lastDist = dist(currX, currY, destX, destY)
+    -- Buffer this distanec for future comparisions
     lastDist = unrootedDist
   end
 
