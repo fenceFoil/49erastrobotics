@@ -29,7 +29,7 @@ robotinfo.length = 1.117
 -- (an optimization for movement modelling)
 robotinfo.bubble = 0.1 + ((robotinfo.width/2)^2+(robotinfo.length/2)^2)^0.5
 
-
+-- precalculate and cache this value
 robotinfo.theta1 = math.atan((robotinfo.width/2)/(robotinfo.length/2))
 robotinfo.r = ((robotinfo.width/2)*(robotinfo.width/2) + (robotinfo.length/2)*(robotinfo.length/2))^0.5
 -- botAngle is in radians
