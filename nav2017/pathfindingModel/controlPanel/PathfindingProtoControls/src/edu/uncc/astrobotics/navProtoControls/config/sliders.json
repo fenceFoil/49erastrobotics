@@ -21,7 +21,7 @@
 			"defaultValue": false
 		},
 		{
-			"label": "Lock Robot Pos?",
+			"label": "Drag Robot Pos?",
 			"variable": "lockRobotPos",
 			"defaultValue": true
 		}
@@ -31,7 +31,7 @@
 			"variable": "movement.turnRadius",
 			"defaultMin": 0,
 			"defaultMax": 3,
-			"defaultValue": 2
+			"defaultValue": 1.5
 		}, /*
 		{
 			"variable": "pathfinding.deadZone",
@@ -39,12 +39,12 @@
 			"defaultMax": 2,
 			"defaultValue": 0.5
 		},*/
-		{
+		/*{
 			"variable": "pathfinding.pathResolution",
 			"defaultMin": 0.1,
 			"defaultMax": 1,
 			"defaultValue": 0.3
-		},
+		},*/
 		{
 			"variable": "pathfinding.lengthWeight",
 			"defaultMin": 0,
@@ -85,7 +85,7 @@
 			"variable": "movement.segLength",
 			"defaultMin": 0.001,
 			"defaultMax": 1,
-			"defaultValue": 0.1
+			"defaultValue": 0.3
 		}
 	]
 }
