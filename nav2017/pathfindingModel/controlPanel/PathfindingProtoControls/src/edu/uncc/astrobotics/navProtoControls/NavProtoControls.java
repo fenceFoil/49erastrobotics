@@ -101,7 +101,9 @@ public class NavProtoControls extends JFrame {
 		pack();
 	}
 	
-	
+	/**
+	 * Override window packing to make the window a reasonable height.
+	 */
 
 	@Override
 	public void pack() {

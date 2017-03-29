@@ -4,14 +4,30 @@ Main file of NAVTune.
 
 Visualizer code, making calls out to the movement and pathfinding models.
 
+Visually demonstrates capabilities of robot pathfinding, and allows a Java
+control panel to connect up to quickly tweak and test different constant values.
+
+Controls Across Simulations:
+Robot sticks to mouse or is dragged with left mouse button.
+Scroll wheel spins robot.
+Right mouse button click places a yellow destination marker.
+Middle mouse button (wheel) changes visualization.
+
+Note: Dimensions must be converted often between pixels and meters.
+
+Server:
 Creates a TCP socket server on port 31336 (see PORT_NUM) that will execute any
-string sent over the connection, enabling external control of the script.
+string sent over the connection followed by a newline, enabling external control 
+of this demo script.
+Code sent is executed in the scope of this main.lua, so it can, for instance,
+set the values in the movement model by saying movement.turnRadius = 1.1,
+for instance.
 
 --]]
 
 -- Background image
 -- Size of this dictates size of window. Modify conf.lua manually to match.
-arenaBGFilename = "sand-texture1.png"
+arenaBGFilename = "labeledArena.png"
 
 -- Visualizations
 -- 1: A single movement path
@@ -19,32 +35,32 @@ arenaBGFilename = "sand-texture1.png"
 -- 3: Positions used in pathfinding
 -- 4: A "sea of arrows", at each pathfinding position
 -- 5: Top-scoring path between mouse pos and destination marker
+-- 6: Robot competition run animation
 currVisualization = 5
 numVisualizations = 5
 
+-- Lock robot pos: Must drag mouse to move robot. Otherwise robot locked to mouse
 lockRobotPos = false
+-- Turn robot using scroll wheel: 8 steps, or smoothly?
 lock8Angles = true
+-- Turn robot in a kind of demo mode after a few moments untouched?
 autoSpin = true
 
-destAngle = 0
-
--- Imports
+-- Imports & setup
 robotinfo = require "robotinfo"
 movement = require "movementmodel"
-movement.turnRadius = 2
+movement.turnRadius = 1.5
 movement.tolerance = 0.05
-movement.segLength = 0.1
+movement.segLength = 0.2
 pathfinding = require "pathfinding"
-pidmoveleft = require "pidmove"
-pidmoveright = require "pidmove"
 
-
--- Controls server imports and setup
+-- Java Control Panel server imports and setup
 local PORT_NUM = 31336
 socket = require "socket"
 server = assert(socket.bind("*", PORT_NUM))
 server:settimeout(0) -- do not block while waiting for request
 
+-- Start script.
 function love.load()
   if arg[#arg] == "-debug" then require("mobdebug").start() end
 
@@ -52,6 +68,7 @@ function love.load()
   boomImage = love.graphics.newImage("boom.png")
 end
 
+-- Mouse wheel spins robot
 robotAngle = 0
 lastScrollTime = love.timer.getTime()
 function love.wheelmoved(x, y)
@@ -62,11 +79,13 @@ function love.wheelmoved(x, y)
   end
   lastScrollTime = love.timer.getTime()
 end
+-- Moving mouse stops auto spin
 function love.mousemoved(x, y, d, dy, istouch)
   -- don't start spinning robot while mouse is moving
   lastScrollTime = love.timer.getTime()
 end
 
+-- Utility function. Alternative color space from RGB.
 -- source: https://love2d.org/wiki/HSV_color
 function HSV(h, s, v)
   if s <= 0 then return v,v,v end
@@ -83,6 +102,7 @@ function HSV(h, s, v)
   end return (r+m)*255,(g+m)*255,(b+m)*255
 end
 
+-- Graphics: Draws a 3-line vector arrow in one call.
 function drawArrow(startX, startY, length, angle)
   local endX = startX + length * math.cos(angle)
   local endY = startY + length * math.sin(angle)
@@ -95,9 +115,14 @@ function drawArrow(startX, startY, length, angle)
   love.graphics.line(endX, endY, endX - (length / 3) * math.cos(endAngle2), endY - (length / 3) * math.sin(endAngle2))
 end
 
+-- Destination of robot (yellow circle marker)
 destX = 4
 destY = 2
+-- Move robot to destination point and this angle
+-- used in some visualizations
+destAngle = 0
 
+-- Middle clicking mouse changes visualization
 function love.mousereleased(x, y, button)
   if button == 3 then
     -- change visualization
@@ -109,9 +134,11 @@ function love.mousereleased(x, y, button)
   end
 end
 
+-- Update simulation, and render any current visualization
 function love.draw()
-  love.graphics.draw(arenaBG)
-  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+  local windowWidth, windowHeight = love.window.getMode()
+  love.graphics.draw(arenaBG, 0, 0, 0, (windowWidth / arenaBG:getWidth()), (windowHeight / arenaBG:getHeight()))
+  love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
 
   -- update robot position to mouse position
@@ -204,7 +231,7 @@ function love.draw()
     love.graphics.rectangle("line", ulx, uly, lrx-ulx, lry-uly)
 
     -- for now, just show positions considered in pathfinding
-    for i,pos in ipairs(pathfinding.getAllPositions()) do
+    for i,pos in ipairs(pathfinding.getIntermediatePositions()) do
       px, py = mToPixels(pos[1], pos[2])
       love.graphics.setColor(0, 0, 255, 80)
       love.graphics.circle("fill", px, py, 10)
@@ -215,7 +242,7 @@ function love.draw()
     -- sea of arrows, at pathfinding position resolution
 
     -- for now, just show positions considered in pathfinding
-    for i,pos in ipairs(pathfinding.getAllPositions()) do
+    for i,pos in ipairs(pathfinding.getIntermediatePositions()) do
       x, y = pos[1], pos[2]
       px, py = mToPixels(x, y)
 
@@ -236,10 +263,11 @@ function love.draw()
 
     -- Draw destination point
     love.graphics.setColor(HSV(40, 255, 255))
-    love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
+    local destXpixels, destYpixels = mToPixels(destX, destY)
+    love.graphics.circle("fill", destXpixels, destYpixels, 10)
     love.graphics.setColor(255, 255, 255)
     if destAngle ~= nil then
-      drawArrow(mToPixels1(destX), mToPixels1(destY), 20, destAngle)
+      drawArrow(destXpixels, destYpixels, 20, destAngle)
     end
 
     -- Run pathfinding
@@ -260,7 +288,7 @@ function love.draw()
         -- Draw simulated robot movement towards destination
         local tempRad = movement.turnRadius
         movement.turnRadius = usedRadius
-        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true, nil, nil, nil, nextPos.isFwd)
+        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true, nextPos.isFwd)
         movement.turnRadius = tempRad
         if (#move.positions > 1) then
           -- Convert movement points to pixel points for rendering
@@ -289,8 +317,8 @@ function love.draw()
   end
 end
 
+-- Auto-spin is implemented here
 lastdt = 0
-lastPIDTick = 0
 lastAngle = 0
 lastAngleChange = 0
 function love.update(dt)

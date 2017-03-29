@@ -9,10 +9,6 @@
 			"code":"currVisualization = currVisualization + 1; if currVisualization > numVisualizations then currVisualization = 1 end"
 		},
 		{
-			"label":"Update Intemediate Points",
-			"code":"pathfinding.allPositions = nil"
-		},
-		{
 			"label":"Clear Dest Angle",
 			"code":"destAngle = nil"
 		}
@@ -66,13 +62,13 @@
 			"defaultValue": 1
 		},		
 		{
-			"variable": "pathfinding.positionGrids[1].density",
+			"variable": "pathfinding.positionGrids[1].resolution",
 			"defaultMin": 0,
 			"defaultMax": 1,
 			"defaultValue": 0.25
 		},
 		{
-			"variable": "pathfinding.positionGrids[2].density",
+			"variable": "pathfinding.positionGrids[2].resolution",
 			"defaultMin": 0,
 			"defaultMax": 1,
 			"defaultValue": 0.4

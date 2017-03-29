@@ -3,13 +3,16 @@
 Movement Model for NAVTune.
 
 Models movement of the UNCC_ASTR1 robot as a circular curve, followed
-by a line segment. Uses iterative method to find points.
+by a line segment. Uses iterative method to find points, and notes
+collisions with walls.
 
 All positions are in meters.
 
-tolerance, segLength, and turnRadius can be set either with the public
-variables provided below, or passed as arguments to a call of move(). 
-The public varaibles are the default.
+tolerance, segLength, and turnRadius can be set with the public
+variables provided below.
+
+Note, I was paranoid about clamping angle to range 0..2pi. Maybe
+you could cut the number of those.
 
 --]]
 
@@ -41,6 +44,8 @@ function movementmodel.getCloserEnd(botX, botY, botAngle, destX, destY)
   end
 end
 
+-- NOTE: These values should be set in main.lua. Defaults here are not defaults
+-- used there!!! Ignore these defaults most of the time!!!
 movementmodel.turnRadius = 2
 movementmodel.tolerance = 0.01
 movementmodel.segLength = 0.1
@@ -49,49 +54,52 @@ movementmodel.segLength = 0.1
 Iteratively moves the robot along a circular/straight curve towards the 
 end point. This movement may or may not succeed, and the result is given
 in didReach. The "resolution" of the movement is determined by segLength,
-in meters/iteration of movement. The movement will also fail if the robot collides with the edge of the arena. 
+in meters/iteration of movement. The movement will also fail if the robot 
+collides with the edge of the arena. 
 
 The robot may move forward or backward, depending on the closer of the 
 summed distances of the cameras on the front and back.
 
-logAllPoints defaults to false
+Turning radius is determined by the variable provided above.
 
-tolerance, segLength, and turnRadius can be set either with the public
-variables provided in movementmodel, or passed as arguments to a call of move(). 
-The public varaibles are the default if no values provided for those 3 args.
+logAllPoints defaults to false
 
 TO DO:
 - failure condition checking
   - collision
     - already-dug pits
+    
+Params:
+  startX, startY - in meters
+  startAngle - in rads
+  destX, destY - destination point
+    (you cannot specify an end angle, fundamentally)
+  logAllPoints - for animation and rendering. defaults to false if set to nil
+  forceDirection - force robot to move forwards or backwards. nil lets closer end 
+    of robot determine. Forwards = true, backwards = false if you do set this
+    value.
 
 Returns a movement table:
 - didReach
 - didCollide
 - angleSum (how many radians robot turned over course of movement)
 - length (sum length of segments)
-- array of positions:
+- array of positions: (either just a couple or many, depending on logAllPoints)
   - {x, y, angle}
 - movedFwd (boolean)
 --]]
-function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, turnRadius, tolerance, segLength, moveFwd)
+function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, forceDirection)
   local currX, currY = startX, startY
   local currAngle = startAngle
-
-  if turnRadius == nil then
-    turnRadius = movementmodel.turnRadius
-  end
-  if tolerance == nil then
-    tolerance = movementmodel.tolerance
-  end
-  if segLength == nil then
-    segLength = movementmodel.segLength
-  end
+  
+  local turnRadius = movementmodel.turnRadius
+  local tolerance = movementmodel.tolerance
+  local segLength = movementmodel.segLength
 
   -- "Spin" robot 180 degrees "logically" here if the the robot moves backwards.
   -- Report the robot's angle as being 180 degrees again off it's "logical" angle here.
   local movingBackward
-  if moveFwd == nil then
+  if forceDirection == nil then
     if movementmodel.getCloserEnd(startX, startY, startAngle, destX, destY) == 1 then
       movingBackward = false
     else
@@ -99,7 +107,7 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
       currAngle = currAngle + math.pi
     end
   else
-    if moveFwd then
+    if forceDirection then
       movingBackward = false
     else
       movingBackward = true
@@ -131,6 +139,8 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
   --local lastDist = dist(startX, startY, destX, destY)
   local lastDist = (startX-destX)*(startX-destX)+(startY-destY)*(startY-destY)
   while (dist(currX, currY, destX, destY) > tolerance) do
+    -- keep this position if logging all positions, or else keep only the
+    -- starting position
     if logAllPoints or #positions == 0 then
       -- Log robot's current position
       if not movingBackward then
@@ -177,7 +187,8 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
     -- Collision Detection: Walls
     -- Check each corner of the robot to ensure it is inside arena.
     -- Only perform corner check if robot is close enough to walls
-    if currX - robotinfo.bubble < 0 or currX + robotinfo.bubble > robotinfo.arenaWidth or currY - robotinfo.bubble < 0 or currY + robotinfo.bubble > robotinfo.arenaHeight then
+    if currX - robotinfo.bubble < 0 or currX + robotinfo.bubble > robotinfo.arenaWidth 
+      or currY - robotinfo.bubble < 0 or currY + robotinfo.bubble > robotinfo.arenaHeight then
       local corners = robotinfo.getCorners(currX, currY, currAngle)
       for i = 1, 8, 2 do
         if corners[i] < 0 or corners[i] >= robotinfo.arenaWidth then
