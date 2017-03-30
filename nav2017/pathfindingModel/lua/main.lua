@@ -263,7 +263,7 @@ function updateCompetitionAnimation()
       compAnim.botPos = compAnim.currAnimPath.positions[#compAnim.currAnimPath.positions]
 
       -- Either move on next segment towards destination or move on to next destination
-      if dist(compAnim.botPos[1], compAnim.botPos[2], compAnim.destList[compAnim.currDest][1], compAnim.destList[compAnim.currDest][2]) < 0.001 then
+      if dist(compAnim.botPos[1], compAnim.botPos[2], compAnim.destList[compAnim.currDest][1], compAnim.destList[compAnim.currDest][2]) < movement.tolerance then
         -- Reached goal. move to next!
         compAnim.currDest = compAnim.currDest + 1
 
