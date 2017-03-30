@@ -50,6 +50,13 @@ movementmodel.turnRadius = 2
 movementmodel.tolerance = 0.01
 movementmodel.segLength = 0.1
 
+-- already dug pit obstacle size
+movementmodel.pitRadius = 0.5
+-- already dug pit locations. Array of tables.
+-- Each pit:
+-- x, y -- location coordinates
+movementmodel.pits = {}
+
 --[[
 Iteratively moves the robot along a circular/straight curve towards the 
 end point. This movement may or may not succeed, and the result is given
@@ -91,7 +98,7 @@ Returns a movement table:
 function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoints, forceDirection, turnRadius, segLength)
   local currX, currY = startX, startY
   local currAngle = startAngle
-  
+
   if turnRadius == nil then turnRadius = movementmodel.turnRadius end
   local tolerance = movementmodel.tolerance
   if segLength == nil then segLength = movementmodel.segLength end
@@ -188,7 +195,7 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
     -- Check each corner of the robot to ensure it is inside arena.
     -- Only perform corner check if robot is close enough to walls
     if currX - robotinfo.bubble < 0 or currX + robotinfo.bubble > robotinfo.arenaWidth 
-      or currY - robotinfo.bubble < 0 or currY + robotinfo.bubble > robotinfo.arenaHeight then
+    or currY - robotinfo.bubble < 0 or currY + robotinfo.bubble > robotinfo.arenaHeight then
       local corners = robotinfo.getCorners(currX, currY, currAngle)
       for i = 1, 8, 2 do
         if corners[i] < 0 or corners[i] >= robotinfo.arenaWidth then
@@ -203,41 +210,52 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
       end
     end
 
-    -- TO DO: Collision detection: dug pits
+    -- Collision Detection: Pits
+    local corners = robotinfo.getCorners(currX, currY, currAngle)
+    for i, pit in ipairs(movementmodel.pits) do
+      for corner = 1, 8, 2 do
+          if dist(corners[corner], corners[corner+1], pit.x, pit.y) < movementmodel.pitRadius then
+            didReach = false
+            didCollide = true
+          end
+        end
+      end
 
-    -- Stop moving if a collision has occurred
-    if didCollide then break end
+      -- TO DO: Collision detection: dug pits
 
-    -- Move towards destination, but only while still growing closer.
-    -- Catch the robot moving away from destination
-    local unrootedDist = (currX-destX)*(currX-destX) + (currY-destY)*(currY-destY)
-    -- needless sqrt if (dist(currX, currY, destX, destY) >= lastDist) then
-    if (unrootedDist >= lastDist) then
-      didReach = false
-      break
+      -- Stop moving if a collision has occurred
+      if didCollide then break end
+
+      -- Move towards destination, but only while still growing closer.
+      -- Catch the robot moving away from destination
+      local unrootedDist = (currX-destX)*(currX-destX) + (currY-destY)*(currY-destY)
+      -- needless sqrt if (dist(currX, currY, destX, destY) >= lastDist) then
+      if (unrootedDist >= lastDist) then
+        didReach = false
+        break
+      end
+
+      -- Buffer this distanec for future comparisions
+      lastDist = unrootedDist
     end
 
-    -- Buffer this distanec for future comparisions
-    lastDist = unrootedDist
+    -- Note the robot's final location
+    if not didReach then
+      if not movingBackward then
+        positions[#positions+1] = {currX, currY, currAngle}
+      else
+        positions[#positions+1] = {currX, currY, clampAngle(currAngle + math.pi)}
+      end
+    else
+      -- add actual destination as last point, since it was reached
+      if not movingBackward then
+        positions[#positions+1] = {destX, destY, currAngle}
+      else
+        positions[#positions+1] = {destX, destY, clampAngle(currAngle + math.pi)}
+      end
+    end
+
+    return {didReach=didReach, didCollide=didCollide, length=length, angleSum=angleSum, positions=positions, movedFwd=(not movingBackward)}
   end
 
-  -- Note the robot's final location
-  if not didReach then
-    if not movingBackward then
-      positions[#positions+1] = {currX, currY, currAngle}
-    else
-      positions[#positions+1] = {currX, currY, clampAngle(currAngle + math.pi)}
-    end
-  else
-    -- add actual destination as last point, since it was reached
-    if not movingBackward then
-      positions[#positions+1] = {destX, destY, currAngle}
-    else
-      positions[#positions+1] = {destX, destY, clampAngle(currAngle + math.pi)}
-    end
-  end
-
-  return {didReach=didReach, didCollide=didCollide, length=length, angleSum=angleSum, positions=positions, movedFwd=(not movingBackward)}
-end
-
-return movementmodel
+  return movementmodel

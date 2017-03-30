@@ -165,7 +165,7 @@ compAnim.startMovingTowards = function (self, destPos)
   -- Cache detailed movement along path
   self.currAnimPath = movement.move(self.botPos[1], self.botPos[2], self.botPos[3], miningPaths[1].positions[1][1], miningPaths[1].positions[1][2], true, miningPaths[1].positions[1].isFwd, radiusUsed, self.segLength)
   self.currAnimTime = 0
-  
+
   -- Cachce overall path being taken
   self.currCompletePath = miningPaths[1]
   self.currCompletePathRadius = radiusUsed
@@ -176,7 +176,23 @@ compAnim.startMovingTowards = function (self, destPos)
 end
 movement.turnRadius = 1.7
 function updateCompetitionAnimation() 
+  -- Always draw pits
+  love.graphics.setColor(63, 63, 63, 255)
+  for i, pit in ipairs(movement.pits) do
+    local pitXm, pitYm = mToPixels(pit.x, pit.y)
+    love.graphics.circle("fill",  pitXm, pitYm, mToPixels1(movement.pitRadius))
+  end
+  love.graphics.setColor(255, 255, 255, 255)
+
   if compAnim.state == "reset" then
+    -- add a bunch of pits
+    for i = 1, 1 do
+      movement.pits[i] = {x = robotinfo.arenaWidth-1.5, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
+    end
+    movement.pits[2] = {x = robotinfo.arenaWidth/2, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
+    
+    --movement.pits[1] = {x = robotinfo.arenaWidth-1.5}
+
     -- let user select a starting position
 
     -- show robot attached to mouse cursor
@@ -189,7 +205,7 @@ function updateCompetitionAnimation()
 
       -- TODO: Select a mining destination
       compAnim.botPos = {mxm, mym, robotAngle}
-      
+
       -- Calculate a list of points to move between to imitate competition run
       compAnim.destList = {{robotinfo.arenaWidth-1.5, 0.7}, {0.8, robotinfo.arenaHeight/2, 0}, {robotinfo.arenaWidth-1.5, robotinfo.arenaHeight/2}, {0.8, robotinfo.arenaHeight/2, math.pi}}
       compAnim.currDest = 1
@@ -245,25 +261,25 @@ function updateCompetitionAnimation()
     local currBotTravelPosition = math.floor(currBotTravelDist / compAnim.segLength) + 1
     if currBotTravelPosition > #compAnim.currAnimPath.positions then
       compAnim.botPos = compAnim.currAnimPath.positions[#compAnim.currAnimPath.positions]
-      
+
       -- Either move on next segment towards destination or move on to next destination
       if dist(compAnim.botPos[1], compAnim.botPos[2], compAnim.destList[compAnim.currDest][1], compAnim.destList[compAnim.currDest][2]) < 0.001 then
         -- Reached goal. move to next!
         compAnim.currDest = compAnim.currDest + 1
-        
+
         if compAnim.currDest > #compAnim.destList then
           -- Done moving
           compAnim.state = "reset"
           return
         end
       end
-      
+
       compAnim:startMovingTowards(compAnim.destList[compAnim.currDest])
       -- TODO redo state change stuff above until reached end of paths
       return
     end
     local currBotPos = compAnim.currAnimPath.positions[currBotTravelPosition]
-    
+
     drawRobot(currBotPos[1], currBotPos[2], currBotPos[3])
   end
 end
