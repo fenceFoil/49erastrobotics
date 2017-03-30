@@ -191,7 +191,7 @@ function updateCompetitionAnimation()
       compAnim.botPos = {mxm, mym, robotAngle}
       
       -- Calculate a list of points to move between to imitate competition run
-      compAnim.destList = {{robotinfo.arenaWidth-1, 0.7}, {0.7, robotinfo.arenaHeight/2, 0}, {robotinfo.arenaWidth-1, robotinfo.arenaHeight/2}, {0.7, robotinfo.arenaHeight/2, math.pi}}
+      compAnim.destList = {{robotinfo.arenaWidth-1.5, 0.7}, {0.8, robotinfo.arenaHeight/2, 0}, {robotinfo.arenaWidth-1.5, robotinfo.arenaHeight/2}, {0.8, robotinfo.arenaHeight/2, math.pi}}
       compAnim.currDest = 1
 
       compAnim:startMovingTowards(compAnim.destList[1])
