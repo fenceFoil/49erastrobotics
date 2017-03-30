@@ -22,7 +22,7 @@ robotinfo.arenaHeight = 3.78 -- meters
 
 -- robot width and height in meters
 robotinfo.width = 0.71
-robotinfo.length = 1.117
+robotinfo.length = 1.143 -- 1.117
 
 -- robot "radius", a bubble outside of which collisions are impossible
 -- padded a little bit just to be safe
