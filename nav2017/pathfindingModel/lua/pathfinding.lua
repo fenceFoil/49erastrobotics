@@ -42,12 +42,12 @@ pathfinding.angleWeight = 0
 -- (angleError multiplied by this value)
 pathfinding.angleErrorWeight = 1000
 -- (angleError multiplied by Weight, minus this threshold, outside this threshold)
-pathfinding.angleErrorThreshold = math.pi/16
+pathfinding.angleErrorThreshold = math.pi/25
 
 pathfinding.perSegmentPenalty = 0.05
 
 -- anti-spin-in-place path segment penalty
-pathfinding.tooShortPenalty = 1000
+pathfinding.tooShortPenalty = 100
 pathfinding.tooShortThreshold = 1.5
 
 -- Ensure angle given is always within the range 0..2pi

@@ -51,7 +51,7 @@ robotinfo = require "robotinfo"
 movement = require "movementmodel"
 movement.turnRadius = 1.5
 movement.tolerance = 0.05
-movement.segLength = 0.2
+movement.segLength = 0.1
 pathfinding = require "pathfinding"
 
 -- Java Control Panel server imports and setup
@@ -136,6 +136,9 @@ function love.mousereleased(x, y, button)
   end
 end
 
+-- Source: https://love2d.org/wiki/General_math (Feb 9 2017)
+local function dist(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
+
 -- positions are in meters
 function drawRobot(botX, botY, robotAngle)
   -- Print position in meters by the mouse
@@ -154,7 +157,7 @@ end
 
 -- Called from love.draw(); draws the current frame of an animation of a complete competition run
 -- compAnim is the state of the animation between function calls
-compAnim = {state="reset", stateJustChanged=false, botPos = {0, 0, 0}, miningDest = {0, 0}, botSpeed = 1, segLength = 0.001}
+compAnim = {state="reset", stateJustChanged=false, botPos = {0, 0, 0}, botSpeed = 0.75, segLength = 0.001}
 compAnim.startMovingTowards = function (self, destPos)
   -- Calculate mining path
   local miningPaths, radiusUsed, totalPathsChecked = pathfinding.getPathsTo(self.botPos[1], self.botPos[2], self.botPos[3], destPos[1], destPos[2], movement, destPos[3])
@@ -168,7 +171,7 @@ compAnim.startMovingTowards = function (self, destPos)
   self.currCompletePathRadius = radiusUsed
 
   -- Switch states
-  self.state = "anim-to-mining"
+  self.state = "anim-to-dest"
   self.stateJustChanged = true
 end
 movement.turnRadius = 1.7
@@ -186,11 +189,14 @@ function updateCompetitionAnimation()
 
       -- TODO: Select a mining destination
       compAnim.botPos = {mxm, mym, robotAngle}
-      compAnim.miningDest = {6.4, 0.8, math.pi}
+      
+      -- Calculate a list of points to move between to imitate competition run
+      compAnim.destList = {{robotinfo.arenaWidth-1, 0.7}, {0.7, robotinfo.arenaHeight/2, 0}, {robotinfo.arenaWidth-1, robotinfo.arenaHeight/2}, {0.7, robotinfo.arenaHeight/2, math.pi}}
+      compAnim.currDest = 1
 
-      compAnim:startMovingTowards(compAnim.miningDest)
+      compAnim:startMovingTowards(compAnim.destList[1])
     end
-  elseif compAnim.state == "anim-to-mining" then
+  elseif compAnim.state == "anim-to-dest" then
     -- Increment animation time
     if not compAnim.stateJustChanged then
       compAnim.currAnimTime = compAnim.currAnimTime + lastdt
@@ -239,7 +245,20 @@ function updateCompetitionAnimation()
     local currBotTravelPosition = math.floor(currBotTravelDist / compAnim.segLength) + 1
     if currBotTravelPosition > #compAnim.currAnimPath.positions then
       compAnim.botPos = compAnim.currAnimPath.positions[#compAnim.currAnimPath.positions]
-      compAnim:startMovingTowards(compAnim.miningDest)
+      
+      -- Either move on next segment towards destination or move on to next destination
+      if dist(compAnim.botPos[1], compAnim.botPos[2], compAnim.destList[compAnim.currDest][1], compAnim.destList[compAnim.currDest][2]) < 0.001 then
+        -- Reached goal. move to next!
+        compAnim.currDest = compAnim.currDest + 1
+        
+        if compAnim.currDest > #compAnim.destList then
+          -- Done moving
+          compAnim.state = "reset"
+          return
+        end
+      end
+      
+      compAnim:startMovingTowards(compAnim.destList[compAnim.currDest])
       -- TODO redo state change stuff above until reached end of paths
       return
     end
