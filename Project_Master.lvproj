@@ -95,10 +95,8 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="res" Type="Folder">
-			<Item Name="arena-bg1.png" Type="Document" URL="../Computer_VIs/res/arena-bg1.png"/>
+			<Item Name="sand-texture1.png" Type="Document" URL="../Computer_VIs/res/sand-texture1.png"/>
 		</Item>
-		<Item Name="Control_Panel_r0.vi" Type="VI" URL="../Computer_VIs/Control_Panel_r0.vi"/>
-		<Item Name="Joystick_Control_r0.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r0.vi"/>
 		<Item Name="Joystick_Control_r1.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r1.vi"/>
 		<Item Name="Localization Mockup.lvlib" Type="Library" URL="../Computer_VIs/Localization Mockup.lvlib"/>
 		<Item Name="Movement Control System.vi" Type="VI" URL="../nav2017/Movement Control System.vi"/>
