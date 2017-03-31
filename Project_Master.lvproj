@@ -2724,7 +2724,7 @@ DirectoryIndex index.htm
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="NavigationProjec_FPGATarget2_FPGAMainNavigati_PWPHW8gwDxI.lvbitx" Type="Document" URL="../Navigation_VIs/UNCC_AST2_Master/FPGA Bitfiles/NavigationProjec_FPGATarget2_FPGAMainNavigati_PWPHW8gwDxI.lvbitx"/>
-			<Item Name="path coefs.vi" Type="VI" URL="../nav/nav working/path coefs.vi"/>
+			<Item Name="path coefs.vi" Type="VI" URL="../nav2016/nav working/path coefs.vi"/>
 			<Item Name="Encoder-Velocity_Conversion (SubVI).vi" Type="VI" URL="../Navigation_VIs/Encoder-Velocity_Conversion (SubVI).vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
