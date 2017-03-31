@@ -1,3 +1,0 @@
-local pidmove = {}
-
-return pidmove

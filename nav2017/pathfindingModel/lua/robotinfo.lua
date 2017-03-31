@@ -22,14 +22,14 @@ robotinfo.arenaHeight = 3.78 -- meters
 
 -- robot width and height in meters
 robotinfo.width = 0.71
-robotinfo.length = 1.117
+robotinfo.length = 1.143 -- 1.117
 
 -- robot "radius", a bubble outside of which collisions are impossible
 -- padded a little bit just to be safe
 -- (an optimization for movement modelling)
 robotinfo.bubble = 0.1 + ((robotinfo.width/2)^2+(robotinfo.length/2)^2)^0.5
 
-
+-- precalculate and cache this value
 robotinfo.theta1 = math.atan((robotinfo.width/2)/(robotinfo.length/2))
 robotinfo.r = ((robotinfo.width/2)*(robotinfo.width/2) + (robotinfo.length/2)*(robotinfo.length/2))^0.5
 -- botAngle is in radians

@@ -18,6 +18,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
+import javax.swing.ScrollPaneConstants;
 
 public class NavProtoControls extends JFrame {
 
@@ -26,6 +30,8 @@ public class NavProtoControls extends JFrame {
 
 	// Preferences stuff. Static singleton for whole project.
 	private static Preferences prefs;
+	private JPanel mainPanel;
+	private JScrollPane scrollPane;
 
 	public static Preferences getPrefs() {
 		return prefs;
@@ -64,14 +70,45 @@ public class NavProtoControls extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+
+		scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		contentPane.add(scrollPane);
+
+		mainPanel = new JPanel();
+		scrollPane.setViewportView(mainPanel);
+		mainPanel.setLayout(new BorderLayout(0, 0));
 
 		sliderControlsPanel = new JPanel();
-		contentPane.add(sliderControlsPanel);
+		mainPanel.add(sliderControlsPanel, BorderLayout.CENTER);
 		sliderControlsPanel.setLayout(new BoxLayout(sliderControlsPanel, BoxLayout.PAGE_AXIS));
+
+		JButton btnReconnect = new JButton("Reconnect");
+		mainPanel.add(btnReconnect, BorderLayout.SOUTH);
+		final JFrame thisFrame = this;
+		btnReconnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				sliderControlsPanel.removeAll();
+				VisualizerClient.connectToServer(thisFrame);
+				createSliderControls();
+				pack();
+			}
+		});
 
 		createSliderControls();
 		pack();
+	}
+	
+	/**
+	 * Override window packing to make the window a reasonable height.
+	 */
+
+	@Override
+	public void pack() {
+		super.pack();
+		setSize(getSize().width, Toolkit.getDefaultToolkit().getScreenSize().height / 5 * 4);
 	}
 
 	private void createSliderControls() {

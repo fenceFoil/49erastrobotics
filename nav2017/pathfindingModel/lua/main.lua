@@ -4,14 +4,30 @@ Main file of NAVTune.
 
 Visualizer code, making calls out to the movement and pathfinding models.
 
+Visually demonstrates capabilities of robot pathfinding, and allows a Java
+control panel to connect up to quickly tweak and test different constant values.
+
+Controls Across Simulations:
+Robot sticks to mouse or is dragged with left mouse button.
+Scroll wheel spins robot.
+Right mouse button click places a yellow destination marker.
+Middle mouse button (wheel) changes visualization.
+
+Note: Dimensions must be converted often between pixels and meters.
+
+Server:
 Creates a TCP socket server on port 31336 (see PORT_NUM) that will execute any
-string sent over the connection, enabling external control of the script.
+string sent over the connection followed by a newline, enabling external control 
+of this demo script.
+Code sent is executed in the scope of this main.lua, so it can, for instance,
+set the values in the movement model by saying movement.turnRadius = 1.1,
+for instance.
 
 --]]
 
 -- Background image
 -- Size of this dictates size of window. Modify conf.lua manually to match.
-arenaBGFilename = "sand-texture1.png"
+arenaBGFilename = "labeledArena-black.png"
 
 -- Visualizations
 -- 1: A single movement path
@@ -19,30 +35,32 @@ arenaBGFilename = "sand-texture1.png"
 -- 3: Positions used in pathfinding
 -- 4: A "sea of arrows", at each pathfinding position
 -- 5: Top-scoring path between mouse pos and destination marker
-currVisualization = 5
-numVisualizations = 5
+-- 6: Robot competition run animation
+currVisualization = 6
+numVisualizations = 6
 
+-- Lock robot pos: Must drag mouse to move robot. Otherwise robot locked to mouse
 lockRobotPos = false
-lock8Angles = true
+-- Turn robot using scroll wheel: 8 steps, or smoothly?
+lock8Angles = false
+-- Turn robot in a kind of demo mode after a few moments untouched?
 autoSpin = true
 
--- Imports
+-- Imports & setup
 robotinfo = require "robotinfo"
 movement = require "movementmodel"
-movement.turnRadius = 2
+movement.turnRadius = 1.5
 movement.tolerance = 0.05
 movement.segLength = 0.1
 pathfinding = require "pathfinding"
-pidmoveleft = require "pidmove"
-pidmoveright = require "pidmove"
 
-
--- Controls server imports and setup
+-- Java Control Panel server imports and setup
 local PORT_NUM = 31336
 socket = require "socket"
 server = assert(socket.bind("*", PORT_NUM))
 server:settimeout(0) -- do not block while waiting for request
 
+-- Start script.
 function love.load()
   if arg[#arg] == "-debug" then require("mobdebug").start() end
 
@@ -50,6 +68,7 @@ function love.load()
   boomImage = love.graphics.newImage("boom.png")
 end
 
+-- Mouse wheel spins robot
 robotAngle = 0
 lastScrollTime = love.timer.getTime()
 function love.wheelmoved(x, y)
@@ -60,11 +79,13 @@ function love.wheelmoved(x, y)
   end
   lastScrollTime = love.timer.getTime()
 end
+-- Moving mouse stops auto spin
 function love.mousemoved(x, y, d, dy, istouch)
   -- don't start spinning robot while mouse is moving
   lastScrollTime = love.timer.getTime()
 end
 
+-- Utility function. Alternative color space from RGB.
 -- source: https://love2d.org/wiki/HSV_color
 function HSV(h, s, v)
   if s <= 0 then return v,v,v end
@@ -81,6 +102,7 @@ function HSV(h, s, v)
   end return (r+m)*255,(g+m)*255,(b+m)*255
 end
 
+-- Graphics: Draws a 3-line vector arrow in one call.
 function drawArrow(startX, startY, length, angle)
   local endX = startX + length * math.cos(angle)
   local endY = startY + length * math.sin(angle)
@@ -93,23 +115,189 @@ function drawArrow(startX, startY, length, angle)
   love.graphics.line(endX, endY, endX - (length / 3) * math.cos(endAngle2), endY - (length / 3) * math.sin(endAngle2))
 end
 
+-- Destination of robot (yellow circle marker)
 destX = 4
 destY = 2
+-- Move robot to destination point and this angle
+-- used in some visualizations
+destAngle = 0
 
+lastdt = 0
+
+-- Middle clicking mouse changes visualization
 function love.mousereleased(x, y, button)
---  if button == 1 then
---    -- change visualization
---    currVisualization = currVisualization + 1
---    if currVisualization > numVisualizations then currVisualization = 1 end
+  if button == 3 then
+    -- change visualization
+    currVisualization = currVisualization + 1
+    if currVisualization > numVisualizations then currVisualization = 1 end
+  end
   if button == 2 then
     destX, destY = pixelsToM(x, y)
   end
 end
 
-function love.draw()
-  love.graphics.draw(arenaBG)
-  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+-- Source: https://love2d.org/wiki/General_math (Feb 9 2017)
+local function dist(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
 
+-- positions are in meters
+function drawRobot(botX, botY, robotAngle)
+  -- Print position in meters by the mouse
+  local botXPixel, botYPixel = mToPixels(botX, botY)
+
+  love.graphics.print(round2(botX).."m, "..round2(botY).."m", botXPixel+16, botYPixel+16)
+  local cornerPoints = {}
+  local cornerPointsMeters = robotinfo.getCornersLoop(botX, botY, robotAngle)
+  for i = 1, #cornerPointsMeters, 2 do
+    cornerPoints[i], cornerPoints[i+1] = mToPixels(cornerPointsMeters[i], cornerPointsMeters[i+1])
+  end
+  love.graphics.line(cornerPoints)
+  -- draw arrow
+  drawArrow(botXPixel, botYPixel, mToPixels1(robotinfo.length / 3), robotAngle)
+end
+
+-- Called from love.draw(); draws the current frame of an animation of a complete competition run
+-- compAnim is the state of the animation between function calls
+compAnim = {state="reset", stateJustChanged=false, botPos = {0, 0, 0}, botSpeed = 0.75, segLength = 0.001}
+compAnim.startMovingTowards = function (self, destPos)
+  -- Calculate mining path
+  local miningPaths, radiusUsed, totalPathsChecked = pathfinding.getPathsTo(self.botPos[1], self.botPos[2], self.botPos[3], destPos[1], destPos[2], movement, destPos[3])
+
+  -- Cache detailed movement along path
+  -- NOTE: CHANGE TURNING RADIUS HERE TO SIMULATE ERRORS IN MOVEMENT VS MODEL
+  self.currAnimPath = movement.move(self.botPos[1], self.botPos[2], self.botPos[3], miningPaths[1].positions[1][1], miningPaths[1].positions[1][2], true, miningPaths[1].positions[1].isFwd, radiusUsed, self.segLength)
+  self.currAnimTime = 0
+
+  -- Cachce overall path being taken
+  self.currCompletePath = miningPaths[1]
+  self.currCompletePathRadius = radiusUsed
+
+  -- Switch states
+  self.state = "anim-to-dest"
+  self.stateJustChanged = true
+end
+movement.turnRadius = 1.7
+function updateCompetitionAnimation() 
+  -- Always draw pits
+  love.graphics.setColor(63, 63, 63, 255)
+  for i, pit in ipairs(movement.pits) do
+    local pitXm, pitYm = mToPixels(pit.x, pit.y)
+    love.graphics.circle("fill",  pitXm, pitYm, mToPixels1(movement.pitRadius))
+  end
+  love.graphics.setColor(255, 255, 255, 255)
+
+  if compAnim.state == "reset" then
+    -- add a bunch of pits
+    for i = 1, 1 do
+      --movement.pits[i] = {x = robotinfo.arenaWidth-1.5, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
+    end
+    movement.pits[1] = {x = robotinfo.arenaWidth/2, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
+    
+    --movement.pits[1] = {x = robotinfo.arenaWidth-1.5}
+
+    -- let user select a starting position
+
+    -- show robot attached to mouse cursor
+    local mxm, mym = pixelsToM(love.mouse.getPosition())
+    drawRobot(mxm, mym, robotAngle)
+
+    -- clicking starts animation
+    if love.mouse.isDown(1) then
+      -- TODO: calculate path to mining area, change state to animate it
+
+      -- TODO: Select a mining destination
+      compAnim.botPos = {mxm, mym, robotAngle}
+
+      -- Calculate a list of points to move between to imitate competition run
+      compAnim.destList = {{robotinfo.arenaWidth-1.5, 0.7}, {0.8, robotinfo.arenaHeight/2, 0}, {robotinfo.arenaWidth-1.5, robotinfo.arenaHeight/2}, {0.8, robotinfo.arenaHeight/2, math.pi}}
+      compAnim.currDest = 1
+
+      compAnim:startMovingTowards(compAnim.destList[1])
+    end
+  elseif compAnim.state == "anim-to-dest" then
+    -- Increment animation time
+    if not compAnim.stateJustChanged then
+      compAnim.currAnimTime = compAnim.currAnimTime + lastdt
+    else
+      compAnim.stateJustChanged = false
+    end
+
+    -- Draw bot's current path
+    -- Choose top path
+    local path = compAnim.currCompletePath.positions
+
+    --love.graphics.print("Paths Found: "..#pathsFound.." Paths Checked: "..pathsChecked)
+    love.graphics.print("Turning Radius Used: "..compAnim.currCompletePathRadius, 0, 20)
+
+    -- Draw movement between each point of path
+    local lastPos = compAnim.botPos
+    for i,nextPos in ipairs(path) do
+      love.graphics.print(round2(nextPos[1])..","..round2(nextPos[2])..","..round2(nextPos[3]), 400, 20*i)
+
+      -- Draw simulated robot movement towards destination
+      local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true, nextPos.isFwd, compAnim.currCompletePathRadius)
+      if (#move.positions > 1) then
+        -- Convert movement points to pixel points for rendering
+        local movePixelPoints = {}
+        if move.movedFwd then
+          love.graphics.setColor(0, 255, 0)
+        else
+          love.graphics.setColor(0, 255, 255)
+        end
+        for j,point in ipairs(move.positions) do
+          local pixX, pixY = mToPixels(point[1], point[2])
+          movePixelPoints[(j-1)*2+1] = pixX
+          movePixelPoints[(j-1)*2+1+1] = pixY
+
+          love.graphics.circle("fill", pixX, pixY, 4)
+        end
+        love.graphics.line(movePixelPoints)
+        love.graphics.setColor(255, 255, 255, 255)
+      end
+
+      lastPos = nextPos
+    end
+
+    -- Draw bot at a position along path
+    local currBotTravelDist = compAnim.botSpeed * compAnim.currAnimTime
+    local currBotTravelPosition = math.floor(currBotTravelDist / compAnim.segLength) + 1
+    if currBotTravelPosition > #compAnim.currAnimPath.positions then
+      compAnim.botPos = compAnim.currAnimPath.positions[#compAnim.currAnimPath.positions]
+
+      -- Either move on next segment towards destination or move on to next destination
+      if dist(compAnim.botPos[1], compAnim.botPos[2], compAnim.destList[compAnim.currDest][1], compAnim.destList[compAnim.currDest][2]) < movement.tolerance then
+        -- Reached goal. move to next!
+        compAnim.currDest = compAnim.currDest + 1
+
+        if compAnim.currDest > #compAnim.destList then
+          -- Done moving
+          compAnim.state = "reset"
+          return
+        end
+      end
+
+      compAnim:startMovingTowards(compAnim.destList[compAnim.currDest])
+      -- TODO redo state change stuff above until reached end of paths
+      return
+    end
+    local currBotPos = compAnim.currAnimPath.positions[currBotTravelPosition]
+
+    drawRobot(currBotPos[1], currBotPos[2], currBotPos[3])
+    love.graphics.print(movement.getCloseness(robotinfo.getCorners(currBotPos[1], currBotPos[2], currBotPos[3])), 100, 100)
+
+  end
+end
+
+-- Update simulation, and render any current visualization
+function love.draw()
+  local windowWidth, windowHeight = love.window.getMode()
+  love.graphics.draw(arenaBG, 0, 0, 0, (windowWidth / arenaBG:getWidth()), (windowHeight / arenaBG:getHeight()))
+
+  if currVisualization == 6 then
+    updateCompetitionAnimation()
+    return
+  end
+
+  love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
   -- update robot position to mouse position
   if not (lockRobotPos and not love.mouse.isDown(1)) then
@@ -120,7 +308,9 @@ function love.draw()
   end
   local mxm, mym = pixelsToM(mx, my)
   -- Print position in meters by the mouse
-  love.graphics.print(round2(mxm).."m, "..round2(mym).."m", mx+16, my+16)
+  love.graphics.print(round2(mxm).."m", mx+16, my+16)
+  love.graphics.print(round2(mym).."m", mx+16, my+32)
+  love.graphics.print(movement.getCloseness(robotinfo.getCorners(mxm, mym, robotAngle)), mx+16, my+48)
 
   -- Draw the robot at the mouse cursor
   local cornerPoints = {}
@@ -201,7 +391,7 @@ function love.draw()
     love.graphics.rectangle("line", ulx, uly, lrx-ulx, lry-uly)
 
     -- for now, just show positions considered in pathfinding
-    for i,pos in ipairs(pathfinding.getAllPositions()) do
+    for i,pos in ipairs(pathfinding.getIntermediatePositions()) do
       px, py = mToPixels(pos[1], pos[2])
       love.graphics.setColor(0, 0, 255, 80)
       love.graphics.circle("fill", px, py, 10)
@@ -212,7 +402,7 @@ function love.draw()
     -- sea of arrows, at pathfinding position resolution
 
     -- for now, just show positions considered in pathfinding
-    for i,pos in ipairs(pathfinding.getAllPositions()) do
+    for i,pos in ipairs(pathfinding.getIntermediatePositions()) do
       x, y = pos[1], pos[2]
       px, py = mToPixels(x, y)
 
@@ -233,17 +423,22 @@ function love.draw()
 
     -- Draw destination point
     love.graphics.setColor(HSV(40, 255, 255))
-    love.graphics.circle("fill", mToPixels1(destX), mToPixels1(destY), 10)
+    local destXpixels, destYpixels = mToPixels(destX, destY)
+    love.graphics.circle("fill", destXpixels, destYpixels, 10)
     love.graphics.setColor(255, 255, 255)
+    if destAngle ~= nil then
+      drawArrow(destXpixels, destYpixels, 20, destAngle)
+    end
 
     -- Run pathfinding
-    local pathsFound = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement)
+    local pathsFound, usedRadius, pathsChecked = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement, destAngle)
 
     if #pathsFound >= 1 then
       -- Choose top path
       local path = pathsFound[1]
 
-      love.graphics.print("Paths found: "..#pathsFound)
+      love.graphics.print("Paths Found: "..#pathsFound.." Paths Checked: "..pathsChecked)
+      love.graphics.print("Turning Radius Used: "..usedRadius, 0, 20)
 
       -- Draw movement between each point of path
       local lastPos = {mxm, mym, robotAngle}
@@ -251,7 +446,10 @@ function love.draw()
         love.graphics.print(round2(nextPos[1])..","..round2(nextPos[2])..","..round2(nextPos[3]), 400, 20*i)
 
         -- Draw simulated robot movement towards destination
-        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true)
+        local tempRad = movement.turnRadius
+        movement.turnRadius = usedRadius
+        local move = movement.move(lastPos[1], lastPos[2], lastPos[3], nextPos[1], nextPos[2], true, nextPos.isFwd)
+        movement.turnRadius = tempRad
         if (#move.positions > 1) then
           -- Convert movement points to pixel points for rendering
           local movePixelPoints = {}
@@ -276,11 +474,13 @@ function love.draw()
     else
       love.graphics.print("No paths found!", 100, 100)
     end
+  elseif currVisualization == 6 then
+    -- Perform an animation of the robot's complete sequence of movements
+    updateCompetitionAnimation()
   end
 end
 
-lastdt = 0
-lastPIDTick = 0
+-- Auto-spin is implemented here
 lastAngle = 0
 lastAngleChange = 0
 function love.update(dt)

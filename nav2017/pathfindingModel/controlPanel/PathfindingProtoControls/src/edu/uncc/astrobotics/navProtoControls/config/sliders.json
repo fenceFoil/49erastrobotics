@@ -7,6 +7,10 @@
 		{
 			"label":"Next Visualization",
 			"code":"currVisualization = currVisualization + 1; if currVisualization > numVisualizations then currVisualization = 1 end"
+		},
+		{
+			"label":"Clear Dest Angle",
+			"code":"destAngle = nil"
 		}
 	],
 	"checkboxes": [
@@ -21,7 +25,7 @@
 			"defaultValue": false
 		},
 		{
-			"label": "Lock Robot Pos?",
+			"label": "Drag Robot Pos?",
 			"variable": "lockRobotPos",
 			"defaultValue": true
 		}
@@ -31,25 +35,43 @@
 			"variable": "movement.turnRadius",
 			"defaultMin": 0,
 			"defaultMax": 3,
-			"defaultValue": 2
-		}, /*
+			"defaultValue": 1.5
+		}, 
+		{
+			"variable": "destAngle",
+			"defaultMin": 0,
+			"defaultMax": 6.28,
+			"defaultValue": 0
+		},
 		{
 			"variable": "pathfinding.deadZone",
 			"defaultMin": 0,
 			"defaultMax": 2,
-			"defaultValue": 0.5
-		},*/
-		{
+			"defaultValue": 0.75
+		},
+		/*{
 			"variable": "pathfinding.pathResolution",
 			"defaultMin": 0.1,
 			"defaultMax": 1,
 			"defaultValue": 0.3
-		},
+		},*/
 		{
 			"variable": "pathfinding.lengthWeight",
 			"defaultMin": 0,
 			"defaultMax": 10,
 			"defaultValue": 1
+		},		
+		{
+			"variable": "pathfinding.positionGrids[1].resolution",
+			"defaultMin": 0,
+			"defaultMax": 1,
+			"defaultValue": 0.25
+		},
+		{
+			"variable": "pathfinding.positionGrids[2].resolution",
+			"defaultMin": 0,
+			"defaultMax": 1,
+			"defaultValue": 0.4
 		},/*
 		{
 			"variable": "pathfinding.angleWeight",
@@ -66,14 +88,14 @@
 		{
 			"variable": "pathfinding.tooShortPenalty",
 			"defaultMin": 0,
-			"defaultMax": 20,
-			"defaultValue": 4
+			"defaultMax": 100,
+			"defaultValue": 100
 		},
 		{
 			"variable": "pathfinding.tooShortThreshold",
 			"defaultMin": 0,
 			"defaultMax": 5,
-			"defaultValue": 1
+			"defaultValue": 1.5
 		},
 		{
 			"variable": "movement.tolerance",
@@ -85,7 +107,7 @@
 			"variable": "movement.segLength",
 			"defaultMin": 0.001,
 			"defaultMax": 1,
-			"defaultValue": 0.1
+			"defaultValue": 0.2
 		}
 	]
 }
