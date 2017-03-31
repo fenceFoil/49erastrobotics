@@ -46,6 +46,9 @@ pathfinding.angleErrorThreshold = math.pi/25
 
 pathfinding.perSegmentPenalty = 0.05
 
+-- closeness weight
+pathfinding.closenessWeight = 100
+
 -- anti-spin-in-place path segment penalty
 pathfinding.tooShortPenalty = 100
 pathfinding.tooShortThreshold = 1.5
@@ -136,12 +139,14 @@ local function createEmptyPath()
     -- cost = sum of lengths * lengthweight + sum of angleSums * angleSumWeight
     local lenSum = 0
     local angleSum = 0
+    local closenessSum = 0
     for i,pos in pairs(self.positions) do
       lenSum = lenSum + pos.length
       angleSum = angleSum + pos.angleSum
+      closenessSum = closenessSum + pos.closeness
     end
 
-    local costCounter = lenSum * pathfinding.lengthWeight + angleSum * pathfinding.angleWeight
+    local costCounter = lenSum * pathfinding.lengthWeight + angleSum * pathfinding.angleWeight + closenessSum * pathfinding.closenessWeight
 
     -- note number of anti-spin-in-place penalties (reversals and too-short paths)
     local lastDirection = nil
@@ -183,7 +188,7 @@ end
 -- Path object factory, but with values and a starting position at positions[1]
 -- A destAngleDelta value of nil indicates no destinationAngle was considered 
 -- finding this path.
-local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isFwd, destAngleDelta)
+local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, closeness, isFwd, destAngleDelta)
   local newPath = createEmptyPath()
   local newPos = {}
   newPos[1] = nodeX
@@ -192,6 +197,7 @@ local function createNewPath(nodeX, nodeY, nodeAngle, length, angleSum, isFwd, d
   newPos.length = length
   newPos.angleSum = angleSum
   newPos.isFwd = isFwd
+  newPos.closeness = closeness
   newPath.destAngleDelta = destAngleDelta
 
   newPath.positions[#newPath.positions+1] = newPos
@@ -253,7 +259,7 @@ local function getPathsToRecurse(startX, startY, startAngle, destX, destY, movem
       if destAngle ~= nil then 
         angleError = math.abs(((destAngle - directMove.positions[#directMove.positions][3])+math.pi) % (2*math.pi) - math.pi)
       end
-      pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.movedFwd, angleError)
+      pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.closeness, directMove.movedFwd, angleError)
     end
 
     -- Try moving from current position to every single possible intermediate position
@@ -280,7 +286,7 @@ local function getPathsToRecurse(startX, startY, startAngle, destX, destY, movem
               totalPathsChecked = totalPathsChecked + subPathsChecked
               -- Take each found path to the destination, copy our move so far in front, and add to pathsToDest
               for j,path in ipairs(subPathsToDest) do
-                local moveInfo = {length=move.length, angleSum=move.angleSum, isFwd=move.movedFwd}
+                local moveInfo = {length=move.length, angleSum=move.angleSum, closeness=move.closeness, isFwd=move.movedFwd}
                 moveInfo[1] = pos[1]
                 moveInfo[2] = pos[2]
                 moveInfo[3] = move.positions[#move.positions][3]

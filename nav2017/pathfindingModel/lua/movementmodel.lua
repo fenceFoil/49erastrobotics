@@ -57,6 +57,62 @@ movementmodel.pitRadius = 0.5
 -- x, y -- location coordinates
 movementmodel.pits = {}
 
+-- Closeness parameters
+movementmodel.maxCloseDist = 0.5 -- in meters
+
+--[[
+Find the closeness of the robot to any obstacle
+Summed over each corner of the robot and each obstacle (4 walls, pits):
+A closeness value, from 1 down to 0, linearly decreasing over a distance 
+(0.5m?)
+Measured from the x or y axis distance from a wall, or
+from the edge of a pit's radius.
+
+Assumes no corner is colliding inside of one of the obstacles or walls. if it is,
+weird negative values come out. could clamp these if desired.
+
+Params:
+botCornerCoords -- 8 element array, alternating x and y coords for 4 corners of robot
+
+Returns:
+closeness -- number between 0..4corners*(4 walls + num pits), increasing with 
+            closeness of robot to obstacles
+--]]
+function movementmodel.getCloseness(botCornerCoords)
+  local closeness = 0
+  local maxCloseDist = movementmodel.maxCloseDist
+  for corner = 1, 8, 2 do
+    local x = botCornerCoords[corner]
+    local y = botCornerCoords[corner+1]
+    -- get closeness for x wall 1
+    if x < maxCloseDist then
+      closeness = closeness + 1-(x / maxCloseDist)
+    end
+    -- get closeness for x wall 2
+    if x > robotinfo.arenaWidth - maxCloseDist then
+      closeness = closeness + 1-((robotinfo.arenaWidth - x) / maxCloseDist)
+    end
+    -- get closeness for y wall 1
+    if y < maxCloseDist then
+      closeness = closeness + 1-(y / maxCloseDist)
+    end
+    -- get closeness for y wall 2
+    if y > robotinfo.arenaHeight - maxCloseDist then
+      closeness = closeness + 1-((robotinfo.arenaHeight - y) / maxCloseDist)
+    end
+    
+    for i, pit in ipairs(movementmodel.pits) do
+      -- get closeness for pit
+      local pitDist = dist (x, y, pit.x, pit.y) - movementmodel.pitRadius
+      if pitDist < maxCloseDist then
+        closeness = closeness + 1-(pitDist / maxCloseDist)
+      end
+    end
+  end
+  
+  return closeness
+end
+
 --[[
 Iteratively moves the robot along a circular/straight curve towards the 
 end point. This movement may or may not succeed, and the result is given
@@ -91,6 +147,7 @@ Returns a movement table:
 - didCollide
 - angleSum (how many radians robot turned over course of movement)
 - length (sum length of segments)
+- closeness (closeness of robot to walls and pits. should be mostly independent of segLength)
 - array of positions: (either just a couple or many, depending on logAllPoints)
   - {x, y, angle}
 - movedFwd (boolean)
@@ -131,6 +188,7 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
   local didCollide = false
   local angleSum = 0
   local length = 0
+  local closeness = 0
 
   -- Calculate the max angle the robot is capable of turning each segLength 
   -- of movement.
@@ -194,9 +252,11 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
     -- Collision Detection: Walls
     -- Check each corner of the robot to ensure it is inside arena.
     -- Only perform corner check if robot is close enough to walls
-    if currX - robotinfo.bubble < 0 or currX + robotinfo.bubble > robotinfo.arenaWidth 
-    or currY - robotinfo.bubble < 0 or currY + robotinfo.bubble > robotinfo.arenaHeight then
-      local corners = robotinfo.getCorners(currX, currY, currAngle)
+    local corners = robotinfo.getCorners(currX, currY, currAngle)
+    if currX - robotinfo.bubble < 0 
+      or currX + robotinfo.bubble > robotinfo.arenaWidth 
+      or currY - robotinfo.bubble < 0 
+      or currY + robotinfo.bubble > robotinfo.arenaHeight then
       for i = 1, 8, 2 do
         if corners[i] < 0 or corners[i] >= robotinfo.arenaWidth then
           didReach = false
@@ -211,51 +271,53 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
     end
 
     -- Collision Detection: Pits
-    local corners = robotinfo.getCorners(currX, currY, currAngle)
     for i, pit in ipairs(movementmodel.pits) do
       for corner = 1, 8, 2 do
-          if dist(corners[corner], corners[corner+1], pit.x, pit.y) < movementmodel.pitRadius then
-            didReach = false
-            didCollide = true
-          end
+        if dist(corners[corner], corners[corner+1], pit.x, pit.y) < movementmodel.pitRadius then
+          didReach = false
+          didCollide = true
         end
       end
+    end
+        
+    -- Note closeness 
+    -- Actually note closeness-meters, to make closeness constant even when distance
+    -- between segments changes
+    closeness = closeness + movementmodel.getCloseness(corners) * segLength
 
-      -- TO DO: Collision detection: dug pits
+    -- Stop moving if a collision has occurred
+    if didCollide then break end
 
-      -- Stop moving if a collision has occurred
-      if didCollide then break end
-
-      -- Move towards destination, but only while still growing closer.
-      -- Catch the robot moving away from destination
-      local unrootedDist = (currX-destX)*(currX-destX) + (currY-destY)*(currY-destY)
-      -- needless sqrt if (dist(currX, currY, destX, destY) >= lastDist) then
-      if (unrootedDist >= lastDist) then
-        didReach = false
-        break
-      end
-
-      -- Buffer this distanec for future comparisions
-      lastDist = unrootedDist
+    -- Move towards destination, but only while still growing closer.
+    -- Catch the robot moving away from destination
+    local unrootedDist = (currX-destX)*(currX-destX) + (currY-destY)*(currY-destY)
+    -- needless sqrt if (dist(currX, currY, destX, destY) >= lastDist) then
+    if (unrootedDist >= lastDist) then
+      didReach = false
+      break
     end
 
-    -- Note the robot's final location
-    if not didReach then
-      if not movingBackward then
-        positions[#positions+1] = {currX, currY, currAngle}
-      else
-        positions[#positions+1] = {currX, currY, clampAngle(currAngle + math.pi)}
-      end
-    else
-      -- add actual destination as last point, since it was reached
-      if not movingBackward then
-        positions[#positions+1] = {destX, destY, currAngle}
-      else
-        positions[#positions+1] = {destX, destY, clampAngle(currAngle + math.pi)}
-      end
-    end
-
-    return {didReach=didReach, didCollide=didCollide, length=length, angleSum=angleSum, positions=positions, movedFwd=(not movingBackward)}
+    -- Buffer this distanec for future comparisions
+    lastDist = unrootedDist
   end
 
-  return movementmodel
+  -- Note the robot's final location
+  if not didReach then
+    if not movingBackward then
+      positions[#positions+1] = {currX, currY, currAngle}
+    else
+      positions[#positions+1] = {currX, currY, clampAngle(currAngle + math.pi)}
+    end
+  else
+    -- add actual destination as last point, since it was reached
+    if not movingBackward then
+      positions[#positions+1] = {destX, destY, currAngle}
+    else
+      positions[#positions+1] = {destX, destY, clampAngle(currAngle + math.pi)}
+    end
+  end
+
+  return {didReach=didReach, didCollide=didCollide, length=length, angleSum=angleSum, closeness=closeness, positions=positions, movedFwd=(not movingBackward)}
+end
+
+return movementmodel

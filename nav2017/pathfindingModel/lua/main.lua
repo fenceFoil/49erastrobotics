@@ -163,6 +163,7 @@ compAnim.startMovingTowards = function (self, destPos)
   local miningPaths, radiusUsed, totalPathsChecked = pathfinding.getPathsTo(self.botPos[1], self.botPos[2], self.botPos[3], destPos[1], destPos[2], movement, destPos[3])
 
   -- Cache detailed movement along path
+  -- NOTE: CHANGE TURNING RADIUS HERE TO SIMULATE ERRORS IN MOVEMENT VS MODEL
   self.currAnimPath = movement.move(self.botPos[1], self.botPos[2], self.botPos[3], miningPaths[1].positions[1][1], miningPaths[1].positions[1][2], true, miningPaths[1].positions[1].isFwd, radiusUsed, self.segLength)
   self.currAnimTime = 0
 
@@ -187,9 +188,9 @@ function updateCompetitionAnimation()
   if compAnim.state == "reset" then
     -- add a bunch of pits
     for i = 1, 1 do
-      movement.pits[i] = {x = robotinfo.arenaWidth-1.5, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
+      --movement.pits[i] = {x = robotinfo.arenaWidth-1.5, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
     end
-    movement.pits[2] = {x = robotinfo.arenaWidth/2, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
+    movement.pits[1] = {x = robotinfo.arenaWidth/2, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
     
     --movement.pits[1] = {x = robotinfo.arenaWidth-1.5}
 
@@ -281,6 +282,8 @@ function updateCompetitionAnimation()
     local currBotPos = compAnim.currAnimPath.positions[currBotTravelPosition]
 
     drawRobot(currBotPos[1], currBotPos[2], currBotPos[3])
+    love.graphics.print(movement.getCloseness(robotinfo.getCorners(currBotPos[1], currBotPos[2], currBotPos[3])), 100, 100)
+
   end
 end
 
@@ -305,7 +308,9 @@ function love.draw()
   end
   local mxm, mym = pixelsToM(mx, my)
   -- Print position in meters by the mouse
-  love.graphics.print(round2(mxm).."m, "..round2(mym).."m", mx+16, my+16)
+  love.graphics.print(round2(mxm).."m", mx+16, my+16)
+  love.graphics.print(round2(mym).."m", mx+16, my+32)
+  love.graphics.print(movement.getCloseness(robotinfo.getCorners(mxm, mym, robotAngle)), mx+16, my+48)
 
   -- Draw the robot at the mouse cursor
   local cornerPoints = {}
