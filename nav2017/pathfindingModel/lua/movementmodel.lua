@@ -126,11 +126,6 @@ summed distances of the cameras on the front and back.
 Turning radius is determined by the variable provided above.
 
 logAllPoints defaults to false
-
-TO DO:
-- failure condition checking
-  - collision
-    - already-dug pits
     
 Params:
   startX, startY - in meters
@@ -225,8 +220,6 @@ function movementmodel.move(startX, startY, startAngle, destX, destY, logAllPoin
     -- Find the smallest signed, acute angle between current 
     -- angle and angle towards destination. Inputs must lie between 0 and 2pi(?)
     local angleError = ((angleToDest-currAngle)+math.pi) % (2*math.pi) - math.pi
-    -- Correct range of atan2's output from -pi..pi to 0..2pi
-    --if angleError < 0 then angleError = angleError + 2 * math.pi end
     -- Move current angle towards pointing at destination
     if angleError >= 0 then
       currAngle = currAngle + math.min(angleError, maxAngleDelta)
