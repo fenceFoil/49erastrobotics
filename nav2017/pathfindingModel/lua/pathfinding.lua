@@ -42,7 +42,7 @@ pathfinding.angleWeight = 0
 -- (angleError multiplied by this value)
 pathfinding.angleErrorWeight = 1000
 -- (angleError multiplied by Weight, minus this threshold, outside this threshold)
-pathfinding.angleErrorThreshold = math.pi/25
+pathfinding.angleErrorThreshold = math.pi/10
 
 pathfinding.perSegmentPenalty = 0.05
 
