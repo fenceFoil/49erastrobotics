@@ -36,7 +36,13 @@
 			"defaultMin": 0,
 			"defaultMax": 3,
 			"defaultValue": 1.5
-		}, 
+		},
+		{
+			"variable": "compAnim.inaccuracy",
+			"defaultMin": -1,
+			"defaultMax": 1,
+			"defaultValue": 0 
+		},
 		{
 			"variable": "destAngle",
 			"defaultMin": 0,
@@ -72,13 +78,13 @@
 			"defaultMin": 0,
 			"defaultMax": 1,
 			"defaultValue": 0.4
-		},/*
+		},
 		{
 			"variable": "pathfinding.angleWeight",
 			"defaultMin": 0,
 			"defaultMax": 100,
 			"defaultValue": 1
-		},*/
+		},
 		{
 			"variable": "pathfinding.maxMoves",
 			"defaultMin": 0,
@@ -95,7 +101,13 @@
 			"variable": "pathfinding.tooShortThreshold",
 			"defaultMin": 0,
 			"defaultMax": 5,
-			"defaultValue": 1.5
+			"defaultValue": 1
+		},
+		{
+			"variable": "pathfinding.angleErrorWeight",
+			"defaultMin":0,
+			"defaultMax":1000,
+			"defaultValue": 100
 		},
 		{
 			"variable": "movement.tolerance",
@@ -107,7 +119,7 @@
 			"variable": "movement.segLength",
 			"defaultMin": 0.001,
 			"defaultMax": 1,
-			"defaultValue": 0.2
+			"defaultValue": 0.1
 		}
 	]
 }
