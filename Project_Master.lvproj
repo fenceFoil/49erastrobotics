@@ -102,7 +102,9 @@
 		<Item Name="Movement Control System.vi" Type="VI" URL="../nav2017/Movement Control System.vi"/>
 		<Item Name="Nav Testing 2.0.vi" Type="VI" URL="../nav2017/Nav Testing 2.0.vi"/>
 		<Item Name="Nav_testing_variables_LV.lvlib" Type="Library" URL="../nav2017/Nav_testing_variables_LV.lvlib"/>
+		<Item Name="PointDistance.vi" Type="VI" URL="../Computer_VIs/PointDistance.vi"/>
 		<Item Name="Stop Robot Button.vi" Type="VI" URL="../Computer_VIs/Stop Robot Button.vi"/>
+		<Item Name="VectorToPoint.vi" Type="VI" URL="../Computer_VIs/VectorToPoint.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Acquire Input Data.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Acquire Input Data.vi"/>
@@ -131,6 +133,7 @@
 				<Item Name="LVBoundsTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVBoundsTypeDef.ctl"/>
 				<Item Name="mouseAcquire.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/mouseAcquire.vi"/>
 				<Item Name="Move Pen.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Move Pen.vi"/>
+				<Item Name="NI_AAL_Angle.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AAL_Angle.lvlib"/>
 				<Item Name="Read PNG File.vi" Type="VI" URL="/&lt;vilib&gt;/picture/png.llb/Read PNG File.vi"/>
 				<Item Name="Set Pen State.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Set Pen State.vi"/>
 			</Item>

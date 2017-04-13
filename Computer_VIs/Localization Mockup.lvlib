@@ -22,6 +22,7 @@
 	<Item Name="Hypotenuse.vi" Type="VI" URL="../Hypotenuse.vi"/>
 	<Item Name="Localization Mockup.vi" Type="VI" URL="../Localization Mockup.vi"/>
 	<Item Name="MetersToPixels.vi" Type="VI" URL="../MetersToPixels.vi"/>
+	<Item Name="MovementModel.vi" Type="VI" URL="../MovementModel.vi"/>
 	<Item Name="PixelsToMeters.vi" Type="VI" URL="../PixelsToMeters.vi"/>
 	<Item Name="RobotConstants.vi" Type="VI" URL="../RobotConstants.vi"/>
 	<Item Name="Untitled 1.vi" Type="VI" URL="../Untitled 1.vi"/>
