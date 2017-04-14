@@ -16,4 +16,5 @@
 	<Item Name="Pathfind.vi" Type="VI" URL="../Pathfind.vi"/>
 	<Item Name="PathfindingSettings.ctl" Type="VI" URL="../PathfindingSettings.ctl"/>
 	<Item Name="RobotConstants.vi" Type="VI" URL="../RobotConstants.vi"/>
+	<Item Name="Vector.ctl" Type="VI" URL="../Vector.ctl"/>
 </Library>
