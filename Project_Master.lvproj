@@ -102,9 +102,8 @@
 		<Item Name="Movement Control System.vi" Type="VI" URL="../nav2017/Movement Control System.vi"/>
 		<Item Name="Nav Testing 2.0.vi" Type="VI" URL="../nav2017/Nav Testing 2.0.vi"/>
 		<Item Name="Nav_testing_variables_LV.lvlib" Type="Library" URL="../nav2017/Nav_testing_variables_LV.lvlib"/>
-		<Item Name="PointDistance.vi" Type="VI" URL="../Computer_VIs/PointDistance.vi"/>
+		<Item Name="Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017.lvlib"/>
 		<Item Name="Stop Robot Button.vi" Type="VI" URL="../Computer_VIs/Stop Robot Button.vi"/>
-		<Item Name="VectorToPoint.vi" Type="VI" URL="../Computer_VIs/VectorToPoint.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Acquire Input Data.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Acquire Input Data.vi"/>
