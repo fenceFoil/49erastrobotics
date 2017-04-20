@@ -9,6 +9,7 @@
 	<Item Name="Move.ctl" Type="VI" URL="../Move.ctl"/>
 	<Item Name="MovementModel.vi" Type="VI" URL="../MovementModel.vi"/>
 	<Item Name="MovementSettings.ctl" Type="VI" URL="../MovementSettings.ctl"/>
+	<Item Name="Navigate.vi" Type="VI" URL="../Navigate.vi"/>
 	<Item Name="Navigation2017-SubVIs.lvlib" Type="Library" URL="../Navigation2017-SubVIs.lvlib"/>
 	<Item Name="Navigation2017-util.lvlib" Type="Library" URL="../Navigation2017-util.lvlib"/>
 	<Item Name="Path.ctl" Type="VI" URL="../Path.ctl"/>

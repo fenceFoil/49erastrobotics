@@ -61,6 +61,7 @@
 	<Property Name="varPersistentID:{CC9FF91B-2D64-4D4B-9A60-FA9BEBDDEAC8}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Angle</Property>
 	<Property Name="varPersistentID:{CEBF537D-F37C-4CD1-A914-F6BF25FE1917}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Auto_Manual</Property>
 	<Property Name="varPersistentID:{CEC4D716-F467-4CA8-B671-3DC46F6FC941}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Position X</Property>
+	<Property Name="varPersistentID:{CF469FB0-716E-4AEE-B2B9-2FB909D8A8A5}" Type="Ref">/My Computer/Overlord2017.lvlib/LocalizationStatus</Property>
 	<Property Name="varPersistentID:{D094820B-D8E3-4CC4-820A-070AC837D807}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/All Stop</Property>
 	<Property Name="varPersistentID:{D69C4E0C-BE30-40C1-8B21-ED0362E7A576}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_Y_array</Property>
 	<Property Name="varPersistentID:{E11BDECB-DB9B-4A62-AB61-995DC2CA1CC4}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Position Y</Property>
@@ -94,15 +95,13 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
-		<Item Name="res" Type="Folder">
-			<Item Name="sand-texture1.png" Type="Document" URL="../Computer_VIs/res/sand-texture1.png"/>
-		</Item>
 		<Item Name="Joystick_Control_r1.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r1.vi"/>
 		<Item Name="Localization Mockup.lvlib" Type="Library" URL="../Computer_VIs/Localization Mockup.lvlib"/>
 		<Item Name="Movement Control System.vi" Type="VI" URL="../nav2017/Movement Control System.vi"/>
 		<Item Name="Nav Testing 2.0.vi" Type="VI" URL="../nav2017/Nav Testing 2.0.vi"/>
 		<Item Name="Nav_testing_variables_LV.lvlib" Type="Library" URL="../nav2017/Nav_testing_variables_LV.lvlib"/>
 		<Item Name="Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017.lvlib"/>
+		<Item Name="Overlord2017.lvlib" Type="Library" URL="../Computer_VIs/Overlord2017.lvlib"/>
 		<Item Name="Stop Robot Button.vi" Type="VI" URL="../Computer_VIs/Stop Robot Button.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
