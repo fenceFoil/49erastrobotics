@@ -42,6 +42,7 @@
 	<Property Name="varPersistentID:{865E9AC8-AD49-418F-8F5F-6CE5D58E348B}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Left Duty Cycle</Property>
 	<Property Name="varPersistentID:{86FC34F1-2CE5-419D-A801-9EFDD4705588}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Dig</Property>
 	<Property Name="varPersistentID:{88019964-4E7A-47AA-B633-877C3B776F5D}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Joystick Direction</Property>
+	<Property Name="varPersistentID:{8BD016DF-B4A0-4DE6-8EC5-ACA180C75C55}" Type="Ref">/My Computer/Overlord2017.lvlib/Overlord_Variables.lvlib/CurrMiningRun</Property>
 	<Property Name="varPersistentID:{8D51C155-E041-4878-A870-069F26025B42}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/myRIO Accel x</Property>
 	<Property Name="varPersistentID:{92A60328-5629-494A-AA8A-DF86187CC7F1}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Orientation complete</Property>
 	<Property Name="varPersistentID:{94E1FAAA-B2FC-400A-9C51-C1338365DDAD}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Right Servo Angle_Image</Property>
@@ -74,6 +75,7 @@
 	<Property Name="varPersistentID:{E7E7F922-534D-4761-B981-BA4FFFC2FC9D}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Right Servo Angle_Current</Property>
 	<Property Name="varPersistentID:{E88EACAC-885C-4C86-88F6-ABCC330CD677}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum Accel z</Property>
 	<Property Name="varPersistentID:{EA2087F2-4756-4A19-ADA6-6687564957BB}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Start Position X</Property>
+	<Property Name="varPersistentID:{F00BF870-E0A9-483A-8B66-ADA0151BDF6D}" Type="Ref">/My Computer/Overlord2017.lvlib/Overlord_Variables.lvlib/CurrStage</Property>
 	<Property Name="varPersistentID:{F2EF6CD7-646A-447A-B052-0E9381E4722E}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Manual Drum</Property>
 	<Property Name="varPersistentID:{F3CF621B-3A6A-4541-BD2D-DC0F3B79939C}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Scale - Right</Property>
 	<Property Name="varPersistentID:{F6069745-149B-4850-B620-6A1065BF7BCB}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/loc_theta</Property>
