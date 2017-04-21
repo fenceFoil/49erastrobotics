@@ -107,6 +107,7 @@
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="Joystick_Control_r1.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r1.vi"/>
 		<Item Name="Localization Mockup.lvlib" Type="Library" URL="../Computer_VIs/Localization Mockup.lvlib"/>
+		<Item Name="MissionControl2017.lvlib" Type="Library" URL="../Computer_VIs/MissionControl2017.lvlib"/>
 		<Item Name="MovementControl2017.lvlib" Type="Library" URL="../Computer_VIs/MovementControl2017.lvlib"/>
 		<Item Name="Nav Testing 2.0.vi" Type="VI" URL="../nav2017/Nav Testing 2.0.vi"/>
 		<Item Name="Nav_testing_variables_LV.lvlib" Type="Library" URL="../nav2017/Nav_testing_variables_LV.lvlib"/>

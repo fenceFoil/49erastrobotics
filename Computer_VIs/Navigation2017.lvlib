@@ -6,16 +6,18 @@
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
 	<Property Name="NI.SortType" Type="Int">1</Property>
 	<Item Name="IntermediatePositionGrids.ctl" Type="VI" URL="../IntermediatePositionGrids.ctl"/>
+	<Item Name="ModelMovement.vi" Type="VI" URL="../ModelMovement.vi"/>
 	<Item Name="Move.ctl" Type="VI" URL="../Move.ctl"/>
-	<Item Name="MovementModel.vi" Type="VI" URL="../MovementModel.vi"/>
 	<Item Name="MovementSettings.ctl" Type="VI" URL="../MovementSettings.ctl"/>
 	<Item Name="Navigate.vi" Type="VI" URL="../Navigate.vi"/>
+	<Item Name="Navigation2017-NavSettings.lvlib" Type="Library" URL="../Navigation2017-NavSettings.lvlib"/>
+	<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Navigation2017-NavStateVariables.lvlib"/>
 	<Item Name="Navigation2017-SubVIs.lvlib" Type="Library" URL="../Navigation2017-SubVIs.lvlib"/>
 	<Item Name="Navigation2017-util.lvlib" Type="Library" URL="../Navigation2017-util.lvlib"/>
-	<Item Name="Path.ctl" Type="VI" URL="../Path.ctl"/>
 	<Item Name="PathCostWeights.ctl" Type="VI" URL="../PathCostWeights.ctl"/>
 	<Item Name="Pathfind.vi" Type="VI" URL="../Pathfind.vi"/>
 	<Item Name="PathfindingSettings.ctl" Type="VI" URL="../PathfindingSettings.ctl"/>
+	<Item Name="PathOfMoves.ctl" Type="VI" URL="../PathOfMoves.ctl"/>
 	<Item Name="RobotConstants.vi" Type="VI" URL="../RobotConstants.vi"/>
 	<Item Name="Vector.ctl" Type="VI" URL="../Vector.ctl"/>
 </Library>
