@@ -69,7 +69,7 @@
 	<Property Name="varPersistentID:{CCC67DFA-F388-461C-9AE0-50349D476257}" Type="Ref">/My Computer/Navigation2017.lvlib/Navigation2017-NavStateVariables.lvlib/DestinationPoint</Property>
 	<Property Name="varPersistentID:{CEBF537D-F37C-4CD1-A914-F6BF25FE1917}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Auto_Manual</Property>
 	<Property Name="varPersistentID:{CEC4D716-F467-4CA8-B671-3DC46F6FC941}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Position X</Property>
-	<Property Name="varPersistentID:{CF469FB0-716E-4AEE-B2B9-2FB909D8A8A5}" Type="Ref">/My Computer/Overlord2017.lvlib/LocalizationStatus</Property>
+	<Property Name="varPersistentID:{CF469FB0-716E-4AEE-B2B9-2FB909D8A8A5}" Type="Ref">/My Computer/Navigation2017.lvlib/LocalizationStatus</Property>
 	<Property Name="varPersistentID:{D094820B-D8E3-4CC4-820A-070AC837D807}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/All Stop</Property>
 	<Property Name="varPersistentID:{D69C4E0C-BE30-40C1-8B21-ED0362E7A576}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_Y_array</Property>
 	<Property Name="varPersistentID:{DDDD9E3C-E455-4EE9-85E0-07BBB82A326D}" Type="Ref">/My Computer/Navigation2017.lvlib/Navigation2017-NavStateVariables.lvlib/UsedDesperation</Property>
@@ -96,6 +96,7 @@
 		<Property Name="IOScan.Priority" Type="UInt">9</Property>
 		<Property Name="IOScan.ReportModeConflict" Type="Bool">true</Property>
 		<Property Name="IOScan.StartEngineOnDeploy" Type="Bool">false</Property>
+		<Property Name="NI.SortType" Type="Int">3</Property>
 		<Property Name="server.app.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.control.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="server.tcp.enabled" Type="Bool">false</Property>
@@ -105,15 +106,18 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
-		<Item Name="Joystick_Control_r1.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r1.vi"/>
+		<Item Name="Joystick_Control_r1_2016.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r1_2016.vi"/>
 		<Item Name="Localization Mockup.lvlib" Type="Library" URL="../Computer_VIs/Localization Mockup.lvlib"/>
 		<Item Name="MissionControl2017.lvlib" Type="Library" URL="../Computer_VIs/MissionControl2017.lvlib"/>
-		<Item Name="MovementControl2017.lvlib" Type="Library" URL="../Computer_VIs/MovementControl2017.lvlib"/>
 		<Item Name="Nav Testing 2.0.vi" Type="VI" URL="../nav2017/Nav Testing 2.0.vi"/>
 		<Item Name="Nav_testing_variables_LV.lvlib" Type="Library" URL="../nav2017/Nav_testing_variables_LV.lvlib"/>
 		<Item Name="Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017.lvlib"/>
 		<Item Name="Overlord2017.lvlib" Type="Library" URL="../Computer_VIs/Overlord2017.lvlib"/>
 		<Item Name="Stop Robot Button.vi" Type="VI" URL="../Computer_VIs/Stop Robot Button.vi"/>
+		<Item Name="SetWheelMotorPWM.vi" Type="VI" URL="../Computer_VIs/SetWheelMotorPWM.vi"/>
+		<Item Name="GetCurrentLocalization.vi" Type="VI" URL="../Computer_VIs/GetCurrentLocalization.vi"/>
+		<Item Name="LocalizationStatus.ctl" Type="VI" URL="../Computer_VIs/LocalizationStatus.ctl"/>
+		<Item Name="WaitForNewLocalization.vi" Type="VI" URL="../Computer_VIs/WaitForNewLocalization.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Acquire Input Data.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Acquire Input Data.vi"/>

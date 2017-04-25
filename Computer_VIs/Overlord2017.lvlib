@@ -4,25 +4,7 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">352354304</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
-	<Item Name="GetCurrentLocalization.vi" Type="VI" URL="../GetCurrentLocalization.vi"/>
-	<Item Name="LocalizationStatus" Type="Variable">
-		<Property Name="featurePacks" Type="Str">Network</Property>
-		<Property Name="Network:BuffSize" Type="Str">50</Property>
-		<Property Name="Network:ElemSize" Type="Str">1</Property>
-		<Property Name="Network:PointsPerWaveform" Type="Str">1</Property>
-		<Property Name="Network:SingleWriter" Type="Str">False</Property>
-		<Property Name="Network:UseBinding" Type="Str">False</Property>
-		<Property Name="Network:UseBuffering" Type="Str">True</Property>
-		<Property Name="numTypedefs" Type="UInt">1</Property>
-		<Property Name="type" Type="Str">Network</Property>
-		<Property Name="typedefName1" Type="Str">Overlord2017.lvlib:LocalizationStatus.ctl</Property>
-		<Property Name="typedefPath1" Type="PathRel">../LocalizationStatus.ctl</Property>
-		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!$(QQ!!!"5!A!!!!!!'!!&gt;!#A!"?!!(1!I!!8E!#U!+!!6B&lt;G&gt;M:1!+1#%&amp;&gt;G&amp;M;71!&amp;5!+!!^M98.U68"E982F:&amp;2J&lt;75!7A$RV2\LJ!!!!!)34X:F=GRP=G1S-$%X,GRW&lt;'FC&amp;ERP9W&amp;M;8JB&gt;'FP&lt;F.U982V=SZD&gt;'Q!+%"1!!5!!!!"!!)!!Q!%%URP9W&amp;M;8JB&gt;'FP&lt;C"4&gt;'&amp;U&gt;8-!!1!&amp;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
-	</Item>
-	<Item Name="LocalizationStatus.ctl" Type="VI" URL="../LocalizationStatus.ctl"/>
 	<Item Name="MineOrDumpBlocking.vi" Type="VI" URL="../MineOrDumpBlocking.vi"/>
 	<Item Name="Overlord.vi" Type="VI" URL="../Overlord.vi"/>
 	<Item Name="Overlord_Variables.lvlib" Type="Library" URL="../Overlord_Variables.lvlib"/>
-	<Item Name="SetMotorSpeeds.vi" Type="VI" URL="../SetMotorSpeeds.vi"/>
-	<Item Name="WaitForNewLocalization.vi" Type="VI" URL="../WaitForNewLocalization.vi"/>
 </Library>
