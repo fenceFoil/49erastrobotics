@@ -14,6 +14,7 @@
 	<Property Name="varPersistentID:{29012277-538E-46A1-A607-ADDB2DBF424C}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Stop</Property>
 	<Property Name="varPersistentID:{334E4111-E55A-40D4-AF6F-4BB3F1BCB5F3}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Goal Position Angle</Property>
 	<Property Name="varPersistentID:{33FB4014-29A9-4F72-9C4A-4E59D22D41EF}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/myRIO Accel y</Property>
+	<Property Name="varPersistentID:{342274C2-9835-4F2F-8BD8-E83612D46749}" Type="Ref">/My Computer/MissionControl2017.lvlib/DEBUG_LOCALIZATION</Property>
 	<Property Name="varPersistentID:{3449D243-C6C3-460B-8878-A1F404F1F933}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Dumping Complete</Property>
 	<Property Name="varPersistentID:{347169E2-B4E9-4327-A977-AC276ED1A767}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum Accel x</Property>
 	<Property Name="varPersistentID:{39B8D874-1325-4472-A9C1-6594571F61F1}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_X_array</Property>
@@ -71,8 +72,10 @@
 	<Property Name="varPersistentID:{CEC4D716-F467-4CA8-B671-3DC46F6FC941}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Position X</Property>
 	<Property Name="varPersistentID:{CF469FB0-716E-4AEE-B2B9-2FB909D8A8A5}" Type="Ref">/My Computer/Navigation2017.lvlib/LocalizationStatus</Property>
 	<Property Name="varPersistentID:{D094820B-D8E3-4CC4-820A-070AC837D807}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/All Stop</Property>
+	<Property Name="varPersistentID:{D51E5E33-BBD4-41A5-B149-CD6EEABF754C}" Type="Ref">/My Computer/MissionControl2017.lvlib/DEBUG_BUCKET</Property>
 	<Property Name="varPersistentID:{D69C4E0C-BE30-40C1-8B21-ED0362E7A576}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_Y_array</Property>
 	<Property Name="varPersistentID:{DDDD9E3C-E455-4EE9-85E0-07BBB82A326D}" Type="Ref">/My Computer/Navigation2017.lvlib/Navigation2017-NavStateVariables.lvlib/UsedDesperation</Property>
+	<Property Name="varPersistentID:{DF5645C1-CA20-4E6E-B807-2CC0D922275A}" Type="Ref">/My Computer/MissionControl2017.lvlib/DEBUG_WHEEL_MOTORS</Property>
 	<Property Name="varPersistentID:{E11BDECB-DB9B-4A62-AB61-995DC2CA1CC4}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Position Y</Property>
 	<Property Name="varPersistentID:{E1E1940A-51CF-4D7C-BFB2-9077A69CB6BD}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/myRIO Accel z</Property>
 	<Property Name="varPersistentID:{E24D799C-9914-4A98-9A49-5BE0756F4F09}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Scoop Position</Property>

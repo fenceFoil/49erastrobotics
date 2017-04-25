@@ -19,11 +19,11 @@
 		<Property Name="typedefPath1" Type="PathRel">../LocalizationStatus.ctl</Property>
 		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!#UM!!!!"5!A!!!!!!'!!&gt;!#A!"?!!(1!I!!8E!#U!+!!6B&lt;G&gt;M:1!+1#%&amp;&gt;G&amp;M;71!&amp;5!+!!^M98.U68"E982F:&amp;2J&lt;75!2Q$RV2\LJ!!!!!%74'^D97RJ?G&amp;U;7^O5X2B&gt;(6T,G.U&lt;!!I1&amp;!!"1!!!!%!!A!$!!144'^D97RJ?G&amp;U;7^O)&amp;.U982V=Q!"!!5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
 	</Item>
+	<Item Name="LurchTowardsPoint.vi" Type="VI" URL="../LurchTowardsPoint.vi"/>
 	<Item Name="ModelMovement.vi" Type="VI" URL="../ModelMovement.vi"/>
 	<Item Name="Move.ctl" Type="VI" URL="../Move.ctl"/>
 	<Item Name="MovementControl2017.lvlib" Type="Library" URL="../MovementControl2017.lvlib"/>
 	<Item Name="MovementSettings.ctl" Type="VI" URL="../MovementSettings.ctl"/>
-	<Item Name="MoveTowardsPoint.vi" Type="VI" URL="../MoveTowardsPoint.vi"/>
 	<Item Name="Navigate.vi" Type="VI" URL="../Navigate.vi"/>
 	<Item Name="NavigateTryingToKeepPath.vi" Type="VI" URL="../NavigateTryingToKeepPath.vi"/>
 	<Item Name="Navigation2017-NavSettings.lvlib" Type="Library" URL="../Navigation2017-NavSettings.lvlib"/>
