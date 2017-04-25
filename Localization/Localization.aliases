@@ -1,0 +1,15 @@
+[jrocchio-myRIO]
+jrocchio-myRIO = "192.168.1.80"
+
+[Left-Camera]
+Left-Camera = "192.168.1.33"
+
+[My Computer]
+My Computer = "10.38.115.173"
+
+[Right-Camera]
+Right-Camera = "192.168.1.81"
+
+[RT myRIO Target]
+RT myRIO Target = "192.168.1.81"
+
