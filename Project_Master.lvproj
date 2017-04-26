@@ -14,7 +14,7 @@
 	<Property Name="varPersistentID:{29012277-538E-46A1-A607-ADDB2DBF424C}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Stop</Property>
 	<Property Name="varPersistentID:{334E4111-E55A-40D4-AF6F-4BB3F1BCB5F3}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Goal Position Angle</Property>
 	<Property Name="varPersistentID:{33FB4014-29A9-4F72-9C4A-4E59D22D41EF}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/myRIO Accel y</Property>
-	<Property Name="varPersistentID:{342274C2-9835-4F2F-8BD8-E83612D46749}" Type="Ref">/My Computer/MissionControl2017.lvlib/DEBUG_LOCALIZATION</Property>
+	<Property Name="varPersistentID:{342274C2-9835-4F2F-8BD8-E83612D46749}" Type="Ref">/My Computer/MissionControl2017.lvlib/DEBUG_LOCALIZATION_DIALOG</Property>
 	<Property Name="varPersistentID:{3449D243-C6C3-460B-8878-A1F404F1F933}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Dumping Complete</Property>
 	<Property Name="varPersistentID:{347169E2-B4E9-4327-A977-AC276ED1A767}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum Accel x</Property>
 	<Property Name="varPersistentID:{39B8D874-1325-4472-A9C1-6594571F61F1}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_X_array</Property>
@@ -81,6 +81,7 @@
 	<Property Name="varPersistentID:{E24D799C-9914-4A98-9A49-5BE0756F4F09}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Scoop Position</Property>
 	<Property Name="varPersistentID:{E2F97D51-53DE-4542-958D-7650B7D6D6A7}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Jammed?</Property>
 	<Property Name="varPersistentID:{E3DBCDFD-E31F-492E-9D66-FD0346E92909}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Start Position Y</Property>
+	<Property Name="varPersistentID:{E3DF6948-40B1-4E6C-B83E-88FD5F708A46}" Type="Ref">/My Computer/Navigation2017.lvlib/Navigation2017-NavStateVariables.lvlib/CurrPath</Property>
 	<Property Name="varPersistentID:{E472274D-9648-4533-AABE-071DCBA398DC}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Mine or Dump</Property>
 	<Property Name="varPersistentID:{E5D6A37B-904B-4CB3-B744-CD6449C003E4}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Last Robot Position</Property>
 	<Property Name="varPersistentID:{E7E7F922-534D-4761-B981-BA4FFFC2FC9D}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Right Servo Angle_Current</Property>
@@ -121,6 +122,8 @@
 		<Item Name="GetCurrentLocalization.vi" Type="VI" URL="../Computer_VIs/GetCurrentLocalization.vi"/>
 		<Item Name="LocalizationStatus.ctl" Type="VI" URL="../Computer_VIs/LocalizationStatus.ctl"/>
 		<Item Name="WaitForNewLocalization.vi" Type="VI" URL="../Computer_VIs/WaitForNewLocalization.vi"/>
+		<Item Name="DrawBot.vi" Type="VI" URL="../Computer_VIs/DrawBot.vi"/>
+		<Item Name="DrawArrow.vi" Type="VI" URL="../Computer_VIs/DrawArrow.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Acquire Input Data.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Acquire Input Data.vi"/>
@@ -152,6 +155,7 @@
 				<Item Name="NI_AAL_Angle.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AAL_Angle.lvlib"/>
 				<Item Name="Read PNG File.vi" Type="VI" URL="/&lt;vilib&gt;/picture/png.llb/Read PNG File.vi"/>
 				<Item Name="Set Pen State.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Set Pen State.vi"/>
+				<Item Name="LVPoint32TypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVPoint32TypeDef.ctl"/>
 			</Item>
 			<Item Name="lvinput.dll" Type="Document" URL="/&lt;resource&gt;/lvinput.dll"/>
 		</Item>

@@ -25,7 +25,6 @@
 	<Item Name="MovementControl2017.lvlib" Type="Library" URL="../MovementControl2017.lvlib"/>
 	<Item Name="MovementSettings.ctl" Type="VI" URL="../MovementSettings.ctl"/>
 	<Item Name="Navigate.vi" Type="VI" URL="../Navigate.vi"/>
-	<Item Name="NavigateTryingToKeepPath.vi" Type="VI" URL="../NavigateTryingToKeepPath.vi"/>
 	<Item Name="Navigation2017-NavSettings.lvlib" Type="Library" URL="../Navigation2017-NavSettings.lvlib"/>
 	<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Navigation2017-NavStateVariables.lvlib"/>
 	<Item Name="Navigation2017-SubVIs.lvlib" Type="Library" URL="../Navigation2017-SubVIs.lvlib"/>

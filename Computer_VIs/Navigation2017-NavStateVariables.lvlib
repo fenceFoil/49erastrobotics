@@ -18,6 +18,22 @@
 		<Property Name="type" Type="Str">Network</Property>
 		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!!I*!!!!"5!A!!!!!!"!""!-0````]'5X2S;7ZH!!!"!!!!!!!!!!!!!!!!!!!</Property>
 	</Item>
+	<Item Name="CurrPath" Type="Variable">
+		<Property Name="featurePacks" Type="Str">Network</Property>
+		<Property Name="Network:BuffSize" Type="Str">50</Property>
+		<Property Name="Network:ElemSize" Type="Str">1</Property>
+		<Property Name="Network:PointsPerWaveform" Type="Str">1</Property>
+		<Property Name="Network:SingleWriter" Type="Str">False</Property>
+		<Property Name="Network:UseBinding" Type="Str">False</Property>
+		<Property Name="Network:UseBuffering" Type="Str">True</Property>
+		<Property Name="numTypedefs" Type="UInt">2</Property>
+		<Property Name="type" Type="Str">Network</Property>
+		<Property Name="typedefName1" Type="Str">Navigation2017.lvlib:Move.ctl</Property>
+		<Property Name="typedefName2" Type="Str">Navigation2017.lvlib:PathOfMoves.ctl</Property>
+		<Property Name="typedefPath1" Type="PathRel">../Move.ctl</Property>
+		<Property Name="typedefPath2" Type="PathRel">../PathOfMoves.ctl</Property>
+		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!'VM1%!!"5!A!!!!!!1!"&gt;!#A!12'6T&gt;#""&lt;G&gt;M:3"&amp;=H*P=A!!'E!B&amp;52F=X1A17ZH&lt;'5A1W^O=WFE:8*F:!!51#%/2'FE)&amp;*F97.I)%2F=X1!!""!)1N%;71A1W^M&lt;'FE:1!B1!I!'F.V&lt;3"P:C""&lt;G&gt;M:3"$;'&amp;O:W6T)#BS971J!!!61!I!$UVP&gt;G5A4'6O:X2I)#BN+1!41!I!$5.M&lt;X.F&lt;G6T=S"4&gt;7U!"U!+!!&amp;Y!!&gt;!#A!"?1!,1!I!"7&amp;O:WRF!"2!5!!$!!=!#!!*"U.M&gt;8.U:8)!)E"!!!(`````!!I55'^T;82J&lt;WZT)%&amp;M&lt;WZH)%VP&gt;G5!!!Z!)1F.&lt;X:F:#"'&gt;W1!2!$RV2=$&lt;A!!!!)54G&amp;W;7&gt;B&gt;'FP&lt;D)Q-4=O&lt;(:M;7))47^W:3ZD&gt;'Q!(E"1!!=!!A!$!!1!"1!'!!M!$!2.&lt;X:F!!!31%!!!@````]!$16.&lt;X:F=Q"$!0(6&amp;P[7!!!!!B2/98:J:W&amp;U;7^O-D!R.SZM&gt;GRJ9A^1982I4W:.&lt;X:F=SZD&gt;'Q!&amp;E"1!!-!!!!"!!Y%5'&amp;U;!!!!1!0!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
+	</Item>
 	<Item Name="DestinationPoint" Type="Variable">
 		<Property Name="featurePacks" Type="Str">Network</Property>
 		<Property Name="Network:BuffSize" Type="Str">50</Property>
