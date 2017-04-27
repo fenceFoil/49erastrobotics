@@ -5,7 +5,7 @@ jrocchio-myRIO = "192.168.1.80"
 Left-Camera = "192.168.1.33"
 
 [My Computer]
-My Computer = "10.38.115.173"
+My Computer = "10.38.108.214"
 
 [Right-Camera]
 Right-Camera = "192.168.1.81"
