@@ -5,25 +5,12 @@
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
 	<Item Name="IntermediatePositionGrids.ctl" Type="VI" URL="../IntermediatePositionGrids.ctl"/>
-	<Item Name="LocalizationStatus" Type="Variable">
-		<Property Name="featurePacks" Type="Str">Network</Property>
-		<Property Name="Network:BuffSize" Type="Str">50</Property>
-		<Property Name="Network:ElemSize" Type="Str">1</Property>
-		<Property Name="Network:PointsPerWaveform" Type="Str">1</Property>
-		<Property Name="Network:SingleWriter" Type="Str">False</Property>
-		<Property Name="Network:UseBinding" Type="Str">False</Property>
-		<Property Name="Network:UseBuffering" Type="Str">True</Property>
-		<Property Name="numTypedefs" Type="UInt">1</Property>
-		<Property Name="type" Type="Str">Network</Property>
-		<Property Name="typedefName1" Type="Str">LocalizationStatus.ctl</Property>
-		<Property Name="typedefPath1" Type="PathRel">../LocalizationStatus.ctl</Property>
-		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!#UM!!!!"5!A!!!!!!'!!&gt;!#A!"?!!(1!I!!8E!#U!+!!6B&lt;G&gt;M:1!+1#%&amp;&gt;G&amp;M;71!&amp;5!+!!^M98.U68"E982F:&amp;2J&lt;75!2Q$RV2\LJ!!!!!%74'^D97RJ?G&amp;U;7^O5X2B&gt;(6T,G.U&lt;!!I1&amp;!!"1!!!!%!!A!$!!144'^D97RJ?G&amp;U;7^O)&amp;.U982V=Q!"!!5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
-	</Item>
 	<Item Name="LurchTowardsPoint.vi" Type="VI" URL="../LurchTowardsPoint.vi"/>
 	<Item Name="ModelMovement.vi" Type="VI" URL="../ModelMovement.vi"/>
 	<Item Name="Move.ctl" Type="VI" URL="../Move.ctl"/>
 	<Item Name="MovementControl2017.lvlib" Type="Library" URL="../MovementControl2017.lvlib"/>
 	<Item Name="MovementSettings.ctl" Type="VI" URL="../MovementSettings.ctl"/>
+	<Item Name="Navigate - copy.vi" Type="VI" URL="../Navigate - copy.vi"/>
 	<Item Name="Navigate.vi" Type="VI" URL="../Navigate.vi"/>
 	<Item Name="Navigation2017-NavSettings.lvlib" Type="Library" URL="../Navigation2017-NavSettings.lvlib"/>
 	<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Navigation2017-NavStateVariables.lvlib"/>

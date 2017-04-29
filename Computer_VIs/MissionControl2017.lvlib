@@ -4,34 +4,12 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">352354304</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
-	<Item Name="DEBUG_BUCKET" Type="Variable">
-		<Property Name="featurePacks" Type="Str">Network</Property>
-		<Property Name="Network:BuffSize" Type="Str">50</Property>
-		<Property Name="Network:UseBinding" Type="Str">False</Property>
-		<Property Name="Network:UseBuffering" Type="Str">True</Property>
-		<Property Name="numTypedefs" Type="UInt">0</Property>
-		<Property Name="type" Type="Str">Network</Property>
-		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!!B(1!!!"5!A!!!!!!"!!R!)1&gt;#&lt;W^M:7&amp;O!!%!!!!!!!!!!!!!!!</Property>
-	</Item>
-	<Item Name="DEBUG_LOCALIZATION_DIALOG" Type="Variable">
-		<Property Name="featurePacks" Type="Str">Initial Value,Network</Property>
-		<Property Name="Initial Value:Value" Type="Str">False</Property>
-		<Property Name="Network:BuffSize" Type="Str">50</Property>
-		<Property Name="Network:UseBinding" Type="Str">False</Property>
-		<Property Name="Network:UseBuffering" Type="Str">True</Property>
-		<Property Name="numTypedefs" Type="UInt">0</Property>
-		<Property Name="type" Type="Str">Network</Property>
-		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!!B(1!!!"5!A!!!!!!"!!R!)1&gt;#&lt;W^M:7&amp;O!!%!!!!!!!!!!!!!!!</Property>
-	</Item>
-	<Item Name="DEBUG_WHEEL_MOTORS" Type="Variable">
-		<Property Name="featurePacks" Type="Str">Network</Property>
-		<Property Name="Network:BuffSize" Type="Str">50</Property>
-		<Property Name="Network:UseBinding" Type="Str">False</Property>
-		<Property Name="Network:UseBuffering" Type="Str">True</Property>
-		<Property Name="numTypedefs" Type="UInt">0</Property>
-		<Property Name="type" Type="Str">Network</Property>
-		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!!B(1!!!"5!A!!!!!!"!!R!)1&gt;#&lt;W^M:7&amp;O!!%!!!!!!!!!!!!!!!</Property>
-	</Item>
+	<Item Name="DrawArrow.vi" Type="VI" URL="../DrawArrow.vi"/>
+	<Item Name="DrawBot.vi" Type="VI" URL="../DrawBot.vi"/>
+	<Item Name="DrawMarker.vi" Type="VI" URL="../DrawMarker.vi"/>
+	<Item Name="DrawMove.vi" Type="VI" URL="../DrawMove.vi"/>
+	<Item Name="HSVtoRGB.vi" Type="VI" URL="../HSVtoRGB.vi"/>
+	<Item Name="MissionControl2017-DebugVariables.lvlib" Type="Library" URL="../MissionControl2017-DebugVariables.lvlib"/>
 	<Item Name="MissionControl2017.vi" Type="VI" URL="../MissionControl2017.vi"/>
 	<Item Name="MouseCoordsToMeters-MasterControl.vi" Type="VI" URL="../MouseCoordsToMeters-MasterControl.vi"/>
 	<Item Name="mToPixels-MissionControl.vi" Type="VI" URL="../mToPixels-MissionControl.vi"/>
