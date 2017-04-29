@@ -1,4 +1,5 @@
 [ProjectWindow_Data]
+ProjectExplorer.ClassicPosition[String] = "208,2570,1190,3190"
 
 [AB_Cache_{795F5DDD-01B2-4764-8C41-CF4E072FD541}]
 Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"
@@ -16,14 +17,6 @@ Cache_Path[Path] Line0002 = "_{C4FD2ED3-2669-43EB-9B41-920D59BD92B8}.txt"
 Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"
 Cache_Path[Path] Line0002 = "_{0CE26AD1-E5B1-4B80-9CAC-9796A963E9A3}.txt"
 
-[AB_Cache_{FB0A7C2F-0F27-4FB5-B19A-E3FA3A7D67A1}]
-Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"
-Cache_Path[Path] Line0002 = "_{FB0A7C2F-0F27-4FB5-B19A-E3FA3A7D67A1}.txt"
-
-[AB_Cache_{515937BD-5155-4C17-A2B5-E99BA6E0AA5A}]
-Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"
-Cache_Path[Path] Line0002 = "_{515937BD-5155-4C17-A2B5-E99BA6E0AA5A}.txt"
-
 [AB_Cache_{FD8D5C53-BB11-48E0-82CC-8775C6BA6C13}]
 Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"
 Cache_Path[Path] Line0002 = "_{FD8D5C53-BB11-48E0-82CC-8775C6BA6C13}.txt"
@@ -31,14 +24,6 @@ Cache_Path[Path] Line0002 = "_{FD8D5C53-BB11-48E0-82CC-8775C6BA6C13}.txt"
 [AB_Cache_{7C2C393E-AE09-466B-92D0-D862A2020213}]
 Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"
 Cache_Path[Path] Line0002 = "_{7C2C393E-AE09-466B-92D0-D862A2020213}.txt"
-
-[AB_Cache_{DD2A9B2C-F840-4C49-BD5A-47796941AA61}]
-Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"
-Cache_Path[Path] Line0002 = "_{DD2A9B2C-F840-4C49-BD5A-47796941AA61}.txt"
-
-[AB_Cache_{F0CB5B31-8E7A-491E-A0E0-D7194F632970}]
-Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"
-Cache_Path[Path] Line0002 = "_{F0CB5B31-8E7A-491E-A0E0-D7194F632970}.txt"
 
 [AB_Cache_{D64BC4A8-2C61-47F8-B7DC-D85B4B808F75}]
 Cache_Path[Path] Line0001 = "/C/Users/Astrobotics16/AppData/Local/Temp/AB_Cache"

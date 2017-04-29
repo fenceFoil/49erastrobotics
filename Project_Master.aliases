@@ -1,8 +1,14 @@
+[Left-Camera]
+Left-Camera = "192.168.1.33"
+
 [My Computer]
-My Computer = "192.168.1.113"
+My Computer = "10.38.108.214"
 
 [Navigation]
 Navigation = "172.22.11.2"
+
+[Right-Camera]
+Right-Camera = "192.168.1.81"
 
 [RT myRIO Target - Left Camera]
 RT myRIO Target - Left Camera = "192.168.1.33"
