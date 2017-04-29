@@ -10,6 +10,7 @@
 	<Item Name="Move.ctl" Type="VI" URL="../Move.ctl"/>
 	<Item Name="MovementControl2017.lvlib" Type="Library" URL="../MovementControl2017.lvlib"/>
 	<Item Name="MovementSettings.ctl" Type="VI" URL="../MovementSettings.ctl"/>
+	<Item Name="Navigate - copy.vi" Type="VI" URL="../Navigate - copy.vi"/>
 	<Item Name="Navigate.vi" Type="VI" URL="../Navigate.vi"/>
 	<Item Name="Navigation2017-NavSettings.lvlib" Type="Library" URL="../Navigation2017-NavSettings.lvlib"/>
 	<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Navigation2017-NavStateVariables.lvlib"/>
