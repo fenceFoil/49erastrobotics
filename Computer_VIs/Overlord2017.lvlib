@@ -6,5 +6,4 @@
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
 	<Item Name="MineOrDumpBlocking.vi" Type="VI" URL="../MineOrDumpBlocking.vi"/>
 	<Item Name="Overlord.vi" Type="VI" URL="../Overlord.vi"/>
-	<Item Name="Overlord_Variables.lvlib" Type="Library" URL="../Overlord_Variables.lvlib"/>
 </Library>

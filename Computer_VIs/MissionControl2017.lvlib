@@ -9,7 +9,6 @@
 	<Item Name="DrawMarker.vi" Type="VI" URL="../DrawMarker.vi"/>
 	<Item Name="DrawMove.vi" Type="VI" URL="../DrawMove.vi"/>
 	<Item Name="HSVtoRGB.vi" Type="VI" URL="../HSVtoRGB.vi"/>
-	<Item Name="MissionControl2017-DebugVariables.lvlib" Type="Library" URL="../MissionControl2017-DebugVariables.lvlib"/>
 	<Item Name="MissionControl2017.vi" Type="VI" URL="../MissionControl2017.vi"/>
 	<Item Name="MouseCoordsToMeters-MasterControl.vi" Type="VI" URL="../MouseCoordsToMeters-MasterControl.vi"/>
 	<Item Name="mToPixels-MissionControl.vi" Type="VI" URL="../mToPixels-MissionControl.vi"/>

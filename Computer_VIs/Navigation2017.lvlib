@@ -12,8 +12,6 @@
 	<Item Name="MovementSettings.ctl" Type="VI" URL="../MovementSettings.ctl"/>
 	<Item Name="Navigate - Refactored.vi" Type="VI" URL="../Navigate - Refactored.vi"/>
 	<Item Name="Navigate.vi" Type="VI" URL="../Navigate.vi"/>
-	<Item Name="Navigation2017-NavSettings.lvlib" Type="Library" URL="../Navigation2017-NavSettings.lvlib"/>
-	<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Navigation2017-NavStateVariables.lvlib"/>
 	<Item Name="Navigation2017-SubVIs.lvlib" Type="Library" URL="../Navigation2017-SubVIs.lvlib"/>
 	<Item Name="Navigation2017-util.lvlib" Type="Library" URL="../Navigation2017-util.lvlib"/>
 	<Item Name="PathCostWeights.ctl" Type="VI" URL="../PathCostWeights.ctl"/>
