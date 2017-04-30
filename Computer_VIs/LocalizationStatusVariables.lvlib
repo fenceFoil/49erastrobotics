@@ -6,6 +6,7 @@
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
 	<Item Name="LocalizationStatus" Type="Variable">
 		<Property Name="featurePacks" Type="Str">Network</Property>
+		<Property Name="Global:EnableTimestamp" Type="Str">False</Property>
 		<Property Name="Network:BuffSize" Type="Str">50</Property>
 		<Property Name="Network:ElemSize" Type="Str">1</Property>
 		<Property Name="Network:PointsPerWaveform" Type="Str">1</Property>
@@ -13,6 +14,7 @@
 		<Property Name="Network:UseBinding" Type="Str">False</Property>
 		<Property Name="Network:UseBuffering" Type="Str">True</Property>
 		<Property Name="numTypedefs" Type="UInt">1</Property>
+		<Property Name="Path" Type="Str">/Project_Master.lvproj/RT myRIO Target - Overlord/LocalizationStatusVariables.lvlib/</Property>
 		<Property Name="type" Type="Str">Network</Property>
 		<Property Name="typedefName1" Type="Str">LocalizationStatus.ctl</Property>
 		<Property Name="typedefPath1" Type="PathRel">../LocalizationStatus.ctl</Property>
