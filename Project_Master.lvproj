@@ -131,6 +131,7 @@
 		<Item Name="WaitForNewLocalization.vi" Type="VI" URL="../Computer_VIs/WaitForNewLocalization.vi"/>
 		<Item Name="LocalizationStatusVariables.lvlib" Type="Library" URL="../Computer_VIs/LocalizationStatusVariables.lvlib"/>
 		<Item Name="CombineMoveSegments.vi" Type="VI" URL="../CombineMoveSegments.vi"/>
+		<Item Name="mining_control.vi" Type="VI" URL="../Excavation_VIs/mining_control.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Acquire Input Data.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Acquire Input Data.vi"/>
