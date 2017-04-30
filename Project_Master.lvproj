@@ -45,6 +45,7 @@
 	<Property Name="varPersistentID:{78673029-EE61-44A9-90F4-DB8278D1ADD9}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Image Lock - R</Property>
 	<Property Name="varPersistentID:{7B2BE2C5-1771-4E07-9C91-51EA0903F861}" Type="Ref">/My Computer/Nav_testing_variables_LV.lvlib/cornerDist3</Property>
 	<Property Name="varPersistentID:{7EEE8310-A087-4A65-81A3-10912C727C07}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_Y_array</Property>
+	<Property Name="varPersistentID:{844E5046-42C8-42AC-80F7-E2BEEF1DCD8A}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavSettings.lvlib/Turning Radius (m) _(Goes into Dillons' Movement Control)</Property>
 	<Property Name="varPersistentID:{865E9AC8-AD49-418F-8F5F-6CE5D58E348B}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Left Duty Cycle</Property>
 	<Property Name="varPersistentID:{86FC34F1-2CE5-419D-A801-9EFDD4705588}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Dig</Property>
 	<Property Name="varPersistentID:{88019964-4E7A-47AA-B633-877C3B776F5D}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Joystick Direction</Property>
@@ -69,6 +70,7 @@
 	<Property Name="varPersistentID:{BACC9AC2-1EDE-4193-BCC9-2B830D3FFEF0}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch going down</Property>
 	<Property Name="varPersistentID:{C02B1DEA-4341-40D0-BCE6-E6DDBE5529B5}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Mining Complete</Property>
 	<Property Name="varPersistentID:{C2039A42-9A29-4E13-B6D2-D18FB8EE01BB}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Scoops</Property>
+	<Property Name="varPersistentID:{C3BE95FB-2340-4B84-833D-0A7DB965737F}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/PathfindingStartPosition</Property>
 	<Property Name="varPersistentID:{C48AF694-B9FC-4606-8DC4-202FC7F153DD}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch Accel x</Property>
 	<Property Name="varPersistentID:{C97E6794-3947-4FA1-9F99-A48658A96122}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_BOOL_array</Property>
 	<Property Name="varPersistentID:{CB035348-5A8C-4484-88E8-5D5BD6A1871E}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavSettings.lvlib/TurnRadius</Property>
@@ -288,7 +290,6 @@ AddOutputFilter chunkFilter
 		<Item Name="ReadServo_R3.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/ReadServo_R3.vi"/>
 		<Item Name="Set_Compliance_Slope_R2.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Set_Compliance_Slope_R2.vi"/>
 		<Item Name="Localization_Variables_r0.lvlib" Type="Library" URL="../Localization_VIs/Localization_Variables_r0.lvlib"/>
-		<Item Name="Position_TOTAL_R25.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Position_TOTAL_R25.vi"/>
 		<Item Name="Beacon_Scale_to_Distance_R0.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Beacon_Scale_to_Distance_R0.vi"/>
 		<Item Name="last Position.ctl" Type="VI" URL="../Localization_VIs/Overlord myRIO/last Position.ctl"/>
 		<Item Name="DoNothingOnPurpose.vi" Type="VI" URL="../nav/nav working/DoNothingOnPurpose.vi"/>
@@ -303,6 +304,7 @@ AddOutputFilter chunkFilter
 		<Item Name="Navigation2017-NavSettings.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017-NavSettings.lvlib"/>
 		<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017-NavStateVariables.lvlib"/>
 		<Item Name="Overlord_Variables.lvlib" Type="Library" URL="../Computer_VIs/Overlord_Variables.lvlib"/>
+		<Item Name="Position_TOTAL_R25.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Position_TOTAL_R25.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Accelerometer Channels Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/Accelerometer/typedefs/Accelerometer Channels Enum.ctl"/>
