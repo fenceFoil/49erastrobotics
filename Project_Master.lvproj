@@ -8,6 +8,7 @@
 	<Property Name="varPersistentID:{039C0131-5F42-4503-8E20-B179E81A2B70}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Scale - Left</Property>
 	<Property Name="varPersistentID:{0B233DEB-3AEF-48E0-A4D8-53218411EA0A}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Full</Property>
 	<Property Name="varPersistentID:{0C5B20BA-18EF-4333-92D7-CCEC650DA1AA}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_Scales</Property>
+	<Property Name="varPersistentID:{0DA81B02-02E1-4C26-A8EC-A022E677C244}" Type="Ref">/Right-Camera/Battery Voltage.lvlib/Battery Voltage</Property>
 	<Property Name="varPersistentID:{1293F181-9DD4-47ED-A979-934E1CEB8270}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Image Lock - L</Property>
 	<Property Name="varPersistentID:{18889B27-B07E-496F-8A6C-75207E8985EF}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/loc_y</Property>
 	<Property Name="varPersistentID:{1895318F-32D0-4BC5-BA41-B94FFA00D091}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum Accel y</Property>
@@ -305,6 +306,7 @@ AddOutputFilter chunkFilter
 		<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017-NavStateVariables.lvlib"/>
 		<Item Name="Overlord_Variables.lvlib" Type="Library" URL="../Computer_VIs/Overlord_Variables.lvlib"/>
 		<Item Name="Position_TOTAL_R25.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Position_TOTAL_R25.vi"/>
+		<Item Name="Untitled 2.vi" Type="VI" URL="../Computer_VIs/Untitled 2.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Accelerometer Channels Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/Accelerometer/typedefs/Accelerometer Channels Enum.ctl"/>
@@ -4169,7 +4171,7 @@ AddOutputFilter chunkFilter
 	<Item Name="Right-Camera" Type="RT myRIO">
 		<Property Name="alias.name" Type="Str">Right-Camera</Property>
 		<Property Name="alias.value" Type="Str">192.168.1.81</Property>
-		<Property Name="CCSymbols" Type="Str">TARGET_TYPE,RT;OS,Linux;CPU,ARM;DeviceCode,762F;</Property>
+		<Property Name="CCSymbols" Type="Str">TARGET_TYPE,RT;OS,Linux;CPU,ARM;DeviceCode,762F;FPGAPersonality,myRIO_FP_Custom;</Property>
 		<Property Name="crio.ControllerPID" Type="Str">762F</Property>
 		<Property Name="host.ResponsivenessCheckEnabled" Type="Bool">true</Property>
 		<Property Name="host.ResponsivenessCheckPingDelay" Type="UInt">5000</Property>
@@ -5715,6 +5717,8 @@ AddOutputFilter chunkFilter
 		<Item Name="Right Select Beacon Loop (SubVI).vi" Type="VI" URL="../Localization/Right Select Beacon Loop (SubVI).vi"/>
 		<Item Name="Right Tilt Motor Tester.vi" Type="VI" URL="../Localization/Right Tilt Motor Tester.vi"/>
 		<Item Name="Right Pan Motor Tester.vi" Type="VI" URL="../Localization/Right Pan Motor Tester.vi"/>
+		<Item Name="Battery Voltage.vi" Type="VI" URL="../Computer_VIs/Battery Voltage.vi"/>
+		<Item Name="Battery Voltage.lvlib" Type="Library" URL="../Computer_VIs/Battery Voltage.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="SPI.lvlib" Type="Library" URL="/&lt;vilib&gt;/myRIO/Instrument Drivers/Onboard IO/SPI/SPI.lvlib"/>
@@ -5797,6 +5801,27 @@ AddOutputFilter chunkFilter
 				<Item Name="roboRIO DIO Bank Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/roboRIO v1.0/DIO/typedefs/roboRIO DIO Bank Enum.ctl"/>
 				<Item Name="roboRIO v1.0 Build Bitmask DIO.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/roboRIO v1.0/DIO/vis/roboRIO v1.0 Build Bitmask DIO.vi"/>
 				<Item Name="roboRIO DIO Bitmask to Channel Map.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/roboRIO v1.0/DIO/typedefs/roboRIO DIO Bitmask to Channel Map.ctl"/>
+				<Item Name="Analog Scaling Constants.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/Utilities/typedefs/Analog Scaling Constants.ctl"/>
+				<Item Name="Analog Scaling Constants List.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/Utilities/typedefs/Analog Scaling Constants List.ctl"/>
+				<Item Name="AI Channels Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/typedefs/AI Channels Enum.ctl"/>
+				<Item Name="AI Channels List.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/typedefs/AI Channels List.ctl"/>
+				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
+				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
+				<Item Name="myRIO v1.0 Scaling Constants Table.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/Resource Manager/vis/myRIO v1.0 Scaling Constants Table.vi"/>
+				<Item Name="Parse Scaling Constant Table.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/Utilities/vis/Parse Scaling Constant Table.vi"/>
+				<Item Name="myRIO v1.0 Get Scaling Constants.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/Resource Manager/vis/myRIO v1.0 Get Scaling Constants.vi"/>
+				<Item Name="myRIO v1.0 Get Analog Scaling Constants.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/Resource Manager/vis/myRIO v1.0 Get Analog Scaling Constants.vi"/>
+				<Item Name="myRIO v1.0 Get Scaling Constants AI.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/vis/myRIO v1.0 Get Scaling Constants AI.vi"/>
+				<Item Name="myRIO v1.0 Build MUX Configuration AI.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/vis/myRIO v1.0 Build MUX Configuration AI.vi"/>
+				<Item Name="myRIO v1.0 Reserve AI.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/vis/myRIO v1.0 Reserve AI.vi"/>
+				<Item Name="Raw To Scaled Value.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/Utilities/vis/Raw To Scaled Value.vi"/>
+				<Item Name="AI Channels FPGA Reference.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/typedefs/AI Channels FPGA Reference.ctl"/>
+				<Item Name="myRIO v1.0 Read AI.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/vis/myRIO v1.0 Read AI.vi"/>
+				<Item Name="AI.lvlib" Type="Library" URL="/&lt;vilib&gt;/myRIO/Instrument Drivers/Onboard IO/AI/AI.lvlib"/>
+				<Item Name="myRIO v1.1 AI Channels Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/typedefs/myRIO v1.1 AI Channels Enum.ctl"/>
+				<Item Name="myRIO v1.1 Open AI.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/vis/myRIO v1.1 Open AI.vi"/>
+				<Item Name="roboRIO v1.0 Read AI.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/roboRIO v1.0/AI/vis/roboRIO v1.0 Read AI.vi"/>
+				<Item Name="roboRIO AI Channels FPGA Reference.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/roboRIO v1.0/AI/typedefs/roboRIO AI Channels FPGA Reference.ctl"/>
 			</Item>
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
