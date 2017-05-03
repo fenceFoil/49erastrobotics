@@ -74,7 +74,7 @@
 	<Property Name="varPersistentID:{C3BE95FB-2340-4B84-833D-0A7DB965737F}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/PathfindingStartPosition</Property>
 	<Property Name="varPersistentID:{C48AF694-B9FC-4606-8DC4-202FC7F153DD}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch Accel x</Property>
 	<Property Name="varPersistentID:{C97E6794-3947-4FA1-9F99-A48658A96122}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_BOOL_array</Property>
-	<Property Name="varPersistentID:{CB035348-5A8C-4484-88E8-5D5BD6A1871E}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavSettings.lvlib/TurnRadius</Property>
+	<Property Name="varPersistentID:{CB035348-5A8C-4484-88E8-5D5BD6A1871E}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavSettings.lvlib/TurnRadius (Path Modeling)</Property>
 	<Property Name="varPersistentID:{CC9FF91B-2D64-4D4B-9A60-FA9BEBDDEAC8}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Angle</Property>
 	<Property Name="varPersistentID:{CCC67DFA-F388-461C-9AE0-50349D476257}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/DestinationPoint</Property>
 	<Property Name="varPersistentID:{CEBF537D-F37C-4CD1-A914-F6BF25FE1917}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Auto_Manual</Property>
