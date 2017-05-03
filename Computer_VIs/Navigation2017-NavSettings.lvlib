@@ -4,6 +4,15 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">352354304</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
+	<Item Name="MovementControlTurnTightness" Type="Variable">
+		<Property Name="featurePacks" Type="Str">Network</Property>
+		<Property Name="Network:BuffSize" Type="Str">50</Property>
+		<Property Name="Network:UseBinding" Type="Str">False</Property>
+		<Property Name="Network:UseBuffering" Type="Str">True</Property>
+		<Property Name="numTypedefs" Type="UInt">0</Property>
+		<Property Name="type" Type="Str">Network</Property>
+		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!!B(1!!!"5!A!!!!!!"!!5!#A!!!1!!!!!!!!!!!!!!!!!!!!!!!!</Property>
+	</Item>
 	<Item Name="PathfindingSettings" Type="Variable">
 		<Property Name="featurePacks" Type="Str">Network</Property>
 		<Property Name="Network:BuffSize" Type="Str">50</Property>
@@ -23,15 +32,6 @@
 		<Property Name="typedefPath3" Type="PathRel">../PathCostWeights.ctl</Property>
 		<Property Name="typedefPath4" Type="PathRel">../PathfindingSettings.ctl</Property>
 		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!1\.Q1!!"5!A!!!!!!&gt;!"N!#A!618*S;8:B&lt;#"5&lt;WRF=G&amp;O9W5A+'UJ!"V!#A!81WRP=W6O:8.T)&amp;2I=G6T;'^M:#!I&lt;3E!(5!+!"&gt;1;81A4W*T&gt;'&amp;D&lt;'5A5G&amp;E;86T)#BN+1!(1!I!!8A!"U!+!!&amp;Z!"*!5!!#!!-!"!&gt;$&lt;(6T&gt;'6S!"J!1!!"`````Q!&amp;$6"J&gt;#"-&lt;W.B&gt;'FP&lt;H-!6A$RV27=,Q!!!!)54G&amp;W;7&gt;B&gt;'FP&lt;D)Q-4=O&lt;(:M;7)547^W:7VF&lt;H24:82U;7ZH=SZD&gt;'Q!*%"1!!1!!!!"!!)!"B&amp;.&lt;X:F&lt;76O&gt;#"4:82U;7ZH=Q!01!I!#52F971A7G^O:1!01!I!#5VB?#".&lt;X:F=Q!&gt;1!I!&amp;UVP&gt;G5A5W6H&lt;76O&gt;#"-:7ZH&gt;'AA+'UJ!".!#A!.4'6O:X2I)&amp;&gt;F;7&gt;I&gt;!!41!I!$%&amp;O:WRF)&amp;&gt;F;7&gt;I&gt;!!!'5!+!"*"&lt;G&gt;M:3"&amp;=H*P=C"8:7FH;(1!!"N!#A!617ZH&lt;'5A28*S&lt;X)A6'BS:8.I&lt;WRE!"&gt;!#A!15'6S)%VP&gt;G5A5'6O97RU?1!!&amp;U!+!""$&lt;'^T:7ZF=X-A6W6J:WBU!!!81!I!%62P&lt;S"4;'^S&gt;#"1:7ZB&lt;(2Z!"F!#A!46'^P)&amp;.I&lt;X*U)&amp;2I=G6T;'^M:!"&gt;!0(6&amp;&gt;8@!!!!!B2/98:J:W&amp;U;7^O-D!R.SZM&gt;GRJ9B.1982I1W^T&gt;&amp;&gt;F;7&gt;I&gt;(-O9X2M!#R!5!!)!!M!$!!.!!Y!$Q!1!"%!%B&amp;1982I)%.P=X1A6W6J:WBU=Q!R1!I!+U2F=X"F=G&amp;U;7^O)#UA5G6E&gt;7.U;7^O)&amp;"F=C""&gt;(2F&lt;8"U)#B3982J&lt;SE!)5!#!"J%:8.Q:8*B&gt;'FP&lt;C!N)%VB?#""&gt;(2F&lt;8"U=Q!!'%!B%URP:S""&lt;'QA47^W:3"1&lt;WFO&gt;(-!#5!+!!*Y-1!!#5!+!!*Y-A!!%5!+!!JS:8.P&lt;(6U;7^O!!!51&amp;!!!Q!8!"A!'1&gt;$&lt;(6T&gt;'6S!'=!]&gt;56W9Q!!!!#&amp;%ZB&gt;GFH982J&lt;WYS-$%X,GRW&lt;'FC(5FO&gt;'6S&lt;76E;7&amp;U:6"P=WFU;7^O2X*J:(-O9X2M!#R!1!!"`````Q!;'UFO&gt;'6S&lt;76E;7&amp;U:3"1&lt;X.J&gt;'FP&lt;C"(=GFE=Q"H!0(6&amp;R&gt;X!!!!!B2/98:J:W&amp;U;7^O-D!R.SZM&gt;GRJ9B&gt;1982I:GFO:'FO:V.F&gt;(2J&lt;G&gt;T,G.U&lt;!!S1&amp;!!#1!(!!A!#1!+!"-!&amp;!!6!"9!'R21982I:GFO:'FO:S"4:82U;7ZH=Q!!!1!=!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
-	</Item>
-	<Item Name="Turning Radius (m) _(Goes into Dillons&apos; Movement Control)" Type="Variable">
-		<Property Name="featurePacks" Type="Str">Network</Property>
-		<Property Name="Network:BuffSize" Type="Str">50</Property>
-		<Property Name="Network:UseBinding" Type="Str">False</Property>
-		<Property Name="Network:UseBuffering" Type="Str">True</Property>
-		<Property Name="numTypedefs" Type="UInt">0</Property>
-		<Property Name="type" Type="Str">Network</Property>
-		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!!B(1!!!"5!A!!!!!!"!!5!#A!!!1!!!!!!!!!!!!!!!!!!!!!!!!</Property>
 	</Item>
 	<Item Name="TurnRadius (Path Modeling)" Type="Variable">
 		<Property Name="featurePacks" Type="Str">Network</Property>

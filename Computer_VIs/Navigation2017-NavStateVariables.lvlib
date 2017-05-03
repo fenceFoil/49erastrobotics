@@ -34,7 +34,7 @@
 		<Property Name="typedefPath3" Type="PathRel">../Vector.ctl</Property>
 		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!(BX1%!!"5!A!!!!!!1!"&gt;!#A!12'6T&gt;#""&lt;G&gt;M:3"&amp;=H*P=A!!'E!B&amp;52F=X1A17ZH&lt;'5A1W^O=WFE:8*F:!!51#%/2'FE)&amp;*F97.I)%2F=X1!!""!)1N%;71A1W^M&lt;'FE:1!B1!I!'F.V&lt;3"P:C""&lt;G&gt;M:3"$;'&amp;O:W6T)#BS971J!!!61!I!$UVP&gt;G5A4'6O:X2I)#BN+1!41!I!$5.M&lt;X.F&lt;G6T=S"4&gt;7U!"U!+!!&amp;Y!!&gt;!#A!"?1!,1!I!"7&amp;O:WRF!%!!]1!!!!!!!!!#&amp;%ZB&gt;GFH982J&lt;WYS-$%X,GRW&lt;'FC#F:F9X2P=CZD&gt;'Q!'%"1!!-!"Q!)!!E'6G6D&gt;'^S!!!C1%!!!@````]!#B21&lt;X.J&gt;'FP&lt;H-A17RP&lt;G=A47^W:1!!$E!B#5VP&gt;G6E)%:X:!"%!0(6+L.4!!!!!B2/98:J:W&amp;U;7^O-D!R.SZM&gt;GRJ9AB.&lt;X:F,G.U&lt;!!?1&amp;!!"Q!#!!-!"!!&amp;!!9!#Q!-"%VP&gt;G5!!"*!1!!"`````Q!."5VP&gt;G6T!%-!]&gt;57`J9!!!!#&amp;%ZB&gt;GFH982J&lt;WYS-$%X,GRW&lt;'FC$V"B&gt;'B0:EVP&gt;G6T,G.U&lt;!!71&amp;!!!Q!!!!%!$A21982I!!!"!!]!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
 	</Item>
-	<Item Name="DestinationPoint" Type="Variable">
+	<Item Name="CurrPosOnPath" Type="Variable">
 		<Property Name="featurePacks" Type="Str">Network</Property>
 		<Property Name="Network:BuffSize" Type="Str">50</Property>
 		<Property Name="Network:ElemSize" Type="Str">1</Property>
@@ -48,7 +48,7 @@
 		<Property Name="typedefPath1" Type="PathRel">../Vector.ctl</Property>
 		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!#&amp;A1!!!"5!A!!!!!!%!!&gt;!#A!"?!!(1!I!!8E!#U!+!!6B&lt;G&gt;M:1"!!0%!!!!!!!!!!B2/98:J:W&amp;U;7^O-D!R.SZM&gt;GRJ9AJ7:7.U&lt;X)O9X2M!"B!5!!$!!!!!1!#"F:F9X2P=A!!!1!$!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
 	</Item>
-	<Item Name="NextPoint" Type="Variable">
+	<Item Name="DestinationPoint" Type="Variable">
 		<Property Name="featurePacks" Type="Str">Network</Property>
 		<Property Name="Network:BuffSize" Type="Str">50</Property>
 		<Property Name="Network:ElemSize" Type="Str">1</Property>
@@ -73,6 +73,20 @@
 		<Property Name="numTypedefs" Type="UInt">0</Property>
 		<Property Name="type" Type="Str">Network</Property>
 		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!!B(1!!!"5!A!!!!!!"!!R!)1&gt;#&lt;W^M:7&amp;O!!%!!!!!!!!!!!!!!!</Property>
+	</Item>
+	<Item Name="NextPointOnPath" Type="Variable">
+		<Property Name="featurePacks" Type="Str">Network</Property>
+		<Property Name="Network:BuffSize" Type="Str">50</Property>
+		<Property Name="Network:ElemSize" Type="Str">1</Property>
+		<Property Name="Network:PointsPerWaveform" Type="Str">1</Property>
+		<Property Name="Network:SingleWriter" Type="Str">False</Property>
+		<Property Name="Network:UseBinding" Type="Str">False</Property>
+		<Property Name="Network:UseBuffering" Type="Str">True</Property>
+		<Property Name="numTypedefs" Type="UInt">1</Property>
+		<Property Name="type" Type="Str">Network</Property>
+		<Property Name="typedefName1" Type="Str">Navigation2017.lvlib:Vector.ctl</Property>
+		<Property Name="typedefPath1" Type="PathRel">../Vector.ctl</Property>
+		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!#&amp;A1!!!"5!A!!!!!!%!!&gt;!#A!"?!!(1!I!!8E!#U!+!!6B&lt;G&gt;M:1"!!0%!!!!!!!!!!B2/98:J:W&amp;U;7^O-D!R.SZM&gt;GRJ9AJ7:7.U&lt;X)O9X2M!"B!5!!$!!!!!1!#"F:F9X2P=A!!!1!$!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
 	</Item>
 	<Item Name="PathfindingStartPosition" Type="Variable">
 		<Property Name="featurePacks" Type="Str">Network</Property>
