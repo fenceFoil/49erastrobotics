@@ -125,7 +125,6 @@
 		<Item Name="Nav Testing 2.0.vi" Type="VI" URL="../nav2017/Nav Testing 2.0.vi"/>
 		<Item Name="Nav_testing_variables_LV.lvlib" Type="Library" URL="../nav2017/Nav_testing_variables_LV.lvlib"/>
 		<Item Name="Stop Robot Button.vi" Type="VI" URL="../Computer_VIs/Stop Robot Button.vi"/>
-		<Item Name="mining_control.vi" Type="VI" URL="../Excavation_VIs/tdl/mining_control.vi"/>
 		<Item Name="MissionControl2017.lvlib" Type="Library" URL="../Computer_VIs/MissionControl2017.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
@@ -160,6 +159,10 @@
 				<Item Name="Set Pen State.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Set Pen State.vi"/>
 				<Item Name="RGB to Color.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/colorconv.llb/RGB to Color.vi"/>
 				<Item Name="LVPoint32TypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVPoint32TypeDef.ctl"/>
+				<Item Name="Draw Text at Point.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Draw Text at Point.vi"/>
+				<Item Name="Get Text Rect.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Get Text Rect.vi"/>
+				<Item Name="Draw Text in Rect.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Draw Text in Rect.vi"/>
+				<Item Name="PCT Pad String.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/PCT Pad String.vi"/>
 			</Item>
 			<Item Name="lvinput.dll" Type="Document" URL="/&lt;resource&gt;/lvinput.dll"/>
 			<Item Name="Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017.lvlib"/>
@@ -306,7 +309,10 @@ AddOutputFilter chunkFilter
 		<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017-NavStateVariables.lvlib"/>
 		<Item Name="Overlord_Variables.lvlib" Type="Library" URL="../Computer_VIs/Overlord_Variables.lvlib"/>
 		<Item Name="Position_TOTAL_R25.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Position_TOTAL_R25.vi"/>
-		<Item Name="Untitled 2.vi" Type="VI" URL="../Computer_VIs/Untitled 2.vi"/>
+		<Item Name="mining_control.vi" Type="VI" URL="../Excavation_VIs/tdl/mining_control.vi"/>
+		<Item Name="drum_level_after_dumping.vi" Type="VI" URL="../Excavation_VIs/tdl/drum_level_after_dumping.vi"/>
+		<Item Name="drum_level_while_digging.vi" Type="VI" URL="../Excavation_VIs/tdl/drum_level_while_digging.vi"/>
+		<Item Name="servo.vi" Type="VI" URL="../Excavation_VIs/tdl/servo.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Accelerometer Channels Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/Accelerometer/typedefs/Accelerometer Channels Enum.ctl"/>
