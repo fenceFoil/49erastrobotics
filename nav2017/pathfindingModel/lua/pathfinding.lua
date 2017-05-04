@@ -34,24 +34,24 @@ local robotinfo = require "robotinfo"
 pathfinding.maxMoves = 3
 
 -- area around arena with no positions
-pathfinding.deadZone = 0.75
+pathfinding.deadZone = 0.9
 
 -- weights
 pathfinding.lengthWeight = 1
 pathfinding.angleWeight = 0
 -- (angleError multiplied by this value)
-pathfinding.angleErrorWeight = 1000
+pathfinding.angleErrorWeight = 100
 -- (angleError multiplied by Weight, minus this threshold, outside this threshold)
-pathfinding.angleErrorThreshold = math.pi/10
+pathfinding.angleErrorThreshold = math.pi/8
 
-pathfinding.perSegmentPenalty = 0.05
+pathfinding.perSegmentPenalty = 2
 
 -- closeness weight
-pathfinding.closenessWeight = 100
+pathfinding.closenessWeight = 10
 
 -- anti-spin-in-place path segment penalty
 pathfinding.tooShortPenalty = 100
-pathfinding.tooShortThreshold = 1.5
+pathfinding.tooShortThreshold = 1.75
 
 -- Ensure angle given is always within the range 0..2pi
 local function clampAngle(a) return math.fmod(((math.fmod(a, 2*math.pi)) + 2*math.pi), 2*math.pi) end
@@ -101,10 +101,10 @@ split into three sections (for the starting, obstacle, and mining areas),
 each with different densities of positions.
 --]]
 pathfinding.positionGrids = {
-  {x1=0, x2=1.75, resolution=0.15},
+  {x1=0, x2=1.5, resolution=0.45},
   --[[{x1=1.75, x2=4.5, density=0.4},
   {x1=4.5, x2=robotinfo.arenaWidth, density=0.4}]]--
-  {x1=1.75, x2=robotinfo.arenaWidth, resolution=0.4}
+  {x1=1.75, x2=4.5, resolution=0.45}
 }
 -- note: positions are cached for performance. to refresh after changing
 -- position grid densities, etc, set pathfinding.allPositinos to nil as a dirty
@@ -209,6 +209,18 @@ function pathfinding.compareCosts(path1, path2)
   return path1:getCost() < path2:getCost()
 end
 
+-- output is basically points if you leave angle as nil
+-- outputs an even spread of points down a vertical line
+function pathfinding.getVectorsInRange(pointX, bottomY, topY, numPoints, angle)
+  local points = {}
+
+  for currY = bottomY,topY,((topY-bottomY)/numPoints) do
+    points[#points+1] = {pointX, currY, angle}
+  end
+
+  return points
+end
+
 --[[
 Returns a list of paths from starting point to destination. 
 
@@ -231,8 +243,10 @@ destAngle - if left nil, a path is found to the destination. If specified, more 
   possible to specified destAngle will be returned.
 
 --]]
-local function getPathsToRecurse(startX, startY, startAngle, destX, destY, movementModel, movesLeft, destAngle)
+local function getPathsToRecurse(startX, startY, startAngle, destPoints, movementModel, movesLeft, destAngle)
   local pathsToDest = {}
+  local destX = destPoints[1][1]
+  local destY = destPoints[1][2]
 
   -- Tally of total movements performed using movementModel
   local totalPathsChecked = 0
@@ -252,21 +266,25 @@ local function getPathsToRecurse(startX, startY, startAngle, destX, destY, movem
     if dir == "nodir" then dir = nil end
 
     -- Try to move directly from current position to destination
-    local directMove = movementModel.move(startX, startY, startAngle, destX, destY, false, dir)
-    totalPathsChecked = totalPathsChecked + 1
-    if directMove.didReach then   
-      local angleError = nil
-      if destAngle ~= nil then 
-        angleError = math.abs(((destAngle - directMove.positions[#directMove.positions][3])+math.pi) % (2*math.pi) - math.pi)
+    local didAnyDirectMoveReach = false
+    for i, destPoint in ipairs(destPoints) do
+      local directMove = movementModel.move(startX, startY, startAngle, destPoint[1], destPoint[2], false, dir)
+      totalPathsChecked = totalPathsChecked + 1
+      if directMove.didReach then   
+        local angleError = nil
+        if destAngle ~= nil then 
+          angleError = math.abs(((destAngle - directMove.positions[#directMove.positions][3])+math.pi) % (2*math.pi) - math.pi)
+        end
+        pathsToDest[#pathsToDest+1] = createNewPath(destPoint[1], destPoint[2], directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.closeness, directMove.movedFwd, angleError)
+        didAnyDirectMoveReach = true
       end
-      pathsToDest[#pathsToDest+1] = createNewPath(destX, destY, directMove.positions[#directMove.positions][3], directMove.length, directMove.angleSum, directMove.closeness, directMove.movedFwd, angleError)
     end
 
     -- Try moving from current position to every single possible intermediate position
     -- Explore further routes, if we didn't reach the destination, or
     -- if we want to find one that may take longer, but 
     -- reaches the end destination at a particular angle
-    if not directMove.didReach or destAngle ~= nil then
+    if not didAnyDirectMoveReach or destAngle ~= nil then
 
       -- ACTUALLY, do not explore any more moves in tree if out of recursions
       if movesLeft > 0 then
@@ -282,7 +300,7 @@ local function getPathsToRecurse(startX, startY, startAngle, destX, destY, movem
 
             if move.didReach then
               -- Recurse and try to reach destination again from this intermediate point
-              local subPathsToDest, subPathsChecked = getPathsToRecurse(pos[1], pos[2], move.positions[#move.positions][3], destX, destY, movementModel, movesLeft - 1, destAngle, 0)
+              local subPathsToDest, subPathsChecked = getPathsToRecurse(pos[1], pos[2], move.positions[#move.positions][3], destPoints, movementModel, movesLeft - 1, destAngle, 0)
               totalPathsChecked = totalPathsChecked + subPathsChecked
               -- Take each found path to the destination, copy our move so far in front, and add to pathsToDest
               for j,path in ipairs(subPathsToDest) do
@@ -324,7 +342,7 @@ destAngle - if left nil, a path is found to the destination. If specified, more 
 returns a list of found paths (see object definition above), the turning radius
 used for movement, and the total number of checked paths
 --]]
-function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, movementModel, destAngle)  
+function pathfinding.getPathsTo(startX, startY, startAngle, destPoints, movementModel, destAngle)  
   -- For debugging and prototyping: reset field of intermediate points to
   -- recalculate from density parameters again, if changed.
   pathfinding.allPositions = nil
@@ -339,7 +357,7 @@ function pathfinding.getPathsTo(startX, startY, startAngle, destX, destY, moveme
   local totalPathsChecked = 0
   repeat
     local tempPathsChecked = 0
-    paths, tempPathsChecked = getPathsToRecurse(startX, startY, startAngle, destX, destY, movementModel, pathfinding.maxMoves-1, destAngle)
+    paths, tempPathsChecked = getPathsToRecurse(startX, startY, startAngle, destPoints, movementModel, pathfinding.maxMoves-1, destAngle)
     totalPathsChecked = totalPathsChecked + tempPathsChecked
     if (#paths <= 0) then movementModel.turnRadius = movementModel.turnRadius * 0.9 end
     -- XXX: Tune ^^^ constants

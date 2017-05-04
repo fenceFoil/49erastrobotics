@@ -44,14 +44,15 @@ lockRobotPos = false
 -- Turn robot using scroll wheel: 8 steps, or smoothly?
 lock8Angles = false
 -- Turn robot in a kind of demo mode after a few moments untouched?
-autoSpin = true
+autoSpin = false
 
 -- Imports & setup
 robotinfo = require "robotinfo"
 movement = require "movementmodel"
-movement.turnRadius = 1.5
-movement.tolerance = 0.05
-movement.segLength = 0.1
+movement.turnRadius = 2
+movement.tolerance = 0.03
+movement.segLength = 0.2
+
 pathfinding = require "pathfinding"
 
 -- Java Control Panel server imports and setup
@@ -83,6 +84,23 @@ end
 function love.mousemoved(x, y, d, dy, istouch)
   -- don't start spinning robot while mouse is moving
   lastScrollTime = love.timer.getTime()
+end
+
+function love.keypressed(key, scancode, isrepeat)
+  if scancode == "space" then
+    -- change visualization
+    currVisualization = currVisualization + 1
+    if currVisualization > numVisualizations then currVisualization = 1 end
+    movement.pits[1] = {x = robotinfo.arenaWidth-1.5, y = robotinfo.arenaHeight*0.75}
+  end
+  
+  if scancode == "3" then
+    pathfinding.maxMoves = 3
+  elseif scancode == "4" then
+    pathfinding.maxMoves = 4
+  elseif scancode == "2" then
+    pathfinding.maxMoves = 2
+  end
 end
 
 -- Utility function. Alternative color space from RGB.
@@ -120,7 +138,7 @@ destX = 4
 destY = 2
 -- Move robot to destination point and this angle
 -- used in some visualizations
-destAngle = nil
+destAngle = math.pi
 
 lastdt = 0
 
@@ -157,10 +175,10 @@ end
 
 -- Called from love.draw(); draws the current frame of an animation of a complete competition run
 -- compAnim is the state of the animation between function calls
-compAnim = {state="reset", stateJustChanged=false, botPos = {0, 0, 0}, botSpeed = 0.75, segLength = 0.001, inaccuracy = 0}
+compAnim = {state="reset", stateJustChanged=false, botPos = {0, 0, 0}, botSpeed = 0.85, segLength = 0.001, inaccuracy = 0}
 compAnim.startMovingTowards = function (self, destPos)
   -- Calculate mining path
-  local miningPaths, radiusUsed, totalPathsChecked = pathfinding.getPathsTo(self.botPos[1], self.botPos[2], self.botPos[3], destPos[1], destPos[2], movement, destPos[3])
+  local miningPaths, radiusUsed, totalPathsChecked = pathfinding.getPathsTo(self.botPos[1], self.botPos[2], self.botPos[3], destPos, movement, destPos[1][3])
   if #miningPaths <= 0 then
     self.state = "no-path"
     self.stateJustChanged = true
@@ -175,7 +193,7 @@ compAnim.startMovingTowards = function (self, destPos)
   -- Cachce overall path being taken
   self.currCompletePath = miningPaths[1]
   self.currCompletePathRadius = radiusUsed
-
+  
   -- Switch states
   self.state = "anim-to-dest"
   self.stateJustChanged = true
@@ -183,13 +201,11 @@ end
 movement.turnRadius = 1.7
 function updateCompetitionAnimation() 
   if compAnim.state == "reset" then
-    -- add a bunch of pits
-    for i = 1, 1 do
-      --movement.pits[i] = {x = robotinfo.arenaWidth-1.5, y = math.random()*robotinfo.arenaHeight-2*0.5+0.5}
-    end
-    movement.pits[1] = {x = robotinfo.arenaWidth-1.5, y = robotinfo.arenaHeight-math.random()*robotinfo.arenaHeight/4}
-
     --movement.pits[1] = {x = robotinfo.arenaWidth-1.5}
+    movement.pits[1] = nil
+    
+      movement.pits[2] = nil
+      movement.pits[3] = nil
 
     -- let user select a starting position
 
@@ -205,7 +221,10 @@ function updateCompetitionAnimation()
       compAnim.botPos = {mxm, mym, robotAngle}
 
       -- Calculate a list of points to move between to imitate competition run
-      compAnim.destList = {{robotinfo.arenaWidth-1.5, 0.7}, {0.8, robotinfo.arenaHeight/2, 0}, {robotinfo.arenaWidth-1.5, robotinfo.arenaHeight/2}, {0.8, robotinfo.arenaHeight/2, math.pi}}
+      compAnim.destList = {pathfinding.getVectorsInRange(robotinfo.arenaWidth-1.5, 1, robotinfo.arenaHeight-1, 10, 3.14), -- mining point 1
+        pathfinding.getVectorsInRange(0.8, 1.25, robotinfo.arenaHeight-1.25, 10, 3.14), -- trough
+        pathfinding.getVectorsInRange(robotinfo.arenaWidth-1.5, 1, robotinfo.arenaHeight-1, 10), -- mining point 2
+        pathfinding.getVectorsInRange(0.8, 1.25, robotinfo.arenaHeight-1.25, 10, 3.14)} -- trough
       compAnim.currDest = 1
 
       compAnim:startMovingTowards(compAnim.destList[1])
@@ -261,15 +280,29 @@ function updateCompetitionAnimation()
       compAnim.botPos = compAnim.currAnimPath.positions[#compAnim.currAnimPath.positions]
 
       -- Either move on next segment towards destination or move on to next destination
-      if dist(compAnim.botPos[1], compAnim.botPos[2], compAnim.destList[compAnim.currDest][1], compAnim.destList[compAnim.currDest][2]) < movement.tolerance then
+      local reachedDest = false
+      for i, currPoint in ipairs(compAnim.destList[compAnim.currDest]) do
+        if dist(compAnim.botPos[1], compAnim.botPos[2], currPoint[1], currPoint[2]) < movement.tolerance then
+          reachedDest = true
+        end
+      end
+      
+      if reachedDest then
         -- Reached goal. move to next!
         compAnim.currDest = compAnim.currDest + 1
+        
+        if compAnim.currDest == 2 then movement.pits[2] = {x=compAnim.botPos[1], y=compAnim.botPos[2]} end
 
         if compAnim.currDest > #compAnim.destList then
           -- Done moving
           compAnim.state = "reset"
           return
         end
+      end
+
+      if compAnim.currDest == 3 and movement.pits[2] ~= nil then
+        movement.pits[1] = movement.pits[2]
+        movement.pits[2] = nil
       end
 
       compAnim:startMovingTowards(compAnim.destList[compAnim.currDest])
@@ -281,7 +314,7 @@ function updateCompetitionAnimation()
     drawRobot(currBotPos[1], currBotPos[2], currBotPos[3])
     love.graphics.print(movement.getCloseness(robotinfo.getCorners(currBotPos[1], currBotPos[2], currBotPos[3])), 100, 100)
 
-elseif compAnim.state == "no-path" then
+  elseif compAnim.state == "no-path" then
     love.graphics.print("No Path Can Be Found", 300, 300)
     local windowWidth, windowHeight = love.window.getMode()
     local mx, my = love.mouse.getPosition()
@@ -306,7 +339,6 @@ function love.draw()
     updateCompetitionAnimation()
     return
   else
-    movement.pits = {}
   end
 
   love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
@@ -343,14 +375,14 @@ function love.draw()
 
     -- Draw bubble for collisions around robot
     love.graphics.setColor(255, 255, 255, 45)
-    love.graphics.circle("line", mx, my, mToPixels1(robotinfo.bubble))
+    --love.graphics.circle("line", mx, my, mToPixels1(robotinfo.bubble))
     love.graphics.setColor(255, 255, 255, 255)
 
     -- Draw lines from corners of robot to destination
     for i = 1, 8, 2 do
       local destXp, destYp = mToPixels(destX, destY)
       love.graphics.setColor(255, 255, 255, 128)
-      love.graphics.line(destXp, destYp, cornerPoints[i], cornerPoints[i+1])
+      --love.graphics.line(destXp, destYp, cornerPoints[i], cornerPoints[i+1])
       love.graphics.setColor(255, 255, 255, 255)
     end
 
@@ -393,6 +425,7 @@ function love.draw()
       end
     end
   elseif currVisualization == 3 then
+    currVisualization = 4
     -- pathfinding positions
 
     -- Draw dead zone
@@ -441,7 +474,7 @@ function love.draw()
     end
 
     -- Run pathfinding
-    local pathsFound, usedRadius, pathsChecked = pathfinding.getPathsTo(mxm, mym, robotAngle, destX, destY, movement, destAngle)
+    local pathsFound, usedRadius, pathsChecked = pathfinding.getPathsTo(mxm, mym, robotAngle, {{destX, destY}}, movement, destAngle)
 
     if #pathsFound >= 1 then
       -- Choose top path

@@ -51,7 +51,7 @@ movementmodel.tolerance = 0.01
 movementmodel.segLength = 0.1
 
 -- already dug pit obstacle size
-movementmodel.pitRadius = 0.5
+movementmodel.pitRadius = 0.4
 -- already dug pit locations. Array of tables.
 -- Each pit:
 -- x, y -- location coordinates
