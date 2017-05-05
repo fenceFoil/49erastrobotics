@@ -4,6 +4,7 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">352354304</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
+	<Item Name="ArenaVisualDebugger2017.vi" Type="VI" URL="../ArenaVisualDebugger2017.vi"/>
 	<Item Name="DrawArrow.vi" Type="VI" URL="../DrawArrow.vi"/>
 	<Item Name="DrawBot.vi" Type="VI" URL="../DrawBot.vi"/>
 	<Item Name="DrawMarker.vi" Type="VI" URL="../DrawMarker.vi"/>

@@ -6,9 +6,11 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">352354304</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
+	<Property Name="NI.SortType" Type="Int">3</Property>
 	<Item Name="GetCloserEnd.vi" Type="VI" URL="../GetCloserEnd.vi"/>
 	<Item Name="GetPathCost.vi" Type="VI" URL="../GetPathCost.vi"/>
 	<Item Name="GetRobotCorners.vi" Type="VI" URL="../GetRobotCorners.vi"/>
 	<Item Name="IntermediatePositions.vi" Type="VI" URL="../IntermediatePositions.vi"/>
 	<Item Name="PathfindInner.vi" Type="VI" URL="../PathfindInner.vi"/>
+	<Item Name="FindClosestPointOnMove.vi" Type="VI" URL="../FindClosestPointOnMove.vi"/>
 </Library>
