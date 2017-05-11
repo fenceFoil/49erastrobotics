@@ -471,9 +471,15 @@ function love.draw()
     if destAngle ~= nil then
       drawArrow(destXpixels, destYpixels, 20, destAngle)
     end
+    
+    -- Shorten pathfinding analysis if not spinning around
+    if math.abs(((destAngle-robotAngle)+math.pi) % (2*math.pi) - math.pi) < math.pi/3 then
+      pathfinding.maxMoves = 2
+    end
 
     -- Run pathfinding
     local pathsFound, usedRadius, pathsChecked = pathfinding.getPathsTo(mxm, mym, robotAngle, --[[{{destX, destY}}--]] pathfinding.getVectorsInRange(robotinfo.arenaWidth-1.5, 1, robotinfo.arenaHeight-1, 5, 3.14), movement, destAngle)
+    pathfinding.maxMoves = 4
 
     if #pathsFound >= 1 then
       -- Choose top path
