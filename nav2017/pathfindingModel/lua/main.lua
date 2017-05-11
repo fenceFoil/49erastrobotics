@@ -49,7 +49,7 @@ autoSpin = false
 -- Imports & setup
 robotinfo = require "robotinfo"
 movement = require "movementmodel"
-movement.turnRadius = 2
+movement.turnRadius = 2.2
 movement.tolerance = 0.03
 movement.segLength = 0.2
 
@@ -198,7 +198,6 @@ compAnim.startMovingTowards = function (self, destPos)
   self.state = "anim-to-dest"
   self.stateJustChanged = true
 end
-movement.turnRadius = 1.7
 function updateCompetitionAnimation() 
   if compAnim.state == "reset" then
     --movement.pits[1] = {x = robotinfo.arenaWidth-1.5}

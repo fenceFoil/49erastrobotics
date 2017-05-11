@@ -31,7 +31,7 @@ local pathfinding = {}
 local robotinfo = require "robotinfo"
 
 -- path search depth
-pathfinding.maxMoves = 3
+pathfinding.maxMoves = 4
 
 -- area around arena with no positions
 pathfinding.deadZone = 0.9
