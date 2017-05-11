@@ -47,8 +47,8 @@ end
 -- NOTE: These values should be set in main.lua. Defaults here are not defaults
 -- used there!!! Ignore these defaults most of the time!!!
 movementmodel.turnRadius = 2
-movementmodel.tolerance = 0.01
-movementmodel.segLength = 0.1
+movementmodel.tolerance = 0.02
+movementmodel.segLength = 0.2
 
 -- already dug pit obstacle size
 movementmodel.pitRadius = 0.4

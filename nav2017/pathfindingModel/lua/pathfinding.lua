@@ -40,14 +40,14 @@ pathfinding.deadZone = 0.9
 pathfinding.lengthWeight = 1
 pathfinding.angleWeight = 0
 -- (angleError multiplied by this value)
-pathfinding.angleErrorWeight = 100
+pathfinding.angleErrorWeight = 50
 -- (angleError multiplied by Weight, minus this threshold, outside this threshold)
-pathfinding.angleErrorThreshold = math.pi/8
+pathfinding.angleErrorThreshold = math.pi/4
 
-pathfinding.perSegmentPenalty = 2
+pathfinding.perSegmentPenalty = 5
 
 -- closeness weight
-pathfinding.closenessWeight = 10
+pathfinding.closenessWeight = 5
 
 -- anti-spin-in-place path segment penalty
 pathfinding.tooShortPenalty = 100
@@ -101,10 +101,11 @@ split into three sections (for the starting, obstacle, and mining areas),
 each with different densities of positions.
 --]]
 pathfinding.positionGrids = {
-  {x1=0, x2=1.5, resolution=0.45},
+ -- {x1=0, x2=1.5, resolution=0.45},
   --[[{x1=1.75, x2=4.5, density=0.4},
   {x1=4.5, x2=robotinfo.arenaWidth, density=0.4}]]--
-  {x1=1.75, x2=4.5, resolution=0.45}
+  --{x1=1.75, x2=4.5, resolution=0.45}
+  {x1 = 0, x2 = 4.75, resolution = 0.45}
 }
 -- note: positions are cached for performance. to refresh after changing
 -- position grid densities, etc, set pathfinding.allPositinos to nil as a dirty

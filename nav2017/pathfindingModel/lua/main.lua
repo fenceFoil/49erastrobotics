@@ -473,7 +473,7 @@ function love.draw()
     end
 
     -- Run pathfinding
-    local pathsFound, usedRadius, pathsChecked = pathfinding.getPathsTo(mxm, mym, robotAngle, {{destX, destY}}, movement, destAngle)
+    local pathsFound, usedRadius, pathsChecked = pathfinding.getPathsTo(mxm, mym, robotAngle, --[[{{destX, destY}}--]] pathfinding.getVectorsInRange(robotinfo.arenaWidth-1.5, 1, robotinfo.arenaHeight-1, 5, 3.14), movement, destAngle)
 
     if #pathsFound >= 1 then
       -- Choose top path
