@@ -40,14 +40,14 @@ pathfinding.deadZone = 0.9
 pathfinding.lengthWeight = 1
 pathfinding.angleWeight = 0
 -- (angleError multiplied by this value)
-pathfinding.angleErrorWeight = 50
+pathfinding.angleErrorWeight = 75
 -- (angleError multiplied by Weight, minus this threshold, outside this threshold)
-pathfinding.angleErrorThreshold = math.pi/4
+pathfinding.angleErrorThreshold = math.pi/6
 
-pathfinding.perSegmentPenalty = 5
+pathfinding.perSegmentPenalty = 0.5
 
 -- closeness weight
-pathfinding.closenessWeight = 5
+pathfinding.closenessWeight = 3
 
 -- anti-spin-in-place path segment penalty
 pathfinding.tooShortPenalty = 100
@@ -105,7 +105,7 @@ pathfinding.positionGrids = {
   --[[{x1=1.75, x2=4.5, density=0.4},
   {x1=4.5, x2=robotinfo.arenaWidth, density=0.4}]]--
   --{x1=1.75, x2=4.5, resolution=0.45}
-  {x1 = 0, x2 = 4.75, resolution = 0.45}
+  {x1 = 0, x2 = 4.75, xResolution = 0.45, yResolution = 0.45}
 }
 -- note: positions are cached for performance. to refresh after changing
 -- position grid densities, etc, set pathfinding.allPositinos to nil as a dirty
@@ -118,8 +118,8 @@ function pathfinding.getIntermediatePositions()
       -- for each grid, create an even distribution of points throughout
       -- start with columns across x-axis, then go down columns
       for x = math.max(grid.x1, pathfinding.deadZone), 
-      math.min(grid.x2, robotinfo.arenaWidth-pathfinding.deadZone), grid.resolution do
-        for y = pathfinding.deadZone, robotinfo.arenaHeight-pathfinding.deadZone, grid.resolution do
+      math.min(grid.x2, robotinfo.arenaWidth-pathfinding.deadZone), grid.xResolution do
+        for y = pathfinding.deadZone, robotinfo.arenaHeight-pathfinding.deadZone, grid.yResolution do
           positions[#positions+1] = {x, y}
         end
       end
