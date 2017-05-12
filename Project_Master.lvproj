@@ -219,15 +219,8 @@
 				<Item Name="myRIO v1.1 Open AI.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/AI/vis/myRIO v1.1 Open AI.vi"/>
 				<Item Name="Is FPGA Ref Available.vi" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/Utilities/vis/Is FPGA Ref Available.vi"/>
 				<Item Name="myRIO v1.1 FPGA.lvbitx" Type="Document" URL="/&lt;vilib&gt;/myRIO/FPGA/bitfiles/myRIO v1.1 FPGA.lvbitx"/>
-				<Item Name="Dynamic To Waveform Array.vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/transition.llb/Dynamic To Waveform Array.vi"/>
-				<Item Name="DWDT Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DWDTOps.llb/DWDT Error Code.vi"/>
-				<Item Name="NI_AALBase.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AALBase.lvlib"/>
-				<Item Name="Normalize Waveform.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/Normalize Waveform.vi"/>
 				<Item Name="_Get Sound Error From Return Value.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_Get Sound Error From Return Value.vi"/>
 				<Item Name="Sound Output Task ID.ctl" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Output Task ID.ctl"/>
-				<Item Name="Sound Output Clear.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Output Clear.vi"/>
-				<Item Name="Sound Output Wait.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Output Wait.vi"/>
-				<Item Name="Sound Output Start.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Output Start.vi"/>
 				<Item Name="_ArrWfmsTo2DArr.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_ArrWfmsTo2DArr.vi"/>
 				<Item Name="_ArrWfmsTo1DInterleave.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_ArrWfmsTo1DInterleave.vi"/>
 				<Item Name="_ArrWfmsToData.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_ArrWfmsToData.vi"/>
@@ -241,17 +234,6 @@
 				<Item Name="Sound Data Format.ctl" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Data Format.ctl"/>
 				<Item Name="Sampling Mode.ctl" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sampling Mode.ctl"/>
 				<Item Name="Sound Output Configure.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Output Configure.vi"/>
-				<Item Name="_FormatFromData (DBL).vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_FormatFromData (DBL).vi"/>
-				<Item Name="_FormatFromData (U8).vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_FormatFromData (U8).vi"/>
-				<Item Name="_FormatFromData (SGL).vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_FormatFromData (SGL).vi"/>
-				<Item Name="_FormatFromData (I32).vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_FormatFromData (I32).vi"/>
-				<Item Name="_FormatFromData (I16).vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_FormatFromData (I16).vi"/>
-				<Item Name="_FormatFromData.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_FormatFromData.vi"/>
-				<Item Name="Sound Output Write Simple (DBL2).vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Output Write Simple (DBL2).vi"/>
-				<Item Name="Sound Output Write Simple (DBL1).vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Output Write Simple (DBL1).vi"/>
-				<Item Name="Sound Output Write Simple.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound Output Write Simple.vi"/>
-				<Item Name="ex_CorrectErrorChain.vi" Type="VI" URL="/&lt;vilib&gt;/express/express shared/ex_CorrectErrorChain.vi"/>
-				<Item Name="subPlayWaveform.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/PlayWaveformSource.llb/subPlayWaveform.vi"/>
 				<Item Name="_2DArrToArrWfms.vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/_2DArrToArrWfms.vi"/>
 				<Item Name="Sound File Refnum.ctl" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound File Refnum.ctl"/>
 				<Item Name="Sound File Info (refnum).vi" Type="VI" URL="/&lt;vilib&gt;/sound2/lvsound2.llb/Sound File Info (refnum).vi"/>
@@ -275,7 +257,6 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="lvsound2.dll" Type="Document" URL="/&lt;resource&gt;/lvsound2.dll"/>
-			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build"/>
 	</Item>
@@ -3760,25 +3741,6 @@ DirectoryIndex index.htm
 						<Item Name="lvSimController.dll" Type="Document" URL="/&lt;vilib&gt;/rvi/Simulation/lvSimController.dll"/>
 						<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
 					</Item>
-					<Item Name="Start Boolean.ctl" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/Utilities/Start Boolean.ctl"/>
-					<Item Name="Split myDAQ DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split myDAQ DIO.vi"/>
-					<Item Name="Split myDAQ Function Select.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split myDAQ Function Select.vi"/>
-					<Item Name="DIO 1-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/DIO/DIO 1-bit.vi"/>
-					<Item Name="DIO_Encoder.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_Encoder.vi"/>
-					<Item Name="DIO_PWM.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_PWM.vi"/>
-					<Item Name="Join myDAQ DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join myDAQ DIO.vi"/>
-					<Item Name="Split HDC Function Select.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Function Select.vi"/>
-					<Item Name="Split HDC Bank1 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Bank1 DIO.vi"/>
-					<Item Name="DIO 4-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/DIO/DIO 4-bit.vi"/>
-					<Item Name="Split HDC Bank2 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Bank2 DIO.vi"/>
-					<Item Name="DIO_SPI.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_SPI.vi"/>
-					<Item Name="Falling Edge Trigger.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/Utilities/Falling Edge Trigger.vi"/>
-					<Item Name="Check DI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/Check DI IRQ.vi"/>
-					<Item Name="Join HDC Bank1 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join HDC Bank1 DIO.vi"/>
-					<Item Name="Join HDC Bank2 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join HDC Bank2 DIO.vi"/>
-					<Item Name="Check AI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/Check AI IRQ.vi"/>
-					<Item Name="SPI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/SPI/SPI IRQ.vi"/>
-					<Item Name="DIO IRQ 1-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/DIO IRQ 1-bit.vi"/>
 				</Item>
 				<Item Name="Build Specifications" Type="Build">
 					<Item Name="FPGA Main Navigation Final" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">
