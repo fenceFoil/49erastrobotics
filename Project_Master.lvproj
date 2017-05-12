@@ -3760,6 +3760,25 @@ DirectoryIndex index.htm
 						<Item Name="lvSimController.dll" Type="Document" URL="/&lt;vilib&gt;/rvi/Simulation/lvSimController.dll"/>
 						<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
 					</Item>
+					<Item Name="Start Boolean.ctl" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/Utilities/Start Boolean.ctl"/>
+					<Item Name="Split myDAQ DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split myDAQ DIO.vi"/>
+					<Item Name="Split myDAQ Function Select.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split myDAQ Function Select.vi"/>
+					<Item Name="DIO 1-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/DIO/DIO 1-bit.vi"/>
+					<Item Name="DIO_Encoder.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_Encoder.vi"/>
+					<Item Name="DIO_PWM.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_PWM.vi"/>
+					<Item Name="Join myDAQ DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join myDAQ DIO.vi"/>
+					<Item Name="Split HDC Function Select.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Function Select.vi"/>
+					<Item Name="Split HDC Bank1 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Bank1 DIO.vi"/>
+					<Item Name="DIO 4-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/DIO/DIO 4-bit.vi"/>
+					<Item Name="Split HDC Bank2 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Bank2 DIO.vi"/>
+					<Item Name="DIO_SPI.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_SPI.vi"/>
+					<Item Name="Falling Edge Trigger.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/Utilities/Falling Edge Trigger.vi"/>
+					<Item Name="Check DI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/Check DI IRQ.vi"/>
+					<Item Name="Join HDC Bank1 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join HDC Bank1 DIO.vi"/>
+					<Item Name="Join HDC Bank2 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join HDC Bank2 DIO.vi"/>
+					<Item Name="Check AI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/Check AI IRQ.vi"/>
+					<Item Name="SPI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/SPI/SPI IRQ.vi"/>
+					<Item Name="DIO IRQ 1-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/DIO IRQ 1-bit.vi"/>
 				</Item>
 				<Item Name="Build Specifications" Type="Build">
 					<Item Name="FPGA Main Navigation Final" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">
