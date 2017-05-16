@@ -16,8 +16,8 @@
 		<Property Name="numTypedefs" Type="UInt">1</Property>
 		<Property Name="Path" Type="Str">/Project_Master.lvproj/RT myRIO Target - Overlord/LocalizationStatusVariables.lvlib/</Property>
 		<Property Name="type" Type="Str">Network</Property>
-		<Property Name="typedefName1" Type="Str">LocalizationStatus.ctl</Property>
+		<Property Name="typedefName1" Type="Str">Navigation2017.lvlib:TestbenchUtils - Navigation2017.lvlib:LocalizationStatus.ctl</Property>
 		<Property Name="typedefPath1" Type="PathRel">../LocalizationStatus.ctl</Property>
-		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!#UM!!!!"5!A!!!!!!'!!&gt;!#A!"?!!(1!I!!8E!#U!+!!6B&lt;G&gt;M:1!+1#%&amp;&gt;G&amp;M;71!&amp;5!+!!^M98.U68"E982F:&amp;2J&lt;75!2Q$RV2\LJ!!!!!%74'^D97RJ?G&amp;U;7^O5X2B&gt;(6T,G.U&lt;!!I1&amp;!!"1!!!!%!!A!$!!144'^D97RJ?G&amp;U;7^O)&amp;.U982V=Q!"!!5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
+		<Property Name="typeDesc" Type="Bin">&amp;1#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!$P[Q!!!"5!A!!!!!!'!!&gt;!#A!"?!!(1!I!!8E!#U!+!!6B&lt;G&gt;M:1!+1#%&amp;&gt;G&amp;M;71!&amp;5!+!!^M98.U68"E982F:&amp;2J&lt;75!AA$RV2\LJ!!!!!-54G&amp;W;7&gt;B&gt;'FP&lt;D)Q-4=O&lt;(:M;7)F6'6T&gt;'*F&lt;G.I682J&lt;(-A,3"/98:J:W&amp;U;7^O-D!R.SZM&gt;GRJ9B:-&lt;W.B&lt;'F[982J&lt;WZ4&gt;'&amp;U&gt;8-O9X2M!#B!5!!&amp;!!!!!1!#!!-!"".-&lt;W.B&lt;'F[982J&lt;WYA5X2B&gt;(6T!!%!"1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</Property>
 	</Item>
 </Library>

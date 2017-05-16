@@ -23,8 +23,8 @@
 	<Property Name="varPersistentID:{39B8D874-1325-4472-A9C1-6594571F61F1}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_X_array</Property>
 	<Property Name="varPersistentID:{43D4C988-E02E-4BBF-BBF7-38E7B01941BE}" Type="Ref">/My Computer/Nav_testing_variables_LV.lvlib/cornerDist4</Property>
 	<Property Name="varPersistentID:{4679DBAB-235D-4478-B610-6372E275B7FD}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch Accel z</Property>
-	<Property Name="varPersistentID:{47D4CDB8-61C1-4B48-A24A-40AE3BC7E5D4}" Type="Ref">/My Computer/Localization Mockup.lvlib/ArenaPixelDim</Property>
-	<Property Name="varPersistentID:{4BC7728E-DBFF-4A2C-ADFD-62245B8E1571}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/NextPointOnPath</Property>
+	<Property Name="varPersistentID:{47D4CDB8-61C1-4B48-A24A-40AE3BC7E5D4}" Type="Ref">/My Computer/Localization Mockup - DEPRECATED.lvlib/ArenaPixelDim</Property>
+	<Property Name="varPersistentID:{4BC7728E-DBFF-4A2C-ADFD-62245B8E1571}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/NextPointOnPath</Property>
 	<Property Name="varPersistentID:{4D2D81C5-7470-4559-9528-FE123FB477C1}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch</Property>
 	<Property Name="varPersistentID:{4EC7E30F-0746-45F9-A9F3-0A36B11BAB20}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Destination Reached</Property>
 	<Property Name="varPersistentID:{54B7EDE8-8E01-4444-A53F-54AAF977913B}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Left Servo Angle_Image</Property>
@@ -32,7 +32,7 @@
 	<Property Name="varPersistentID:{5C53B893-1A8A-40ED-A5F0-122F3314CD14}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/unjam</Property>
 	<Property Name="varPersistentID:{5F78DB51-8CCB-4A17-82A7-B6EF6546F911}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum</Property>
 	<Property Name="varPersistentID:{6009D1EB-47EC-450D-8B6B-11A073A21951}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Info - Left</Property>
-	<Property Name="varPersistentID:{62498C1A-74F5-4E65-A38F-04F7C38E093E}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/SpecifyingEndAngle</Property>
+	<Property Name="varPersistentID:{62498C1A-74F5-4E65-A38F-04F7C38E093E}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/SpecifyingEndAngle</Property>
 	<Property Name="varPersistentID:{62809F78-958C-481C-AF89-6B3100843F8A}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Info - Right</Property>
 	<Property Name="varPersistentID:{65564515-3875-4A2F-A8CF-C0415F4D80A3}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Start Position Angle</Property>
 	<Property Name="varPersistentID:{67BCE5E6-C30C-4864-8836-124D746D7DB9}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_Scales</Property>
@@ -43,21 +43,21 @@
 	<Property Name="varPersistentID:{6DA6CC0A-0C85-4643-8E63-6FB818A80877}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Goal Position Y</Property>
 	<Property Name="varPersistentID:{7206615D-8AD1-4754-A5C5-A8A8D40DCF67}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch Accel y</Property>
 	<Property Name="varPersistentID:{74592816-49CB-4A88-B503-C6200A0125E8}" Type="Ref">/My Computer/Nav_testing_variables_LV.lvlib/cornerDist1</Property>
-	<Property Name="varPersistentID:{74602508-07F4-4DBD-B403-6580B24EC61B}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/CurrPosOnPath</Property>
+	<Property Name="varPersistentID:{74602508-07F4-4DBD-B403-6580B24EC61B}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/CurrPosOnPath</Property>
 	<Property Name="varPersistentID:{78673029-EE61-44A9-90F4-DB8278D1ADD9}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Image Lock - R</Property>
 	<Property Name="varPersistentID:{7B2BE2C5-1771-4E07-9C91-51EA0903F861}" Type="Ref">/My Computer/Nav_testing_variables_LV.lvlib/cornerDist3</Property>
 	<Property Name="varPersistentID:{7EEE8310-A087-4A65-81A3-10912C727C07}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_Y_array</Property>
-	<Property Name="varPersistentID:{844E5046-42C8-42AC-80F7-E2BEEF1DCD8A}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavSettings.lvlib/MovementControlTurnTightness</Property>
+	<Property Name="varPersistentID:{844E5046-42C8-42AC-80F7-E2BEEF1DCD8A}" Type="Ref">/RT myRIO Target - Overlord/NavSettings - Navigation2017.lvlib/MovementControlTurnTightness</Property>
 	<Property Name="varPersistentID:{865E9AC8-AD49-418F-8F5F-6CE5D58E348B}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Left Duty Cycle</Property>
 	<Property Name="varPersistentID:{86FC34F1-2CE5-419D-A801-9EFDD4705588}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Dig</Property>
 	<Property Name="varPersistentID:{88019964-4E7A-47AA-B633-877C3B776F5D}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Joystick Direction</Property>
 	<Property Name="varPersistentID:{88998668-E2FA-4771-9CCC-AE9D4260DB14}" Type="Ref">/Left-Camera/Left Network Variables.lvlib/Heading</Property>
-	<Property Name="varPersistentID:{89A21522-74FA-4BB7-9785-20BC05126B04}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavSettings.lvlib/PathfindingSettings</Property>
-	<Property Name="varPersistentID:{8BD016DF-B4A0-4DE6-8EC5-ACA180C75C55}" Type="Ref">/RT myRIO Target - Overlord/Overlord_Variables.lvlib/CurrMiningRun</Property>
+	<Property Name="varPersistentID:{89A21522-74FA-4BB7-9785-20BC05126B04}" Type="Ref">/RT myRIO Target - Overlord/NavSettings - Navigation2017.lvlib/PathfindingSettings</Property>
+	<Property Name="varPersistentID:{8BD016DF-B4A0-4DE6-8EC5-ACA180C75C55}" Type="Ref">/RT myRIO Target - Overlord/StateVars - Overlord2017.lvlib/CurrMiningRun</Property>
 	<Property Name="varPersistentID:{8D51C155-E041-4878-A870-069F26025B42}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/myRIO Accel x</Property>
 	<Property Name="varPersistentID:{92A60328-5629-494A-AA8A-DF86187CC7F1}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Orientation complete</Property>
-	<Property Name="varPersistentID:{93180CEE-34D6-402D-804F-FDF4B6EB20F7}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/CurrNavStage</Property>
-	<Property Name="varPersistentID:{94B3E65A-B1BB-44E1-8D0D-E41EE38BFE3A}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/NextPointIsDestination</Property>
+	<Property Name="varPersistentID:{93180CEE-34D6-402D-804F-FDF4B6EB20F7}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/CurrNavStage</Property>
+	<Property Name="varPersistentID:{94B3E65A-B1BB-44E1-8D0D-E41EE38BFE3A}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/NextPointIsDestination</Property>
 	<Property Name="varPersistentID:{94E1FAAA-B2FC-400A-9C51-C1338365DDAD}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Right Servo Angle_Image</Property>
 	<Property Name="varPersistentID:{98CF2629-72C8-41FF-B1AA-0DD43BBA302D}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Start Run</Property>
 	<Property Name="varPersistentID:{9C828DC4-66B7-4019-9A81-3A24AA44BCF0}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_X_array</Property>
@@ -72,37 +72,37 @@
 	<Property Name="varPersistentID:{BACC9AC2-1EDE-4193-BCC9-2B830D3FFEF0}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch going down</Property>
 	<Property Name="varPersistentID:{C02B1DEA-4341-40D0-BCE6-E6DDBE5529B5}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Mining Complete</Property>
 	<Property Name="varPersistentID:{C2039A42-9A29-4E13-B6D2-D18FB8EE01BB}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Scoops</Property>
-	<Property Name="varPersistentID:{C3BE95FB-2340-4B84-833D-0A7DB965737F}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/PathfindingStartPosition</Property>
+	<Property Name="varPersistentID:{C3BE95FB-2340-4B84-833D-0A7DB965737F}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/PathfindingStartPosition</Property>
 	<Property Name="varPersistentID:{C48AF694-B9FC-4606-8DC4-202FC7F153DD}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Winch Accel x</Property>
 	<Property Name="varPersistentID:{C97E6794-3947-4FA1-9F99-A48658A96122}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/RIGHT_BEACON_BOOL_array</Property>
-	<Property Name="varPersistentID:{CB035348-5A8C-4484-88E8-5D5BD6A1871E}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavSettings.lvlib/TurnRadius (Path Modeling)</Property>
+	<Property Name="varPersistentID:{CB035348-5A8C-4484-88E8-5D5BD6A1871E}" Type="Ref">/RT myRIO Target - Overlord/NavSettings - Navigation2017.lvlib/TurnRadius (Path Modeling)</Property>
 	<Property Name="varPersistentID:{CC9FF91B-2D64-4D4B-9A60-FA9BEBDDEAC8}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Angle</Property>
-	<Property Name="varPersistentID:{CCC67DFA-F388-461C-9AE0-50349D476257}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/DestinationPoint</Property>
+	<Property Name="varPersistentID:{CCC67DFA-F388-461C-9AE0-50349D476257}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/DestinationPoint</Property>
 	<Property Name="varPersistentID:{CEBF537D-F37C-4CD1-A914-F6BF25FE1917}" Type="Ref">/RT myRIO Target - Navigation/Joystick_Variables.lvlib/Auto_Manual</Property>
 	<Property Name="varPersistentID:{CEC4D716-F467-4CA8-B671-3DC46F6FC941}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Position X</Property>
 	<Property Name="varPersistentID:{CF469FB0-716E-4AEE-B2B9-2FB909D8A8A5}" Type="Ref">/RT myRIO Target - Overlord/LocalizationStatusVariables.lvlib/LocalizationStatus</Property>
 	<Property Name="varPersistentID:{D094820B-D8E3-4CC4-820A-070AC837D807}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/All Stop</Property>
-	<Property Name="varPersistentID:{D51E5E33-BBD4-41A5-B149-CD6EEABF754C}" Type="Ref">/RT myRIO Target - Overlord/MissionControl2017-DebugVariables.lvlib/DEBUG_BUCKET</Property>
+	<Property Name="varPersistentID:{D51E5E33-BBD4-41A5-B149-CD6EEABF754C}" Type="Ref">/RT myRIO Target - Overlord/Vars - MissionControl2017.lvlib/DEBUG_BUCKET</Property>
 	<Property Name="varPersistentID:{D69C4E0C-BE30-40C1-8B21-ED0362E7A576}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/LEFT_BEACON_Y_array</Property>
-	<Property Name="varPersistentID:{DDDD9E3C-E455-4EE9-85E0-07BBB82A326D}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/UsedDesperation</Property>
-	<Property Name="varPersistentID:{DF5645C1-CA20-4E6E-B807-2CC0D922275A}" Type="Ref">/RT myRIO Target - Overlord/MissionControl2017-DebugVariables.lvlib/DEBUG_WHEEL_MOTORS</Property>
+	<Property Name="varPersistentID:{DDDD9E3C-E455-4EE9-85E0-07BBB82A326D}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/UsedDesperation</Property>
+	<Property Name="varPersistentID:{DF5645C1-CA20-4E6E-B807-2CC0D922275A}" Type="Ref">/RT myRIO Target - Overlord/Vars - MissionControl2017.lvlib/DEBUG_WHEEL_MOTORS</Property>
 	<Property Name="varPersistentID:{E11BDECB-DB9B-4A62-AB61-995DC2CA1CC4}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Navi Current Position Y</Property>
 	<Property Name="varPersistentID:{E1E1940A-51CF-4D7C-BFB2-9077A69CB6BD}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/myRIO Accel z</Property>
 	<Property Name="varPersistentID:{E24D799C-9914-4A98-9A49-5BE0756F4F09}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Scoop Position</Property>
 	<Property Name="varPersistentID:{E2F97D51-53DE-4542-958D-7650B7D6D6A7}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Jammed?</Property>
 	<Property Name="varPersistentID:{E3DBCDFD-E31F-492E-9D66-FD0346E92909}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Start Position Y</Property>
-	<Property Name="varPersistentID:{E3DF6948-40B1-4E6C-B83E-88FD5F708A46}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/CurrPath</Property>
+	<Property Name="varPersistentID:{E3DF6948-40B1-4E6C-B83E-88FD5F708A46}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/CurrPath</Property>
 	<Property Name="varPersistentID:{E472274D-9648-4533-AABE-071DCBA398DC}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Mine or Dump</Property>
 	<Property Name="varPersistentID:{E5D6A37B-904B-4CB3-B744-CD6449C003E4}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Last Robot Position</Property>
 	<Property Name="varPersistentID:{E7E7F922-534D-4761-B981-BA4FFFC2FC9D}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Right Servo Angle_Current</Property>
 	<Property Name="varPersistentID:{E88EACAC-885C-4C86-88F6-ABCC330CD677}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Drum Accel z</Property>
 	<Property Name="varPersistentID:{EA2087F2-4756-4A19-ADA6-6687564957BB}" Type="Ref">/RT myRIO Target - Navigation/Navi Global Variables.lvlib/Start Position X</Property>
-	<Property Name="varPersistentID:{F00BF870-E0A9-483A-8B66-ADA0151BDF6D}" Type="Ref">/RT myRIO Target - Overlord/Overlord_Variables.lvlib/CurrStage</Property>
-	<Property Name="varPersistentID:{F24434D5-CE79-4D5E-9858-7922337834FA}" Type="Ref">/RT myRIO Target - Overlord/MissionControl2017-DebugVariables.lvlib/DEBUG_LOCALIZATION_MOUSE</Property>
+	<Property Name="varPersistentID:{F00BF870-E0A9-483A-8B66-ADA0151BDF6D}" Type="Ref">/RT myRIO Target - Overlord/StateVars - Overlord2017.lvlib/CurrStage</Property>
+	<Property Name="varPersistentID:{F24434D5-CE79-4D5E-9858-7922337834FA}" Type="Ref">/RT myRIO Target - Overlord/Vars - MissionControl2017.lvlib/DEBUG_LOCALIZATION_MOUSE</Property>
 	<Property Name="varPersistentID:{F2EF6CD7-646A-447A-B052-0E9381E4722E}" Type="Ref">/RT myRIO Target - Overlord/Mining_Variables_r0.lvlib/Manual Drum</Property>
 	<Property Name="varPersistentID:{F3CF621B-3A6A-4541-BD2D-DC0F3B79939C}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/Scale - Right</Property>
 	<Property Name="varPersistentID:{F6069745-149B-4850-B620-6A1065BF7BCB}" Type="Ref">/RT myRIO Target - Overlord/Localization_Variables_r0.lvlib/loc_theta</Property>
-	<Property Name="varPersistentID:{F76EC5F9-4F53-44D6-860D-AFDF950DC2F7}" Type="Ref">/RT myRIO Target - Overlord/Navigation2017-NavStateVariables.lvlib/WaitingForLocalization</Property>
+	<Property Name="varPersistentID:{F76EC5F9-4F53-44D6-860D-AFDF950DC2F7}" Type="Ref">/RT myRIO Target - Overlord/NavStateVars - Navigation2017.lvlib/WaitingForLocalization</Property>
 	<Item Name="My Computer" Type="My Computer">
 		<Property Name="IOScan.Faults" Type="Str"></Property>
 		<Property Name="IOScan.NetVarPeriod" Type="UInt">100</Property>
@@ -122,12 +122,21 @@
 		<Property Name="server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
+		<Item Name="res" Type="Folder">
+			<Item Name="arena.png" Type="Document" URL="../Computer_VIs/res/arena.png"/>
+			<Item Name="arenainv.png" Type="Document" URL="../Computer_VIs/res/arenainv.png"/>
+			<Item Name="sand-texture1-blackbg-500px.png" Type="Document" URL="../Computer_VIs/res/sand-texture1-blackbg-500px.png"/>
+			<Item Name="sand-texture1-blackbg-inv.png" Type="Document" URL="../Computer_VIs/res/sand-texture1-blackbg-inv.png"/>
+			<Item Name="sand-texture1-blackbg.png" Type="Document" URL="../Computer_VIs/res/sand-texture1-blackbg.png"/>
+			<Item Name="sand-texture1.png" Type="Document" URL="../Computer_VIs/res/sand-texture1.png"/>
+			<Item Name="wheel.png" Type="Document" URL="../Computer_VIs/res/wheel.png"/>
+		</Item>
 		<Item Name="Joystick_Control_r1_2016.vi" Type="VI" URL="../Computer_VIs/Joystick_Control_r1_2016.vi"/>
-		<Item Name="Localization Mockup.lvlib" Type="Library" URL="../Computer_VIs/Localization Mockup.lvlib"/>
+		<Item Name="MissionControl2017.lvlib" Type="Library" URL="../Computer_VIs/MissionControl2017.lvlib"/>
 		<Item Name="Nav Testing 2.0.vi" Type="VI" URL="../nav2017/Nav Testing 2.0.vi"/>
 		<Item Name="Nav_testing_variables_LV.lvlib" Type="Library" URL="../nav2017/Nav_testing_variables_LV.lvlib"/>
 		<Item Name="Stop Robot Button.vi" Type="VI" URL="../Computer_VIs/Stop Robot Button.vi"/>
-		<Item Name="MissionControl2017.lvlib" Type="Library" URL="../Computer_VIs/MissionControl2017.lvlib"/>
+		<Item Name="Localization Mockup - DEPRECATED.lvlib" Type="Library" URL="../Computer_VIs/Localization Mockup - DEPRECATED.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Acquire Input Data.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/inputDevices.llb/Acquire Input Data.vi"/>
@@ -247,11 +256,6 @@
 			</Item>
 			<Item Name="lvinput.dll" Type="Document" URL="/&lt;resource&gt;/lvinput.dll"/>
 			<Item Name="Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017.lvlib"/>
-			<Item Name="SetWheelMotorPWM.vi" Type="VI" URL="../Computer_VIs/SetWheelMotorPWM.vi"/>
-			<Item Name="GetCurrentLocalization.vi" Type="VI" URL="../Computer_VIs/GetCurrentLocalization.vi"/>
-			<Item Name="LocalizationStatus.ctl" Type="VI" URL="../Computer_VIs/LocalizationStatus.ctl"/>
-			<Item Name="WaitForNewLocalization.vi" Type="VI" URL="../Computer_VIs/WaitForNewLocalization.vi"/>
-			<Item Name="CombineMoveSegments.vi" Type="VI" URL="../CombineMoveSegments.vi"/>
 			<Item Name="Overlord2017.lvlib" Type="Library" URL="../Computer_VIs/Overlord2017.lvlib"/>
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
@@ -340,18 +344,13 @@ AddOutputFilter chunkFilter
 		<Property Name="target.WebServer.ViAccess" Type="Str">+*</Property>
 		<Property Name="target.webservices.SecurityAPIKey" Type="Str">PqVr/ifkAQh+lVrdPIykXlFvg12GhhQFR8H9cUhphgg=:pTe9HRlQuMfJxAG6QCGq7UvoUpJzAzWGKy5SbZ+roSU=</Property>
 		<Property Name="target.webservices.ValidTimestampWindow" Type="Int">15</Property>
-		<Item Name="res" Type="Folder">
-			<Item Name="arena.png" Type="Document" URL="../Computer_VIs/res/arena.png"/>
-			<Item Name="arenainv.png" Type="Document" URL="../Computer_VIs/res/arenainv.png"/>
-			<Item Name="Control 1.ctl" Type="VI" URL="../Computer_VIs/res/Control 1.ctl"/>
-			<Item Name="sand-texture1-blackbg-500px.png" Type="Document" URL="../Computer_VIs/res/sand-texture1-blackbg-500px.png"/>
-			<Item Name="sand-texture1-blackbg-inv.png" Type="Document" URL="../Computer_VIs/res/sand-texture1-blackbg-inv.png"/>
-			<Item Name="sand-texture1-blackbg.png" Type="Document" URL="../Computer_VIs/res/sand-texture1-blackbg.png"/>
-			<Item Name="sand-texture1.png" Type="Document" URL="../Computer_VIs/res/sand-texture1.png"/>
-			<Item Name="wheel.png" Type="Document" URL="../Computer_VIs/res/wheel.png"/>
-		</Item>
 		<Item Name="LocalizationStatusVariables.lvlib" Type="Library" URL="../Computer_VIs/LocalizationStatusVariables.lvlib"/>
 		<Item Name="Overlord2017.lvlib" Type="Library" URL="../Computer_VIs/Overlord2017.lvlib"/>
+		<Item Name="StateVars - Overlord2017.lvlib" Type="Library" URL="../Computer_VIs/StateVars - Overlord2017.lvlib"/>
+		<Item Name="Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017.lvlib"/>
+		<Item Name="NavSettings - Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/NavSettings - Navigation2017.lvlib"/>
+		<Item Name="NavStateVars - Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/NavStateVars - Navigation2017.lvlib"/>
+		<Item Name="Vars - MissionControl2017.lvlib" Type="Library" URL="../Computer_VIs/Vars - MissionControl2017.lvlib"/>
 		<Item Name="Chassis" Type="myRIO Chassis">
 			<Property Name="crio.ProgrammingMode" Type="Str">fpga</Property>
 			<Property Name="crio.ResourceID" Type="Str">RIO0</Property>
@@ -1827,21 +1826,11 @@ AddOutputFilter chunkFilter
 		<Item Name="Position Calc_Build Reference Triangle_R1.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Position Calc_Build Reference Triangle_R1.vi"/>
 		<Item Name="ReadServo_R3.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/ReadServo_R3.vi"/>
 		<Item Name="Set_Compliance_Slope_R2.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Set_Compliance_Slope_R2.vi"/>
-		<Item Name="Localization_Variables_r0.lvlib" Type="Library" URL="../Localization_VIs/Localization_Variables_r0.lvlib"/>
 		<Item Name="Beacon_Scale_to_Distance_R0.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Beacon_Scale_to_Distance_R0.vi"/>
+		<Item Name="Localization_Variables_r0.lvlib" Type="Library" URL="../Localization_VIs/Localization_Variables_r0.lvlib"/>
 		<Item Name="last Position.ctl" Type="VI" URL="../Localization_VIs/Overlord myRIO/last Position.ctl"/>
 		<Item Name="DoNothingOnPurpose.vi" Type="VI" URL="../nav/nav working/DoNothingOnPurpose.vi"/>
 		<Item Name="Position_TOTAL_R25test1111.vi" Type="VI" URL="../Localization_VIs/Bill Test Area/Position_TOTAL_R25test1111.vi"/>
-		<Item Name="Navigation2017.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017.lvlib"/>
-		<Item Name="SetWheelMotorPWM.vi" Type="VI" URL="../Computer_VIs/SetWheelMotorPWM.vi"/>
-		<Item Name="GetCurrentLocalization.vi" Type="VI" URL="../Computer_VIs/GetCurrentLocalization.vi"/>
-		<Item Name="LocalizationStatus.ctl" Type="VI" URL="../Computer_VIs/LocalizationStatus.ctl"/>
-		<Item Name="WaitForNewLocalization.vi" Type="VI" URL="../Computer_VIs/WaitForNewLocalization.vi"/>
-		<Item Name="CombineMoveSegments.vi" Type="VI" URL="../CombineMoveSegments.vi"/>
-		<Item Name="MissionControl2017-DebugVariables.lvlib" Type="Library" URL="../Computer_VIs/MissionControl2017-DebugVariables.lvlib"/>
-		<Item Name="Navigation2017-NavSettings.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017-NavSettings.lvlib"/>
-		<Item Name="Navigation2017-NavStateVariables.lvlib" Type="Library" URL="../Computer_VIs/Navigation2017-NavStateVariables.lvlib"/>
-		<Item Name="Overlord_Variables.lvlib" Type="Library" URL="../Computer_VIs/Overlord_Variables.lvlib"/>
 		<Item Name="Position_TOTAL_R25.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Position_TOTAL_R25.vi"/>
 		<Item Name="mining_control.vi" Type="VI" URL="../Excavation_VIs/tdl/mining_control.vi"/>
 		<Item Name="servo.vi" Type="VI" URL="../Excavation_VIs/tdl/servo.vi"/>
@@ -3740,25 +3729,6 @@ DirectoryIndex index.htm
 						<Item Name="lvSimController.dll" Type="Document" URL="/&lt;vilib&gt;/rvi/Simulation/lvSimController.dll"/>
 						<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
 					</Item>
-					<Item Name="Start Boolean.ctl" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/Utilities/Start Boolean.ctl"/>
-					<Item Name="Split myDAQ DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split myDAQ DIO.vi"/>
-					<Item Name="Split myDAQ Function Select.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split myDAQ Function Select.vi"/>
-					<Item Name="DIO 1-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/DIO/DIO 1-bit.vi"/>
-					<Item Name="DIO_Encoder.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_Encoder.vi"/>
-					<Item Name="DIO_PWM.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_PWM.vi"/>
-					<Item Name="Join myDAQ DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join myDAQ DIO.vi"/>
-					<Item Name="Split HDC Function Select.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Function Select.vi"/>
-					<Item Name="Split HDC Bank1 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Bank1 DIO.vi"/>
-					<Item Name="DIO 4-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/DIO/DIO 4-bit.vi"/>
-					<Item Name="Split HDC Bank2 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Split HDC Bank2 DIO.vi"/>
-					<Item Name="DIO_SPI.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/DIO_SPI.vi"/>
-					<Item Name="Falling Edge Trigger.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/Utilities/Falling Edge Trigger.vi"/>
-					<Item Name="Check DI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/Check DI IRQ.vi"/>
-					<Item Name="Join HDC Bank1 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join HDC Bank1 DIO.vi"/>
-					<Item Name="Join HDC Bank2 DIO.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/MUXed IO/Join HDC Bank2 DIO.vi"/>
-					<Item Name="Check AI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/Check AI IRQ.vi"/>
-					<Item Name="SPI IRQ.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/SPI/SPI IRQ.vi"/>
-					<Item Name="DIO IRQ 1-bit.vi" Type="VI" URL="../Users/UNCC_AST2_SP16/Desktop/Nav_FPGA_Test/NAV_FPGA_revA/Sub VIs/IRQ/DIO IRQ 1-bit.vi"/>
 				</Item>
 				<Item Name="Build Specifications" Type="Build">
 					<Item Name="FPGA Main Navigation Final" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">
