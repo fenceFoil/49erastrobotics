@@ -1836,6 +1836,9 @@ AddOutputFilter chunkFilter
 		<Item Name="servo.vi" Type="VI" URL="../Excavation_VIs/tdl/servo.vi"/>
 		<Item Name="ReadAI0.vi" Type="VI" URL="../Computer_VIs/Power Meter Testing/ReadAI0.vi"/>
 		<Item Name="drum_level_while_digging.vi" Type="VI" URL="../Excavation_VIs/tdl/drum_level_while_digging.vi"/>
+		<Item Name="Drum Level.vi" Type="VI" URL="../Excavation_VIs/Drum Level.vi"/>
+		<Item Name="Untitled 2.vi" Type="VI" URL="../Computer_VIs/Untitled 2.vi"/>
+		<Item Name="Untitled 3.vi" Type="VI" URL="../Computer_VIs/Untitled 3.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Accelerometer Channels Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/myRIO/Common/Instrument Driver Framework/myRIO v1.0/Accelerometer/typedefs/Accelerometer Channels Enum.ctl"/>
@@ -2010,7 +2013,6 @@ AddOutputFilter chunkFilter
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="Angle Calc_Individual Process R4.vi" Type="VI" URL="../Localization_VIs/Overlord myRIO/Angle Calc_Individual Process R4.vi"/>
-			<Item Name="Drum Level.vi" Type="VI" URL="../Excavation_VIs/Drum Level.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="Overlord" Type="{69A947D5-514E-4E75-818E-69657C0547D8}">
@@ -2057,7 +2059,7 @@ AddOutputFilter chunkFilter
 				<Property Name="Source[2].itemID" Type="Ref">/RT myRIO Target - Overlord/Drum Dumping.vi</Property>
 				<Property Name="Source[2].type" Type="Str">VI</Property>
 				<Property Name="Source[3].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[3].itemID" Type="Ref">/RT myRIO Target - Overlord/Dependencies/Drum Level.vi</Property>
+				<Property Name="Source[3].itemID" Type="Ref">/RT myRIO Target - Overlord/Drum Level.vi</Property>
 				<Property Name="Source[3].type" Type="Str">VI</Property>
 				<Property Name="Source[4].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[4].itemID" Type="Ref">/RT myRIO Target - Overlord/Read Accelerometers.vi</Property>
@@ -2134,7 +2136,7 @@ AddOutputFilter chunkFilter
 				<Property Name="Source[2].itemID" Type="Ref">/RT myRIO Target - Overlord/Drum Dumping.vi</Property>
 				<Property Name="Source[2].type" Type="Str">VI</Property>
 				<Property Name="Source[3].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[3].itemID" Type="Ref">/RT myRIO Target - Overlord/Dependencies/Drum Level.vi</Property>
+				<Property Name="Source[3].itemID" Type="Ref">/RT myRIO Target - Overlord/Drum Level.vi</Property>
 				<Property Name="Source[3].type" Type="Str">VI</Property>
 				<Property Name="Source[4].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[4].itemID" Type="Ref"></Property>
