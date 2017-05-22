@@ -1840,13 +1840,10 @@ AddOutputFilter chunkFilter
 		<Item Name="ReadAI0.vi" Type="VI" URL="../Computer_VIs/Power Meter Testing/ReadAI0.vi"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 		<Item Name="drum_level_while_digging.vi" Type="VI" URL="../Excavation_VIs/tdl/drum_level_while_digging.vi"/>
 		<Item Name="Drum Level.vi" Type="VI" URL="../Excavation_VIs/Drum Level.vi"/>
 		<Item Name="Untitled 2.vi" Type="VI" URL="../Computer_VIs/Untitled 2.vi"/>
 		<Item Name="Untitled 3.vi" Type="VI" URL="../Computer_VIs/Untitled 3.vi"/>
-=======
->>>>>>> parent of 7863897... Changes and stuff
 =======
 >>>>>>> parent of 7863897... Changes and stuff
 =======
