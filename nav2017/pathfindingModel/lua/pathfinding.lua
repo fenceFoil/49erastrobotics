@@ -40,11 +40,11 @@ pathfinding.deadZone = 0.9
 pathfinding.lengthWeight = 1
 pathfinding.angleWeight = 0
 -- (angleError multiplied by this value)
-pathfinding.angleErrorWeight = 75
+pathfinding.angleErrorWeight = 300
 -- (angleError multiplied by Weight, minus this threshold, outside this threshold)
-pathfinding.angleErrorThreshold = math.pi/6
+pathfinding.angleErrorThreshold = 1.04
 
-pathfinding.perSegmentPenalty = 0.5
+pathfinding.perSegmentPenalty = 0.25
 
 -- closeness weight
 pathfinding.closenessWeight = 3
